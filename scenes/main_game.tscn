@@ -1,0 +1,731 @@
+[gd_scene format=3 uid="uid://b2maingame002"]
+
+[ext_resource type="Script" path="res://scripts/main_game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/patagonia_view.gd" id="2_pata"]
+[ext_resource type="Script" path="res://scripts/document_view.gd" id="3_doc"]
+[ext_resource type="Script" path="res://scripts/car_inspection.gd" id="4_car"]
+[ext_resource type="Script" path="res://scripts/rulebook_modal.gd" id="5_rule"]
+[ext_resource type="Script" path="res://scripts/radio_alert_modal.gd" id="6_radio"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
+bg_color = Color(0.08, 0.12, 0.15, 0.85)
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_desk_wood"]
+bg_color = Color(0.24, 0.17, 0.12, 1)
+border_width_top = 4
+border_color = Color(0.38, 0.28, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_desk_panel"]
+bg_color = Color(0.18, 0.22, 0.26, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialog"]
+bg_color = Color(0.12, 0.15, 0.18, 0.95)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paper"]
+bg_color = Color(0.93, 0.9, 0.82, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.65, 0.52, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_approve_btn"]
+bg_color = Color(0.16, 0.52, 0.25, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reject_btn"]
+bg_color = Color(0.72, 0.2, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inspect_btn"]
+bg_color = Color(0.25, 0.45, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal"]
+bg_color = Color(0.12, 0.16, 0.2, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.4, 0.55, 0.68, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 12
+
+[node name="MainGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_game")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopView" type="Control" parent="VBox"]
+custom_minimum_size = Vector2(0, 310)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="PatagoniaView" type="Control" parent="VBox/TopView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_pata")
+
+[node name="TopHUD" type="HBoxContainer" parent="VBox/TopView"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="DayBadge" type="Label" parent="VBox/TopView/TopHUD"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "DÍA 1 / 5: PRIMAVERA"
+
+[node name="VisitorCounter" type="Label" parent="VBox/TopView/TopHUD"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "VEHÍCULO 1 DE 4"
+
+[node name="FundsBadge" type="Label" parent="VBox/TopView/TopHUD"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "💵 FONDO FAMILIAR: $12000"
+
+[node name="Spacer" type="Control" parent="VBox/TopView/TopHUD"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RadioAlertBtn" type="Button" parent="VBox/TopView/TopHUD"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_reject_btn")
+text = "🚨 ¡EMERGENCIA EN PARCELA!"
+
+[node name="DeskView" type="PanelContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_desk_wood")
+
+[node name="Margin" type="MarginContainer" parent="VBox/DeskView"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="HBox" type="HBoxContainer" parent="VBox/DeskView/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LeftDesk" type="PanelContainer" parent="VBox/DeskView/Margin/HBox"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_desk_panel")
+
+[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/LeftDesk"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "📋 CONDICIONES DEL DÍA"
+horizontal_alignment = 1
+
+[node name="ClimateBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="FireBadge" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox/ClimateBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "🔥 RIESGO INCENDIO: MEDIO"
+
+[node name="WeatherLabel" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox/ClimateBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 12
+text = "Viento O/SO 55 km/h"
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+layout_mode = 2
+
+[node name="FaunaBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+layout_mode = 2
+
+[node name="FaunaLabel" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox/FaunaBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "Fauna: Pingüinos de Magallanes"
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InspectCarBtn" type="Button" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
+text = "🔍 INSPECCIONAR VEHÍCULO"
+
+[node name="RulebookBtn" type="Button" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
+text = "📖 MANUAL DE NORMAS"
+
+[node name="CenterDesk" type="PanelContainer" parent="VBox/DeskView/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_desk_panel")
+
+[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DialogBox" type="PanelContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
+
+[node name="HBox" type="HBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VisitorName" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+text = "Nahuel Morales (Renault 12)"
+
+[node name="DialogText" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "\"Buenas tardes oficial. Venimos a sacar unas fotos de los senderos.\""
+autowrap_mode = 3
+
+[node name="InterrogateBtn" type="Button" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+text = "💬 Interrogar"
+
+[node name="DocumentView" type="PanelContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
+script = ExtResource("3_doc")
+
+[node name="Margin" type="MarginContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+
+[node name="DocTitle" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
+theme_override_font_sizes/font_size = 15
+text = "PASE DE INGRESO DIARIO"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="NameLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "Titular:"
+
+[node name="NameVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Nahuel Morales"
+
+[node name="DniLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "DNI / Documento:"
+
+[node name="DniVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "34.892.110"
+
+[node name="DateLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "Fecha Validez:"
+
+[node name="DateVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "28/11/2026 (Vigente)"
+
+[node name="PurposeLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "Motivo de Ingreso:"
+
+[node name="PurposeVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Turismo y Fotografía"
+
+[node name="PeopleLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
+theme_override_font_sizes/font_size = 13
+text = "Personas Autorizadas:"
+
+[node name="PeopleVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "2 personas"
+
+[node name="HSeparator2" type="HSeparator" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+
+[node name="PermitsBox" type="HBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FireLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "Permiso Fuego/Fogón:"
+
+[node name="FirePermitVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "NO AUTORIZADO ❌"
+
+[node name="FishingLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "Permiso Pesca:"
+
+[node name="FishingPermitVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "NO HABILITADO ❌"
+
+[node name="StampVisual" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 22
+text = "【 AUTORIZADO 】
+PARQUE CHALET HUERGO"
+horizontal_alignment = 1
+
+[node name="RightDesk" type="PanelContainer" parent="VBox/DeskView/Margin/HBox"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_desk_panel")
+
+[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/RightDesk"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
+theme_override_font_sizes/font_size = 14
+text = "⚖️ RESOLUCIÓN"
+horizontal_alignment = 1
+
+[node name="DecisionsBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="ApproveBtn" type="Button" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox/DecisionsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_approve_btn")
+text = "🟢 AUTORIZAR
+(SELLO VERDE)"
+
+[node name="RejectBtn" type="Button" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox/DecisionsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_reject_btn")
+text = "🔴 DENEGAR
+(SELLO ROJO)"
+
+[node name="FeedbackLabel" type="Label" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Modals" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CarInspectionModal" type="PanelContainer" parent="Modals"]
+visible = false
+custom_minimum_size = Vector2(750, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -240.0
+offset_right = 375.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+script = ExtResource("4_car")
+
+[node name="MarginContainer" type="MarginContainer" parent="Modals/CarInspectionModal"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Modals/CarInspectionModal/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.9, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 18
+text = "🔍 INSPECCIÓN DE VEHÍCULO"
+
+[node name="CloseButton" type="Button" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = " ✕ CERRAR "
+
+[node name="HSeparator" type="HSeparator" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Content" type="HBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="VBox" type="VBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="PassengerInfo" type="PanelContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
+
+[node name="PassengersCountLabel" type="Label" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox/PassengerInfo"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Pasajeros encontrados a bordo: 2 (Declarados: 2)"
+
+[node name="ItemsTitle" type="Label" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "📦 Pertenencias encontradas en Baúl y Asientos:"
+
+[node name="ItemsScroll" type="ScrollContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsList" type="VBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox/ItemsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="RulebookModal" type="PanelContainer" parent="Modals"]
+visible = false
+custom_minimum_size = Vector2(680, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -240.0
+offset_right = 340.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+script = ExtResource("5_rule")
+
+[node name="Margin" type="MarginContainer" parent="Modals/RulebookModal"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="Modals/RulebookModal/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="HBoxContainer" parent="Modals/RulebookModal/Margin/VBox"]
+layout_mode = 2
+
+[node name="DayTitle" type="Label" parent="Modals/RulebookModal/Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.9, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 18
+text = "📖 REGLAMENTO DEL GUARDAPARQUES"
+
+[node name="CloseButton" type="Button" parent="Modals/RulebookModal/Margin/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = " ✕ CERRAR "
+
+[node name="HSeparator" type="HSeparator" parent="Modals/RulebookModal/Margin/VBox"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Modals/RulebookModal/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="WeatherBox" type="HBoxContainer" parent="Modals/RulebookModal/Margin/VBox/Content"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="FireBadge" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/WeatherBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "RIESGO DE INCENDIO: MEDIO"
+
+[node name="WeatherLabel" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/WeatherBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "Clima: Viento O/SO 55 km/h"
+
+[node name="FaunaBox" type="PanelContainer" parent="Modals/RulebookModal/Margin/VBox/Content"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
+
+[node name="FaunaLabel" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/FaunaBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Fauna y Zonas Sensibles: Pingüinos de Magallanes"
+
+[node name="RulesTitle" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+text = "Normas Obligatorias de Control para la Jornada:"
+
+[node name="RulesScroll" type="ScrollContainer" parent="Modals/RulebookModal/Margin/VBox/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RulesList" type="VBoxContainer" parent="Modals/RulebookModal/Margin/VBox/Content/RulesScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="RadioAlertModal" type="PanelContainer" parent="Modals"]
+visible = false
+custom_minimum_size = Vector2(620, 360)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -180.0
+offset_right = 310.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+script = ExtResource("6_radio")
+
+[node name="Margin" type="MarginContainer" parent="Modals/RadioAlertModal"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Modals/RadioAlertModal/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="AlertTitle" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "🚨 ¡ALERTA RADIAL: ACTIVIDAD SOSPECHOSA!"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Modals/RadioAlertModal/Margin/VBox"]
+layout_mode = 2
+
+[node name="ParcelInfo" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "Sector Afectado: Parcela Bosque de Lengas"
+
+[node name="AlertDesc" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Se divisa una columna de humo no controlada cerca de los senderos."
+autowrap_mode = 3
+
+[node name="RewardInfo" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "Bonus por intervención: +$12000  |  Daño si se ignora: -35% salud"
+
+[node name="Buttons" type="HBoxContainer" parent="Modals/RadioAlertModal/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PatrolButton" type="Button" parent="Modals/RadioAlertModal/Margin/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_approve_btn")
+text = "🚨 IR A PATRULLAR E INTERVENIR
+(+ Bonus económico y protege el parque)"
+
+[node name="StayButton" type="Button" parent="Modals/RadioAlertModal/Margin/VBox/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
+text = "🛡️ PERMANECER EN LA GARITA
+(La parcela sufrirá daños ecológicos)"

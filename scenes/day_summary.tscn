@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://b3daysummary003"]
+
+[ext_resource type="Script" path="res://scripts/day_summary.gd" id="1_summary"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.1, 0.13, 0.16, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.15, 0.19, 0.22, 0.96)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_subbox"]
+bg_color = Color(0.11, 0.14, 0.17, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.2, 0.45, 0.3, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 20.0
+content_margin_top = 12.0
+content_margin_right = 20.0
+content_margin_bottom = 12.0
+
+[node name="DaySummary" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_summary")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(980, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -490.0
+offset_top = -300.0
+offset_right = 490.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Header" type="VBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/Margin/VBox/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 22
+text = "RESUMEN DEL DÍA 1 - CIERRE DE JORNADA"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Panel/Margin/VBox/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Informe Operativo y Liquidación de Sueldo - Mr. Chenque"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="Content" type="HBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="LeftCol" type="VBoxContainer" parent="Panel/Margin/VBox/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="StatsBox" type="PanelContainer" parent="Panel/Margin/VBox/Content/LeftCol"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
+
+[node name="StatsLabel" type="Label" parent="Panel/Margin/VBox/Content/LeftCol/StatsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "• Aciertos y Decisiones Correctas: 4
+• Infracciones o Errores Cometidos: 0"
+
+[node name="FinanceBox" type="PanelContainer" parent="Panel/Margin/VBox/Content/LeftCol"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
+
+[node name="FinanceLabel" type="Label" parent="Panel/Margin/VBox/Content/LeftCol/FinanceBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+text = "[ BALANCE ECONÓMICO PERSONAL ]
+Sueldo Base: +$28000
+Bonos por Patrullajes: +$12000
+Multas por Errores: -$0
+----------------------------------------
+Sueldo Neto de Jornada: +$40000
+
+[ GASTOS DEL HOGAR Y FAMILIA ]
+   - Alimentos: -$8000
+   - Calefacción a Gas: -$5000
+   - Medicamentos: -$2000
+Total Gastos Familiares: -$15000
+----------------------------------------
+Resultado Neto del Día: +$25000
+FONDO FAMILIAR ACUMULADO: $37000"
+
+[node name="RightCol" type="VBoxContainer" parent="Panel/Margin/VBox/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="ParcelsBox" type="PanelContainer" parent="Panel/Margin/VBox/Content/RightCol"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin/VBox/Content/RightCol/ParcelsBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Panel/Margin/VBox/Content/RightCol/ParcelsBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "🌲 ESTADO DE PARCELAS DEL PARQUE:"
+
+[node name="ParcelsList" type="VBoxContainer" parent="Panel/Margin/VBox/Content/RightCol/ParcelsBox/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="LogsBox" type="PanelContainer" parent="Panel/Margin/VBox/Content/RightCol"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin/VBox/Content/RightCol/LogsBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Panel/Margin/VBox/Content/RightCol/LogsBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+text = "📜 Sucesos Registrados Hoy:"
+
+[node name="LogsScroll" type="ScrollContainer" parent="Panel/Margin/VBox/Content/RightCol/LogsBox/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LogsList" type="VBoxContainer" parent="Panel/Margin/VBox/Content/RightCol/LogsBox/VBox/LogsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Footer" type="HBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="ContinueButton" type="Button" parent="Panel/Margin/VBox/Footer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "➡️ COMENZAR SIGUIENTE DÍA"

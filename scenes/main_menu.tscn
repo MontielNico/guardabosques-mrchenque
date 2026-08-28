@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://b1mainmenu001"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.117647, 0.156863, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.168627, 0.219608, 0.25098, 0.95)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.231373, 0.407843, 0.282353, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary"]
+bg_color = Color(0.25, 0.32, 0.38, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(680, 520)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -260.0
+offset_right = 340.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Header" type="VBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Panel/Margin/VBox/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.82, 0.55, 1)
+theme_override_font_sizes/font_size = 28
+text = "🌲 GUARDA-BOSQUES: PATAGONIA"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Panel/Margin/VBox/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.84, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+text = "Puesto de Control - Parque Nacional Chalet Huergo & Cerro Chenque"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="LoreLabel" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.88, 0.9, 1)
+theme_override_font_sizes/font_size = 14
+text = "Eres Mr. Chenque, guardaparques a cargo del control de ingreso durante 5 días cruciales.
+
+• Inspecciona vehículos, baúles, pasajeros y documentos de cada visitante.
+• Compara con las condiciones del día (Riesgo de Incendio, Época del año y Fauna protegida).
+• Atiende las emergencias de radio para frenar incendios, cazadores y usurpaciones.
+• Mantén a salvo el ecosistema del parque y ahorra dinero para el sustento de tu familia."
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StartButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "▶ INICIAR SERVICIO (DÍA 1)"
+
+[node name="ManualButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
+text = "📖 MANUAL DE PROCEDIMIENTOS DEL GUARDAPARQUES"
+
+[node name="CreditsButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
+text = "ℹ️ ACERCA DE CHALET HUERGO Y CRÉDITOS"
+
+[node name="ManualDialog" type="AcceptDialog" parent="."]
+title = "Manual de Procedimientos de Parques"
+initial_position = 2
+size = Vector2i(550, 380)
+dialog_text = "INSTRUCCIONES DE JUEGO (ESTILO PAPERS, PLEASE):
+
+1. Mirar al visitante y su auto en la vista superior.
+2. Hacer clic en 'INSPECCIONAR VEHÍCULO' para revisar baúl y contar pasajeros reales.
+3. Revisar el pase/documento sobre el mostrador (fecha, DNI, personas autorizadas y permisos especiales).
+4. Contrastar con el RIESGO DE INCENDIO y Fauna del día:
+   - Riesgo Medio: Fuego solo con Permiso de Fuego.
+   - Riesgo Alto/Extremo: Prohibición TOTAL de fuego, carbón, leña y motosierras.
+   - Prohibición estricta de caza, redes ilegales y materiales de usurpación.
+5. Sellar: AUTORIZAR (Verde) o DENEGAR (Rojo).
+6. Si suena la RADIO, decide si patrullar la parcela para ganar un bonus y proteger el parque."
+
+[node name="CreditsDialog" type="AcceptDialog" parent="."]
+title = "Créditos"
+initial_position = 2
+size = Vector2i(450, 260)
+dialog_text = "GUARDA-BOSQUES: PATAGONIA
+Inspirado en el Parque Histórico y Costero Chalet Huergo y el emblemático Cerro Chenque de Comodoro Rivadavia, Chubut, Patagonia Argentina.
+
+Desarrollado para Godot Engine 4 con estética retro-documental."
