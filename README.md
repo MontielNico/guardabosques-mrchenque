@@ -46,3 +46,4 @@ Encarnas a **Mr. Chenque**, el guardaparques responsable del puesto de control d
 ```powershell
 & "C:\Users\bruno\Desktop\Godot_v4.7.2-stable_win64_console.exe" --path "C:\Users\bruno\Documents\guarda-bosques-patagonia"
 ```
+# guardabosques-mrchenque
