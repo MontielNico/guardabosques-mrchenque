@@ -107,8 +107,8 @@ func _next_step() -> void:
 		_finish_intro()
 
 func _finish_intro() -> void:
-	# Al finalizar el contexto de Mr. Chenque, avanzamos al briefing de órdenes del Día 1
-	GameManager.play_day_intro(1)
+	# Al finalizar la presentación de Mr. Chenque, el Día 1 pasa directamente a las directivas de la garita
+	GameManager.play_day_briefing(1)
 
 func _on_menu_pressed() -> void:
 	SoundManager.play_sound("click")

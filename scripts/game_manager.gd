@@ -25,8 +25,9 @@ var tunnels_map_discovered: bool = false # Día 4 Evento Obligatorio
 var day5_final_choice: String = "" # Día 5: "embrace_mystery" o "protect_park"
 
 # Estado de la pantalla de introducción / briefing diario
-var intro_mode: String = "prologue" # "prologue", "day", "custom"
+var intro_mode: String = "prologue" # "prologue", "morning", "day", "custom"
 var custom_intro_pages: Array[Dictionary] = []
+var custom_morning_texts: Dictionary = {}
 var custom_next_scene: String = "res://scenes/main_game.tscn"
 
 var family_savings: float = 12000.0 # Ahorro inicial de la familia de Mr. Chenque
@@ -370,12 +371,32 @@ func play_prologue() -> void:
 	intro_mode = "prologue"
 	get_tree().change_scene_to_file("res://scenes/game_intro.tscn")
 
-func play_day_intro(day_num: int = -1) -> void:
+func play_day_start_intro(day_num: int = -1) -> void:
+	if day_num > 0:
+		current_day = day_num
+	setup_day_parameters(current_day)
+	if current_day <= 1:
+		play_day_briefing(1)
+		return
+	intro_mode = "morning"
+	get_tree().change_scene_to_file("res://scenes/day_start_intro.tscn")
+
+func play_day_briefing(day_num: int = -1) -> void:
 	if day_num > 0:
 		current_day = day_num
 	setup_day_parameters(current_day)
 	intro_mode = "day"
 	get_tree().change_scene_to_file("res://scenes/day_intro.tscn")
+
+func play_day_intro(day_num: int = -1) -> void:
+	var target = day_num if day_num > 0 else current_day
+	if target <= 1:
+		play_day_briefing(1)
+	else:
+		play_day_start_intro(target)
+
+func set_custom_morning_text(day_num: int, text: String) -> void:
+	custom_morning_texts[day_num] = text
 
 func play_custom_intro(pages_array: Array[Dictionary], next_scene: String = "res://scenes/main_game.tscn") -> void:
 	intro_mode = "custom"
