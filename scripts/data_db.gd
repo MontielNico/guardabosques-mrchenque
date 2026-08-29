@@ -4,10 +4,99 @@ class_name DataDB
 # Base de Datos y Spawner de Visitantes para la Progresión de 5 Días
 # Estructurado estrictamente según los parámetros de promt.txt
 
-static func get_day_info(day_number: int) -> Dictionary:
+static func _get_day_rule_list(day_number: int) -> Array:
 	match day_number:
 		1:
-			return {
+			return [
+				"Visitantes autorizados hoy: ÚNICAMENTE Turistas y Vecinos locales.",
+				"Documentos a revisar: DNI y Pase de Visita Diario.",
+				"LÓGICA DE ERROR: Validar que el DNI no esté vencido.",
+				"LÓGICA DE ERROR: Validar que el nombre coincida en ambos papeles (DNI vs Pase).",
+				"Evento Final: Al culminar el turno, se entregará la Bitácora de Silva."
+			]
+		2:
+			return [
+				"Visitantes autorizados: Se suman Trabajadores (técnicos, guías, oficios).",
+				"Documentos a revisar: DNI, Pase de Visita y Permiso de Actividad.",
+				"LÓGICA DE ERROR: Validar DNI vigente y coincidencia de nombres en los 3 documentos.",
+				"El reto de hoy es validar datos básicos con mayor cantidad de papeles en el escritorio.",
+				"Evento Obligatorio: Atento a la llegada de un Pescador Raro de costa."
+			]
+		3:
+			return [
+				"Visitantes autorizados: Se suman Científicos y Acampantes.",
+				"LÓGICA DE ERROR: VALIDACIÓN DE DIÁLOGOS (La palabra vs el papel).",
+				"El diálogo del visitante debe coincidir con la Actividad Autorizada en su Permiso.",
+				"NO SE INCLUYE mecánica de inspección de baúl: Priorizar la declaración oral.",
+				"Evento Ambiental: Niebla costera activa en toda la seccional.",
+				"Evento Obligatorio: Trabajador nocturno sin documentos válidos a medianoche (Decisión ramificada)."
+			]
+		4:
+			return [
+				"RITMO: Fila rápida con todos los casos mezclados.",
+				"LÓGICA DE ERROR: Cruzar todos los datos visuales, DNI, nombres y diálogos.",
+				"Evento Ambiental: Alerta de Marea Alta en la base del acantilado.",
+				"Evento Obligatorio: Atento a documentos anómalos extraviados (Foto de 1920 y Mapa de Túneles)."
+			]
+		5:
+			return [
+				"LÓGICA DE ERROR: DETECCIÓN DE ANOMALÍAS ACTIVADA.",
+				"RECHAZAR si el documento tiene SELLO NEGRO.",
+				"RECHAZAR si el documento está FIRMADO POR SILVA.",
+				"RECHAZAR si la fecha es ILÓGICA (ej. 1980 o 2099).",
+				"Evento Final: El Hombre Sin Rostro con documento de 1980 (Decisión que define el destino)."
+			]
+		_:
+			return []
+
+static func _rule_key(rule_text: String) -> String:
+	var text = rule_text.strip_edges().to_lower()
+	text = text.replace("lógica de error:", "")
+	text = text.replace("visitantes autorizados hoy:", "")
+	text = text.replace("visitantes autorizados:", "")
+	text = text.replace("documentos a revisar:", "")
+	text = text.replace("evento final:", "")
+	text = text.replace("evento obligatorio:", "")
+	text = text.replace("evento ambiental:", "")
+	text = text.replace("ritmo:", "")
+	text = text.replace("no se incluye", "")
+	text = text.replace("no incluye", "")
+	text = text.replace("  ", " ")
+	text = text.strip_edges()
+	return text
+
+static func _add_unique_rule(accumulated: Array[String], rule_text: String) -> void:
+	var key = _rule_key(rule_text)
+	for existing in accumulated:
+		if _rule_key(existing) == key:
+			return
+	accumulated.append(rule_text)
+
+static func _is_error_rule(rule_text: String) -> bool:
+	var text = rule_text.strip_edges().to_upper()
+	return text.begins_with("LÓGICA DE ERROR") or text.begins_with("RECHAZAR SI") or text.contains("DETECCIÓN DE ANOMALÍAS") or text.contains("VALIDACIÓN DE DIÁLOGOS") or text.contains("NO SE INCLUYE")
+
+static func get_cumulative_rules(day_number: int) -> Array[String]:
+	return _get_day_rule_list(day_number)
+
+static func get_cumulative_rule_sections(day_number: int) -> Dictionary:
+	var visitors_and_documents: Array[String] = []
+	var error_logic: Array[String] = []
+	for rule in _get_day_rule_list(day_number):
+		if _is_error_rule(rule):
+			_add_unique_rule(error_logic, rule)
+		else:
+			_add_unique_rule(visitors_and_documents, rule)
+	return {
+		"visitors_and_documents": visitors_and_documents,
+		"error_logic": error_logic
+	}
+
+static func get_day_info(day_number: int) -> Dictionary:
+	var base_day_info: Dictionary = {}
+	match day_number:
+		1:
+			base_day_info = {
 				"title": "Día 1: Lo Básico - Primavera en Chalet Huergo",
 				"season": "Primavera",
 				"weather": "Viento O/SO 50 km/h - Parcialmente nublado - 15°C",
@@ -23,7 +112,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 				]
 			}
 		2:
-			return {
+			base_day_info = {
 				"title": "Día 2: Validación Extendida - Más Papeles en la Mesa",
 				"season": "Verano Seco",
 				"weather": "Viento N 35 km/h - Clima seco y soleado - 27°C",
@@ -39,7 +128,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 				]
 			}
 		3:
-			return {
+			base_day_info = {
 				"title": "Día 3: La Palabra vs El Papel y Niebla",
 				"season": "Verano Tardío con Niebla",
 				"weather": "Viento Calmo / Marítimo - Niebla Densa del Atlántico - 12°C",
@@ -56,7 +145,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 				]
 			}
 		4:
-			return {
+			base_day_info = {
 				"title": "Día 4: Falsificaciones Múltiples y Marea Alta",
 				"season": "Otoño Inicial - Pleamar",
 				"weather": "Viento Sur 40 km/h - Marea Alta Anormal y Vibraciones - 10°C",
@@ -71,7 +160,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 				]
 			}
 		5:
-			return {
+			base_day_info = {
 				"title": "Día 5: El Legado de Silva - Detección de Anomalías",
 				"season": "Otoño Pleno - Clímax",
 				"weather": "Viento SO 65 km/h - Silencio de Radio y Sirenas - 6°C",
@@ -88,6 +177,13 @@ static func get_day_info(day_number: int) -> Dictionary:
 			}
 		_:
 			return {}
+	if not base_day_info.is_empty():
+		var day_rules: Array = _get_day_rule_list(day_number)
+		base_day_info["rules_summary"] = day_rules
+		base_day_info["daily_rules_summary"] = day_rules
+		base_day_info["cumulative_rules_summary"] = day_rules
+		base_day_info["cumulative_rule_sections"] = get_cumulative_rule_sections(day_number)
+	return base_day_info
 
 static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 	match day_number:

@@ -271,12 +271,20 @@ func _make_decision(approved: bool) -> void:
 			
 	if feedback_lbl:
 		if decision_result.get("status") == "CORRECTO":
-			feedback_lbl.text = "✔ DECISIÓN CORRECTA (+Bonus)"
-			feedback_lbl.modulate = Color(0.25, 0.95, 0.35)
+			feedback_lbl.text = "✔ SELLO CORRECTO • BONO APLICADO"
+			feedback_lbl.modulate = Color(0.22, 0.9, 0.38)
 		else:
-			feedback_lbl.text = "✖ ERROR EN REVISIÓN (Multa aplicada)"
-			feedback_lbl.modulate = Color(0.95, 0.25, 0.25)
-			
+			feedback_lbl.text = "✖ INCONSISTENCIA DETECTADA • MULTA"
+			feedback_lbl.modulate = Color(0.96, 0.32, 0.32)
+		feedback_lbl.visible = true
+		feedback_lbl.scale = Vector2(1.08, 1.08)
+		feedback_lbl.pivot_offset = feedback_lbl.size * 0.5
+		var feed_tween = create_tween()
+		feed_tween.set_parallel(true)
+		feed_tween.tween_property(feedback_lbl, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		feed_tween.tween_property(feedback_lbl, "modulate:a", 1.0, 0.12)
+		feed_tween.tween_property(feedback_lbl, "rotation", 0.0, 0.2).set_trans(Tween.TRANS_QUAD)
+	
 	# Actualizar mapa por si hubo impacto ecológico
 	if park_map_view:
 		park_map_view.update_map()

@@ -4,6 +4,8 @@ class_name DocumentView
 # Visualización e Interacción de los Documentos del Visitante (Ventana 4: Escritorio)
 # Muestra DNI, Pase de Visita Diario, Permiso de Actividad, Firmas, Sellos y Anomalías
 
+const FONT_SPECIAL_ELITE: FontFile = preload("res://fonts/SpecialElite-Regular.ttf")
+
 @onready var doc_title: Label = $Margin/VBox/Header/DocTitle
 @onready var name_val: Label = $Margin/VBox/Grid/NameVal
 @onready var dni_val: Label = $Margin/VBox/Grid/DniVal
@@ -18,14 +20,45 @@ class_name DocumentView
 
 var is_stamped: bool = false
 
+func _configure_stamp_visual() -> void:
+	if not stamp_visual:
+		return
+	stamp_visual.visible = false
+	stamp_visual.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	stamp_visual.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	stamp_visual.autowrap_mode = TextServer.AUTOWRAP_OFF
+	stamp_visual.add_theme_font_override("font", FONT_SPECIAL_ELITE)
+	stamp_visual.add_theme_font_size_override("font_size", 28)
+	stamp_visual.add_theme_constant_override("line_spacing", -10)
+	stamp_visual.add_theme_constant_override("outline_size", 3)
+	stamp_visual.add_theme_color_override("font_outline_color", Color(0.18, 0.12, 0.07, 0.85))
+	stamp_visual.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.22))
+	stamp_visual.add_theme_constant_override("shadow_offset_x", 2)
+	stamp_visual.add_theme_constant_override("shadow_offset_y", 2)
+	stamp_visual.modulate = Color(1.0, 1.0, 1.0, 0.0)
+	stamp_visual.rotation = 0.0
+	stamp_visual.scale = Vector2(1.0, 1.0)
+	stamp_visual.position = Vector2.ZERO
+	stamp_visual.pivot_offset = Vector2.ZERO
+	stamp_visual.set_anchors_preset(Control.PRESET_CENTER)
+	stamp_visual.offset_left = 0
+	stamp_visual.offset_top = 0
+	stamp_visual.offset_right = 0
+	stamp_visual.offset_bottom = 0
+
 func _ready() -> void:
-	if stamp_visual:
-		stamp_visual.visible = false
+	_configure_stamp_visual()
 
 func load_document(doc_data: Dictionary) -> void:
 	is_stamped = false
 	if stamp_visual:
 		stamp_visual.visible = false
+		stamp_visual.text = ""
+		stamp_visual.modulate = Color(1.0, 1.0, 1.0, 0.0)
+		stamp_visual.rotation = 0.0
+		stamp_visual.scale = Vector2(1.0, 1.0)
+		stamp_visual.position = Vector2.ZERO
+		stamp_visual.pivot_offset = Vector2.ZERO
 	
 	var doc_type_str = doc_data.get("type", "Pase de Visita Diario")
 	if doc_title:
@@ -131,13 +164,47 @@ func apply_stamp(approved: bool) -> void:
 	is_stamped = true
 	if stamp_visual:
 		stamp_visual.visible = true
+		stamp_visual.text = ""
+		stamp_visual.rotation = 0.0
+		stamp_visual.scale = Vector2.ONE
+		stamp_visual.modulate = Color(1.0, 1.0, 1.0, 0.0)
+		stamp_visual.position = Vector2.ZERO
+		stamp_visual.anchor_left = 0.5
+		stamp_visual.anchor_right = 0.5
+		stamp_visual.anchor_top = 0.5
+		stamp_visual.anchor_bottom = 0.5
+		stamp_visual.offset_left = 0
+		stamp_visual.offset_top = 0
+		stamp_visual.offset_right = 0
+		stamp_visual.offset_bottom = 0
+		stamp_visual.add_theme_font_size_override("font_size", 28)
+		stamp_visual.add_theme_constant_override("outline_size", 4)
+		stamp_visual.add_theme_constant_override("line_spacing", -8)
+
+		var stamp_color: Color
+		var stamp_text: String
+		var end_rotation: float
 		if approved:
-			stamp_visual.text = "【 AUTORIZADO 】\nPARQUE NACIONAL CHALET HUERGO"
-			stamp_visual.modulate = Color(0.1, 0.7, 0.2, 0.9)
-			stamp_visual.rotation = -0.1
+			stamp_text = "AUTORIZADO\nCHALET HUERGO"
+			stamp_color = Color(0.12, 0.72, 0.26, 1.0)
+			end_rotation = -0.22
 			SoundManager.play_sound("stamp_approve")
 		else:
-			stamp_visual.text = "【 DENEGADO 】\nACCESO RECHAZADO POR PROTOCOLO"
-			stamp_visual.modulate = Color(0.85, 0.12, 0.12, 0.9)
-			stamp_visual.rotation = 0.12
+			stamp_text = "DENEGADO\nNO INGRESA"
+			stamp_color = Color(0.82, 0.18, 0.18, 1.0)
+			end_rotation = 0.25
 			SoundManager.play_sound("stamp_reject")
+
+		stamp_visual.text = stamp_text
+		stamp_visual.modulate = stamp_color
+		stamp_visual.rotation = end_rotation
+		stamp_visual.scale = Vector2(0.35, 0.35)
+		stamp_visual.position = Vector2(0, -12)
+
+		var tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(stamp_visual, "scale", Vector2(1.16, 1.16), 0.16).from(Vector2(0.35, 0.35)).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(stamp_visual, "rotation", end_rotation, 0.18).from(end_rotation + 0.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(stamp_visual, "modulate:a", 0.96, 0.12)
+		tween.tween_property(stamp_visual, "modulate:a", 0.78, 0.2).set_delay(0.8)
+		tween.tween_property(stamp_visual, "position", Vector2(0, -8), 0.14).from(Vector2(0, -20)).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
