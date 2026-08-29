@@ -29,15 +29,15 @@ func _ready() -> void:
 	if stats_lbl:
 		var avg_health = GameManager.get_average_parcel_health()
 		stats_lbl.text = """═══════════════════════════════════════════════════════
-• Conservación Promedio del Parque: %.1f%%
-• Fondo Familiar Final Ahorrado: $%d
-• Patrullajes de Emergencia Realizados: %d
-• Infracciones Furtivas Neutralizadas: %d
+• Conservación Promedio de las 5 Parcelas: %.1f%%
+• Fondo Familiar Acumulado: $%d
+• Infractores Furtivos Detenidos en Garita: %d
+• Errores Cometidos en Puesto de Control: %d
 ═══════════════════════════════════════════════════════""" % [
 			avg_health,
-			GameManager.family_savings,
-			GameManager.total_patrols_done,
-			GameManager.total_infractors_stopped
+			int(GameManager.family_savings),
+			GameManager.total_infractors_stopped,
+			GameManager.total_mistakes_made
 		]
 
 func _on_retry_pressed() -> void:

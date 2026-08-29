@@ -1,86 +1,127 @@
-[gd_scene format=3 uid="uid://b2maingame002"]
+[gd_scene format=3 uid="uid://b2maingame003"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_game"]
 [ext_resource type="Script" path="res://scripts/patagonia_view.gd" id="2_pata"]
-[ext_resource type="Script" path="res://scripts/document_view.gd" id="3_doc"]
-[ext_resource type="Script" path="res://scripts/car_inspection.gd" id="4_car"]
-[ext_resource type="Script" path="res://scripts/rulebook_modal.gd" id="5_rule"]
-[ext_resource type="Script" path="res://scripts/radio_alert_modal.gd" id="6_radio"]
+[ext_resource type="Script" path="res://scripts/park_map_view.gd" id="3_map"]
+[ext_resource type="Script" path="res://scripts/car_trunk_view.gd" id="4_trunk"]
+[ext_resource type="Script" path="res://scripts/document_view.gd" id="5_doc"]
+[ext_resource type="Script" path="res://scripts/rulebook_modal.gd" id="6_rule"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
-bg_color = Color(0.08, 0.12, 0.15, 0.85)
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-content_margin_left = 12.0
-content_margin_top = 8.0
-content_margin_right = 12.0
-content_margin_bottom = 8.0
+bg_color = Color(0.08, 0.12, 0.16, 0.9)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_desk_wood"]
-bg_color = Color(0.24, 0.17, 0.12, 1)
-border_width_top = 4
-border_color = Color(0.38, 0.28, 0.2, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_desk_panel"]
-bg_color = Color(0.18, 0.22, 0.26, 0.9)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_window_panel"]
+bg_color = Color(0.14, 0.18, 0.22, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.28, 0.36, 0.44, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-content_margin_left = 12.0
-content_margin_top = 10.0
-content_margin_right = 12.0
-content_margin_bottom = 10.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialog"]
-bg_color = Color(0.12, 0.15, 0.18, 0.95)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_desk_wood"]
+bg_color = Color(0.22, 0.16, 0.12, 1)
+border_width_left = 2
+border_width_top = 3
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.38, 0.28, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 content_margin_left = 10.0
 content_margin_top = 8.0
 content_margin_right = 10.0
 content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paper"]
-bg_color = Color(0.93, 0.9, 0.82, 1)
+bg_color = Color(0.94, 0.91, 0.84, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.72, 0.65, 0.52, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-shadow_color = Color(0, 0, 0, 0.35)
-shadow_size = 5
+border_color = Color(0.75, 0.68, 0.55, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialog"]
+bg_color = Color(0.1, 0.13, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.32, 0.4, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avatar_box"]
+bg_color = Color(0.08, 0.1, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.5, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_approve_btn"]
 bg_color = Color(0.16, 0.52, 0.25, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-content_margin_left = 14.0
-content_margin_top = 14.0
-content_margin_right = 14.0
-content_margin_bottom = 14.0
+border_width_bottom = 3
+border_color = Color(0.1, 0.36, 0.16, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reject_btn"]
 bg_color = Color(0.72, 0.2, 0.2, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-content_margin_left = 14.0
-content_margin_top = 14.0
-content_margin_right = 14.0
-content_margin_bottom = 14.0
+border_width_bottom = 3
+border_color = Color(0.48, 0.12, 0.12, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inspect_btn"]
-bg_color = Color(0.25, 0.45, 0.6, 1)
+bg_color = Color(0.22, 0.42, 0.58, 1)
+border_width_bottom = 3
+border_color = Color(0.14, 0.28, 0.4, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -89,6 +130,19 @@ content_margin_left = 10.0
 content_margin_top = 8.0
 content_margin_right = 10.0
 content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_interrogate_btn"]
+bg_color = Color(0.65, 0.45, 0.15, 1)
+border_width_bottom = 2
+border_color = Color(0.45, 0.3, 0.08, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal"]
 bg_color = Color(0.12, 0.16, 0.2, 0.98)
@@ -113,6 +167,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_game")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.1, 0.12, 1)
+
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -120,354 +183,489 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 4
 
-[node name="TopView" type="Control" parent="VBox"]
-custom_minimum_size = Vector2(0, 310)
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="PatagoniaView" type="Control" parent="VBox/TopView"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_pata")
-
-[node name="TopHUD" type="HBoxContainer" parent="VBox/TopView"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 16.0
-offset_top = 10.0
-offset_right = -16.0
-offset_bottom = 48.0
-grow_horizontal = 2
-theme_override_constants/separation = 16
-
-[node name="DayBadge" type="Label" parent="VBox/TopView/TopHUD"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
-text = "DÍA 1 / 5: PRIMAVERA"
-
-[node name="VisitorCounter" type="Label" parent="VBox/TopView/TopHUD"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
-text = "VEHÍCULO 1 DE 4"
-
-[node name="FundsBadge" type="Label" parent="VBox/TopView/TopHUD"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 1, 0.6, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
-text = "💵 FONDO FAMILIAR: $12000"
-
-[node name="Spacer" type="Control" parent="VBox/TopView/TopHUD"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RadioAlertBtn" type="Button" parent="VBox/TopView/TopHUD"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxFlat_reject_btn")
-text = "🚨 ¡EMERGENCIA EN PARCELA!"
-
-[node name="DeskView" type="PanelContainer" parent="VBox"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_desk_wood")
-
-[node name="Margin" type="MarginContainer" parent="VBox/DeskView"]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 8
-
-[node name="HBox" type="HBoxContainer" parent="VBox/DeskView/Margin"]
+[node name="TopHUD" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="LeftDesk" type="PanelContainer" parent="VBox/DeskView/Margin/HBox"]
-custom_minimum_size = Vector2(300, 0)
+[node name="DayBadge" type="Label" parent="VBox/TopHUD"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_desk_panel")
+theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "📅 DÍA 1 / 5: PRIMAVERA"
 
-[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/LeftDesk"]
+[node name="VisitorCounter" type="Label" parent="VBox/TopHUD"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "🚗 VEHÍCULO 1 DE 4"
 
-[node name="Title" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+[node name="FundsBadge" type="Label" parent="VBox/TopHUD"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
-theme_override_font_sizes/font_size = 14
-text = "📋 CONDICIONES DEL DÍA"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.4, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "💵 FONDO FAMILIAR: $12000"
 
-[node name="ClimateBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+[node name="Spacer" type="Control" parent="VBox/TopHUD"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ViewModeBadge" type="Label" parent="VBox/TopHUD"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "📋 VISTA 1: CONTROL PRINCIPAL"
+
+[node name="MainLayout" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="TopRow" type="HBoxContainer" parent="VBox/MainLayout"]
+custom_minimum_size = Vector2(0, 310)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="Window1_Office" type="PanelContainer" parent="VBox/MainLayout/TopRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
+
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window1_Office"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="FireBadge" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox/ClimateBox"]
+[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window1_Office/VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 13
-text = "🔥 RIESGO INCENDIO: MEDIO"
-
-[node name="WeatherLabel" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox/ClimateBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
+theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
 theme_override_font_sizes/font_size = 12
-text = "Viento O/SO 55 km/h"
-autowrap_mode = 3
+text = "🪟 1. VENTANA DE OFICINA (EXTERIOR)"
+horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
-layout_mode = 2
-
-[node name="FaunaBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
-layout_mode = 2
-
-[node name="FaunaLabel" type="Label" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox/FaunaBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.9, 0.7, 1)
-theme_override_font_sizes/font_size = 12
-text = "Fauna: Pingüinos de Magallanes"
-autowrap_mode = 3
-
-[node name="Spacer" type="Control" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
+[node name="PatagoniaView" type="Control" parent="VBox/MainLayout/TopRow/Window1_Office/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("2_pata")
 
-[node name="InspectCarBtn" type="Button" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
-text = "🔍 INSPECCIONAR VEHÍCULO"
-
-[node name="RulebookBtn" type="Button" parent="VBox/DeskView/Margin/HBox/LeftDesk/VBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
-text = "📖 MANUAL DE NORMAS"
-
-[node name="CenterDesk" type="PanelContainer" parent="VBox/DeskView/Margin/HBox"]
+[node name="Window2_Visitor" type="PanelContainer" parent="VBox/MainLayout/TopRow"]
+custom_minimum_size = Vector2(390, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_desk_panel")
+theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
-[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
 
-[node name="DialogBox" type="PanelContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
-
-[node name="HBox" type="HBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VisitorName" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.8, 0.4, 1)
-theme_override_font_sizes/font_size = 13
-text = "Nahuel Morales (Renault 12)"
-
-[node name="DialogText" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.9, 0.95, 1)
-theme_override_font_sizes/font_size = 13
-text = "\"Buenas tardes oficial. Venimos a sacar unas fotos de los senderos.\""
-autowrap_mode = 3
-
-[node name="InterrogateBtn" type="Button" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DialogBox/HBox"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 12
-text = "💬 Interrogar"
-
-[node name="DocumentView" type="PanelContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
-script = ExtResource("3_doc")
-
-[node name="Margin" type="MarginContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 10
-
-[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Header" type="HBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
 layout_mode = 2
-
-[node name="DocTitle" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 0.15, 0.1, 1)
-theme_override_font_sizes/font_size = 15
-text = "PASE DE INGRESO DIARIO"
+theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "👤 2. VISITANTE EN GARITA"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+[node name="ProfileHBox" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AvatarContainer" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_avatar_box")
+
+[node name="AvatarTexture" type="TextureRect" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/AvatarContainer"]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="InfoVBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="VisitorName" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "Nahuel Morales"
+
+[node name="VisitorCar" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 12
+text = "🚗 Renault 12 Celeste"
+
+[node name="DialogScroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
+
+[node name="DialogText" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/DialogScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92, 0.94, 0.96, 1)
+theme_override_font_sizes/font_size = 12
+text = "\"Buenas tardes oficial. Venimos a sacar unas fotos de los senderos y el mirador.\""
+autowrap_mode = 3
+
+[node name="InterrogateBtn" type="Button" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_interrogate_btn")
+text = "💬 Interrogar al visitante"
+
+[node name="Window3_MapAndTrunk" type="PanelContainer" parent="VBox/MainLayout/TopRow"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
+
+[node name="ParkMapView" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk"]
+layout_mode = 2
+script = ExtResource("3_map")
+
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Header" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox"]
 layout_mode = 2
 
-[node name="Grid" type="GridContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox/Header"]
 layout_mode = 2
-theme_override_constants/h_separation = 16
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "🗺️ 3. MAPA DEL PARQUE (5 PARCELAS)"
+horizontal_alignment = 1
+
+[node name="MapCanvas" type="Control" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ParcelsList" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="CarTrunkView" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk"]
+visible = false
+layout_mode = 2
+script = ExtResource("4_trunk")
+
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TrunkHeader" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/TrunkHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "📦 3. BAÚL E INTERIOR DEL VEHÍCULO"
+horizontal_alignment = 1
+
+[node name="PassengerBox" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
+
+[node name="PassengersCountLabel" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/PassengerBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "👥 Pasajeros reales a bordo: 2 | Declarados: 2"
+autowrap_mode = 3
+
+[node name="ItemsScroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsList" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/ItemsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="BottomRow" type="HBoxContainer" parent="VBox/MainLayout"]
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="Window4_Desk" type="PanelContainer" parent="VBox/MainLayout/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_desk_wood")
+
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "🗄️ 4. ESCRITORIO DE MR. CHENQUE - DOCUMENTACIÓN DEL VISITANTE"
+horizontal_alignment = 1
+
+[node name="DocumentView" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
+script = ExtResource("5_doc")
+
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 8
+
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+
+[node name="DocTitle" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 1)
+theme_override_font_sizes/font_size = 14
+text = "🏛️ PASE DE INGRESO DIARIO"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="NameLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="NameLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "Titular:"
 
-[node name="NameVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="NameVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "Nahuel Morales"
 
-[node name="DniLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DniLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "DNI / Documento:"
 
-[node name="DniVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DniVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "34.892.110"
 
-[node name="DateLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DateLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "Fecha Validez:"
 
-[node name="DateVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DateVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "28/11/2026 (Vigente)"
 
-[node name="PurposeLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PurposeLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 13
-text = "Motivo de Ingreso:"
+theme_override_font_sizes/font_size = 12
+text = "Motivo de Visita:"
 
-[node name="PurposeVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PurposeVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "Turismo y Fotografía"
 
-[node name="PeopleLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PeopleLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "Personas Autorizadas:"
 
-[node name="PeopleVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PeopleVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 12
 text = "2 personas"
 
-[node name="HSeparator2" type="HSeparator" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+[node name="JobPermitLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
+theme_override_font_sizes/font_size = 12
+text = "Permiso de Oficio:"
+
+[node name="JobPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Ninguno (Particular)"
+
+[node name="HSeparator2" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
 layout_mode = 2
 
-[node name="PermitsBox" type="HBoxContainer" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox"]
+[node name="PermitsBox" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 16
 
-[node name="FireLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FireLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
-theme_override_font_sizes/font_size = 12
-text = "Permiso Fuego/Fogón:"
+theme_override_font_sizes/font_size = 11
+text = "Permiso Fuego:"
 
-[node name="FirePermitVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FirePermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 11
 text = "NO AUTORIZADO ❌"
 
-[node name="FishingLbl" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FishingLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 11
 text = "Permiso Pesca:"
 
-[node name="FishingPermitVal" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FishingPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "NO HABILITADO ❌"
+theme_override_font_sizes/font_size = 11
+text = "NO AUTORIZADO ❌"
 
-[node name="StampVisual" type="Label" parent="VBox/DeskView/Margin/HBox/CenterDesk/VBox/DocumentView"]
+[node name="StampVisual" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = "【 AUTORIZADO 】
 PARQUE CHALET HUERGO"
 horizontal_alignment = 1
 
-[node name="RightDesk" type="PanelContainer" parent="VBox/DeskView/Margin/HBox"]
-custom_minimum_size = Vector2(250, 0)
+[node name="Window5_Decisions" type="PanelContainer" parent="VBox/MainLayout/BottomRow"]
+custom_minimum_size = Vector2(370, 0)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_desk_panel")
+theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
-[node name="VBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/RightDesk"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
 
-[node name="Title" type="Label" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
-theme_override_font_sizes/font_size = 14
-text = "⚖️ RESOLUCIÓN"
+theme_override_font_sizes/font_size = 13
+text = "⚖️ 5. BOTONES DE DECISIÓN"
 horizontal_alignment = 1
 
-[node name="DecisionsBox" type="VBoxContainer" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox"]
+[node name="InfoMini" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 14
 
-[node name="ApproveBtn" type="Button" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox/DecisionsBox"]
+[node name="FireBadgeMini" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/InfoMini"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "🔥 RIESGO INCENDIO: MEDIO"
+horizontal_alignment = 1
+
+[node name="DecisionsBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ApproveBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_approve_btn")
-text = "🟢 AUTORIZAR
-(SELLO VERDE)"
+text = "🟢 AUTORIZAR ACCESO (Sello Verde)"
 
-[node name="RejectBtn" type="Button" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox/DecisionsBox"]
+[node name="RejectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_reject_btn")
-text = "🔴 DENEGAR
-(SELLO ROJO)"
+text = "🔴 DENEGAR ACCESO (Sello Rojo)"
 
-[node name="FeedbackLabel" type="Label" parent="VBox/DeskView/Margin/HBox/RightDesk/VBox"]
+[node name="InspectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
+text = "🔍 INSPECCIONAR VEHÍCULO (Vista 2)"
+
+[node name="BackToMapBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
+text = "🗺️ VOLVER AL MAPA GENERAL (Vista 1)"
+
+[node name="RulebookBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
+text = "📖 LEER REGLAS DEL PARQUE"
+
+[node name="FeedbackLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -479,87 +677,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="CarInspectionModal" type="PanelContainer" parent="Modals"]
-visible = false
-custom_minimum_size = Vector2(750, 480)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -375.0
-offset_top = -240.0
-offset_right = 375.0
-offset_bottom = 240.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
-script = ExtResource("4_car")
-
-[node name="MarginContainer" type="MarginContainer" parent="Modals/CarInspectionModal"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Modals/CarInspectionModal/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="Header" type="HBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TitleLabel" type="Label" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.9, 0.85, 0.5, 1)
-theme_override_font_sizes/font_size = 18
-text = "🔍 INSPECCIÓN DE VEHÍCULO"
-
-[node name="CloseButton" type="Button" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Header"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = " ✕ CERRAR "
-
-[node name="HSeparator" type="HSeparator" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Content" type="HBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 16
-
-[node name="VBox" type="VBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 10
-
-[node name="PassengerInfo" type="PanelContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
-
-[node name="PassengersCountLabel" type="Label" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox/PassengerInfo"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Pasajeros encontrados a bordo: 2 (Declarados: 2)"
-
-[node name="ItemsTitle" type="Label" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.75, 0.85, 0.95, 1)
-theme_override_font_sizes/font_size = 14
-text = "📦 Pertenencias encontradas en Baúl y Asientos:"
-
-[node name="ItemsScroll" type="ScrollContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ItemsList" type="VBoxContainer" parent="Modals/CarInspectionModal/MarginContainer/VBoxContainer/Content/VBox/ItemsScroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 6
 
 [node name="RulebookModal" type="PanelContainer" parent="Modals"]
 visible = false
@@ -577,7 +694,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
-script = ExtResource("5_rule")
+script = ExtResource("6_rule")
 
 [node name="Margin" type="MarginContainer" parent="Modals/RulebookModal"]
 layout_mode = 2
@@ -626,7 +743,7 @@ text = "RIESGO DE INCENDIO: MEDIO"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.85, 0.95, 1)
 theme_override_font_sizes/font_size = 13
-text = "Clima: Viento O/SO 55 km/h"
+text = "Clima: Viento O/SO 50 km/h"
 
 [node name="FaunaBox" type="PanelContainer" parent="Modals/RulebookModal/Margin/VBox/Content"]
 layout_mode = 2
@@ -652,80 +769,3 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
-
-[node name="RadioAlertModal" type="PanelContainer" parent="Modals"]
-visible = false
-custom_minimum_size = Vector2(620, 360)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -310.0
-offset_top = -180.0
-offset_right = 310.0
-offset_bottom = 180.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
-script = ExtResource("6_radio")
-
-[node name="Margin" type="MarginContainer" parent="Modals/RadioAlertModal"]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 20
-
-[node name="VBox" type="VBoxContainer" parent="Modals/RadioAlertModal/Margin"]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="AlertTitle" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
-theme_override_font_sizes/font_size = 18
-text = "🚨 ¡ALERTA RADIAL: ACTIVIDAD SOSPECHOSA!"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Modals/RadioAlertModal/Margin/VBox"]
-layout_mode = 2
-
-[node name="ParcelInfo" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
-theme_override_font_sizes/font_size = 14
-text = "Sector Afectado: Parcela Bosque de Lengas"
-
-[node name="AlertDesc" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Se divisa una columna de humo no controlada cerca de los senderos."
-autowrap_mode = 3
-
-[node name="RewardInfo" type="Label" parent="Modals/RadioAlertModal/Margin/VBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.5, 0.9, 0.6, 1)
-theme_override_font_sizes/font_size = 13
-text = "Bonus por intervención: +$12000  |  Daño si se ignora: -35% salud"
-
-[node name="Buttons" type="HBoxContainer" parent="Modals/RadioAlertModal/Margin/VBox"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="PatrolButton" type="Button" parent="Modals/RadioAlertModal/Margin/VBox/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxFlat_approve_btn")
-text = "🚨 IR A PATRULLAR E INTERVENIR
-(+ Bonus económico y protege el parque)"
-
-[node name="StayButton" type="Button" parent="Modals/RadioAlertModal/Margin/VBox/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 14
-theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
-text = "🛡️ PERMANECER EN LA GARITA
-(La parcela sufrirá daños ecológicos)"

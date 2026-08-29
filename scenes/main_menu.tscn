@@ -55,17 +55,17 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 
 [node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(680, 520)
+custom_minimum_size = Vector2(700, 530)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -340.0
-offset_top = -260.0
-offset_right = 340.0
-offset_bottom = 260.0
+offset_left = -350.0
+offset_top = -265.0
+offset_right = 350.0
+offset_bottom = 265.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_card")
@@ -73,13 +73,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 [node name="Margin" type="MarginContainer" parent="Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
+theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_bottom = 28
 
 [node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
 layout_mode = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 16
 
 [node name="Header" type="VBoxContainer" parent="Panel/Margin/VBox"]
 layout_mode = 2
@@ -88,14 +88,14 @@ theme_override_constants/separation = 4
 [node name="Title" type="Label" parent="Panel/Margin/VBox/Header"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.94, 0.82, 0.55, 1)
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "🌲 GUARDA-BOSQUES: PATAGONIA"
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Panel/Margin/VBox/Header"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.84, 0.9, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 15
 text = "Puesto de Control - Parque Nacional Chalet Huergo & Cerro Chenque"
 horizontal_alignment = 1
 
@@ -105,13 +105,12 @@ layout_mode = 2
 [node name="LoreLabel" type="Label" parent="Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.88, 0.9, 1)
-theme_override_font_sizes/font_size = 14
-text = "Eres Mr. Chenque, guardaparques a cargo del control de ingreso durante 5 días cruciales.
+theme_override_font_sizes/font_size = 13
+text = "Eres Mr. Chenque, guardaparques a cargo del control de acceso durante 5 días consecutivos.
 
-• Inspecciona vehículos, baúles, pasajeros y documentos de cada visitante.
-• Compara con las condiciones del día (Riesgo de Incendio, Época del año y Fauna protegida).
-• Atiende las emergencias de radio para frenar incendios, cazadores y usurpaciones.
-• Mantén a salvo el ecosistema del parque y ahorra dinero para el sustento de tu familia."
+• Vista dividida en 5 ventanas funcionales: Oficina/Auto, Rostro del Visitante, Mapa de 5 Parcelas / Baúl, Escritorio y Panel de Decisiones.
+• Pasa a 'Vista de Investigación' para abrir el baúl, revisar pertenencias e interrogar al visitante.
+• Cada infracción no detectada degradará visiblemente las parcelas del parque en el mapa general y descontará multas de tu fondo familiar."
 autowrap_mode = 3
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/Margin/VBox"]
@@ -119,11 +118,11 @@ layout_mode = 2
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Margin/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 10
 
 [node name="StartButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 text = "▶ INICIAR SERVICIO (DÍA 1)"
 
@@ -142,24 +141,23 @@ text = "ℹ️ ACERCA DE CHALET HUERGO Y CRÉDITOS"
 [node name="ManualDialog" type="AcceptDialog" parent="."]
 title = "Manual de Procedimientos de Parques"
 initial_position = 2
-size = Vector2i(550, 380)
-dialog_text = "INSTRUCCIONES DE JUEGO (ESTILO PAPERS, PLEASE):
+size = Vector2i(580, 420)
+dialog_text = "INSTRUCCIONES DEL PUESTO DE CONTROL:
 
-1. Mirar al visitante y su auto en la vista superior.
-2. Hacer clic en 'INSPECCIONAR VEHÍCULO' para revisar baúl y contar pasajeros reales.
-3. Revisar el pase/documento sobre el mostrador (fecha, DNI, personas autorizadas y permisos especiales).
-4. Contrastar con el RIESGO DE INCENDIO y Fauna del día:
-   - Riesgo Medio: Fuego solo con Permiso de Fuego.
-   - Riesgo Alto/Extremo: Prohibición TOTAL de fuego, carbón, leña y motosierras.
-   - Prohibición estricta de caza, redes ilegales y materiales de usurpación.
-5. Sellar: AUTORIZAR (Verde) o DENEGAR (Rojo).
-6. Si suena la RADIO, decide si patrullar la parcela para ganar un bonus y proteger el parque."
+1. Ventana 1 (Sup. Izq): Observa el vehículo que arriba a la garita con fondo patagónico.
+2. Ventana 2 (Sup. Centro): Observa la fotografía del visitante y lee su diálogo.
+3. Ventana 3 (Sup. Der): Visualiza el estado de las 5 parcelas del parque en tiempo real.
+4. Ventana 4 (Inf. Izq): Revisa la documentación en tu escritorio (DNI, permisos de fuego, pesca y oficio).
+5. Ventana 5 (Inf. Der):
+   - Haz clic en 'INSPECCIONAR VEHÍCULO' (Vista 2) para examinar el baúl, pasajeros reales y habilitar el botón de 'Interrogar'.
+   - Consulta el 'Manual de Normas' para chequear riesgo de incendio y vedas.
+   - Sella: AUTORIZAR (Verde) o DENEGAR (Rojo)."
 
 [node name="CreditsDialog" type="AcceptDialog" parent="."]
 title = "Créditos"
 initial_position = 2
 size = Vector2i(450, 260)
 dialog_text = "GUARDA-BOSQUES: PATAGONIA
-Inspirado en el Parque Histórico y Costero Chalet Huergo y el emblemático Cerro Chenque de Comodoro Rivadavia, Chubut, Patagonia Argentina.
+Inspirado en el Parque Histórico y Costero Chalet Huergo y el Cerro Chenque de Comodoro Rivadavia, Chubut, Patagonia Argentina.
 
-Desarrollado para Godot Engine 4 con estética retro-documental."
+Desarrollado para Godot Engine 4 con estética retro-documental estilo Papers, Please."
