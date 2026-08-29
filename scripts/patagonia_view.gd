@@ -61,7 +61,7 @@ func _draw() -> void:
 	if w <= 0 or h <= 0:
 		return
 	
-	# 1. Cielo Patagónico
+	# 1. Cielo Patagónico (Reacciona a eventos ambientales)
 	_draw_sky_gradient(w, h * 0.65)
 	
 	# 2. Nubes
@@ -70,9 +70,15 @@ func _draw() -> void:
 	# 3. Cerro Chenque
 	_draw_mountains(w, h)
 	
-	# 4. Costa y mar patagónico
-	draw_rect(Rect2(0, h * 0.42, w, h * 0.12), Color(0.18, 0.32, 0.45))
-	draw_line(Vector2(0, h * 0.44), Vector2(w, h * 0.44), Color(0.7, 0.85, 0.9, 0.35), 1.5)
+	# 4. Costa y mar patagónico (Reacciona a Marea Alta del Día 4)
+	if GameManager.high_tide_active:
+		# Marea alta cubre más terreno con espuma
+		draw_rect(Rect2(0, h * 0.38, w, h * 0.18), Color(0.12, 0.28, 0.42))
+		draw_line(Vector2(0, h * 0.40), Vector2(w, h * 0.40), Color(0.85, 0.95, 1.0, 0.75), 3.0)
+		draw_line(Vector2(0, h * 0.45), Vector2(w, h * 0.45), Color(0.7, 0.85, 0.95, 0.5), 2.0)
+	else:
+		draw_rect(Rect2(0, h * 0.42, w, h * 0.12), Color(0.18, 0.32, 0.45))
+		draw_line(Vector2(0, h * 0.44), Vector2(w, h * 0.44), Color(0.7, 0.85, 0.9, 0.35), 1.5)
 	
 	# 5. Terreno y vegetación
 	_draw_terrain(w, h)
@@ -80,27 +86,44 @@ func _draw() -> void:
 	# 6. Bosque de Lengas y Pinos
 	_draw_forest(w, h)
 	
-	# 7. Asfalto / Camino del parque
+	# 7. Niebla Ambiental (Día 3: Niebla densa)
+	if GameManager.fog_active:
+		_draw_fog_layers(w, h)
+	
+	# 8. Asfalto / Camino del parque
 	draw_rect(Rect2(0, h * 0.68, w, h * 0.32), Color(0.24, 0.25, 0.27))
 	for i in range(0, int(w), 50):
 		draw_rect(Rect2(i, h * 0.82, 28, 4), Color(0.85, 0.75, 0.2, 0.8))
 		
-	# 8. Auto del visitante
+	# 9. Auto del visitante
 	_draw_car(car_pos_x, h * 0.64)
 	
-	# 9. Barrera de Control
+	# 10. Barrera de Control
 	_draw_barrier(w * 0.75, h * 0.74, h)
 	
-	# 10. Partículas de viento
+	# 11. Partículas de viento
 	for p in wind_particles:
 		draw_circle(p, 1.5, Color(0.8, 0.7, 0.5, 0.6))
 		
-	# 11. Marco de Ventana de Madera de la Garita
+	# 12. Marco de Ventana de Madera de la Garita
 	_draw_window_frame(w, h)
+
+func _draw_fog_layers(w: float, h: float) -> void:
+	var fog_color = Color(0.75, 0.82, 0.88, 0.55)
+	draw_rect(Rect2(0, 0, w, h * 0.8), fog_color)
+	draw_rect(Rect2(0, h * 0.25, w, h * 0.4), Color(0.8, 0.86, 0.92, 0.35))
 
 func _draw_sky_gradient(w: float, sky_h: float) -> void:
 	var top_color = Color(0.25, 0.48, 0.72)
 	var bottom_color = Color(0.68, 0.82, 0.92)
+	
+	if GameManager.fog_active:
+		top_color = Color(0.4, 0.48, 0.55)
+		bottom_color = Color(0.65, 0.72, 0.78)
+	elif GameManager.anomalies_active:
+		top_color = Color(0.35, 0.25, 0.45)
+		bottom_color = Color(0.75, 0.45, 0.4)
+		
 	var steps = 10
 	for i in range(steps):
 		var y1 = (sky_h / steps) * i

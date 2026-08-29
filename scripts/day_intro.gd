@@ -17,7 +17,7 @@ class_name DayIntro
 @onready var continue_btn: Button = $Margin/Card/CardMargin/VBox/Footer/ButtonsBox/ContinueButton
 
 # Variables de control del efecto Typing Text
-@export var typing_speed: float = 36.0 # Caracteres por segundo
+@export var typing_speed: float = 60.0 # Caracteres por segundo
 var current_visible_chars: float = 0.0
 var total_character_count: int = 0
 var is_typing: bool = false
@@ -72,7 +72,7 @@ func _get_prologue_pages() -> Array[Dictionary]:
 			"agency": "DIRECCIÓN DE RECURSOS NATURALES - DESIGNACIÓN DE PERSONAL",
 			"title": "═══ EXPEDIENTE: GUARDAPARQUES MR. CHENQUE ═══",
 			"subtitle": "📋 ORDEN DE SERVICIO DE 5 DÍAS | COBERTURA DE PUESTO VACANTE",
-			"text": "Te llamas [color=#ffe680]Mr. Chenque[/color]. Aceptaste este puesto por pura necesidad económica: tu familia en la ciudad depende del sueldo y los bonos de cada jornada para afrontar el crudo invierno patagónico.\n\nTu antecesor, el [color=#ff7777]Guardabosques Silva[/color], desapareció misteriosamente el martes pasado a mitad de su turno. Dejó la cafetera a medio llenar, la libreta de bitácora abierta en el escritorio... y la puerta de la garita sin llave.\n\nTu misión es rigurosa: controlar cada vehículo que arriba a la barrera, verificar pases y permisos de fuego, inspeccionar baúles e impedir la caza furtiva y el contrabando.\n\n[color=#ff5555]No permitas el ingreso de nadie que no cumpla estrictamente el reglamento.[/color]",
+			"text": "[color=#a0d8ef]PATAGONIA AUSTRAL.[/color]\n\nEl viento gélido del océano Atlántico azota sin descanso los acantilados del [color=#ffe680]Cerro Chenque[/color].\n\nEn lo alto de la colina se erige el histórico [color=#5af78e]Chalet Huergo[/color] y sus 5 parcelas protegidas: un santuario natural que combina vegetación nativa de lengas, colonias de pingüinos de Magallanes, humedales y vestigios de la vieja infraestructura petrolera.\n\nUn puesto solitario, frío y cargado de secretos que la niebla marina intenta ocultar...",
 			"button_text": "LEER ÓRDENES DEL DÍA 1 ▶"
 		},
 		_get_day_briefing_dict(1)
@@ -88,41 +88,41 @@ func _get_day_briefing_dict(day_num: int) -> Dictionary:
 		1:
 			return {
 				"agency": "SECCIONAL PARQUE CHALET HUERGO - PARTE OPERATIVO DIARIO",
-				"title": "═══ DÍA 1: LUNES - APERTURA DE JORNADA ═══",
-				"subtitle": "💨 CLIMA: Viento O/SO 50 km/h - Parcialmente nublado | 🔥 RIESGO FUEGO: MEDIO",
-				"text": "[color=#ffe680]LUNES - PRIMAVERA VENTOSA.[/color]\n\nPrimer día de servicio en la garita principal. La temporada arranca con trámites habituales: visitantes locales, fotógrafos, científicos y recolectores.\n\n[color=#7be5ff]• DIRECTIVAS DE CONTROL:[/color]\n1. Todo visitante debe portar [color=#ffffff]Pase de Ingreso Diario[/color] con fecha vigente.\n2. Fuego permitido [color=#ffcc66]ÚNICAMENTE con Permiso de Fuego explícito[/color].\n3. Prohibido acampar en zonas protegidas sin permiso especial.\n4. La cantidad de pasajeros reales debe coincidir con lo declarado en el pase.\n\n[color=#a8b5c2]• ANOTACIÓN ENCONTRADA EN LA BITÁCORA DE SILVA:[/color]\n[color=#99eebb]El viento del acantilado suena distinto a las 3:00 AM. Hoy bajé a revisar las cuevas bajo el Chalet. Hay marcas recientes en las rocas...[/color]",
+				"title": "═══ DÍA 1: LO BÁSICO - PRIMAVERA VENTOSA ═══",
+				"subtitle": "💨 CLIMA: Viento O/SO 50 km/h - Parcialmente nublado | 🔥 RIESGO: MEDIO",
+				"text": "[color=#ffe680]LUNES - LO BÁSICO.[/color]\n\nPrimer día de servicio en la garita principal. La temporada arranca con visitantes locales: solo [color=#ffffff]Turistas y Vecinos[/color].\n\n[color=#7be5ff]• DIRECTIVAS DE CONTROL:[/color]\n1. Documentos requeridos: [color=#ffffff]DNI y Pase de Visita Diario[/color].\n2. [color=#ff5555]LÓGICA DE ERROR:[/color] Validar que el DNI [color=#5af78e]NO esté vencido[/color].\n3. [color=#ff5555]LÓGICA DE ERROR:[/color] Validar que el [color=#5af78e]nombre coincida[/color] en ambos papeles.\n\n[color=#a8b5c2]• EVENTO DE TURNO:[/color]\nAl finalizar la jornada recibirás los papeles de relevo y la bitácora del anterior guardaparques...",
 				"button_text": "▶ ABRIR GARITA Y COMENZAR DÍA 1"
 			}
 		2:
 			return {
-				"agency": "SECCIONAL PARQUE CHALET HUERGO - ALERTA METEOROLÓGICA",
-				"title": "═══ DÍA 2: MARTES - ALERTA POR SEQUÍA Y VEDA ═══",
-				"subtitle": "💨 CLIMA: Viento Norte 35 km/h - Seco y caluroso (27°C) | 🔥 RIESGO FUEGO: ALTO",
-				"text": "[color=#ff9944]MARTES - ALERTA POR SEQUÍA Y CALOR.[/color]\n\nLas altas temperaturas y la sequedad extrema elevan el riesgo de incendio forestal en las 5 parcelas a nivel [color=#ff4444]ALTO[/color].\n\n[color=#7be5ff]• DIRECTIVAS DE CONTROL ESTRICTAS:[/color]\n1. [color=#ff5555]PROHIBICIÓN TOTAL DE FUEGO, CARBÓN O LEÑA[/color] (Incluso si traen permisos anteriores).\n2. Pesca deportiva permitida [color=#5af78e]SOLO con Permiso de Pesca Provincial vigente[/color].\n3. Prohibidas las redes agalleras, arpones y elementos de pesca furtiva.\n4. Pasa a [color=#ffe680]Vista 2 (Inspección de Baúl)[/color] para verificar cargas sospechosas.\n\n[color=#a8b5c2]• NOTA EN EL SEGUNDO CAJÓN DE SILVA:[/color]\n[color=#99eebb]No los dejes llevarse nada del lecho del acantilado ni de la restinga. Se alimentan de eso...[/color]",
+				"agency": "SECCIONAL PARQUE CHALET HUERGO - VALIDACIÓN EXTENDIDA",
+				"title": "═══ DÍA 2: VALIDACIÓN EXTENDIDA - TRABAJADORES ═══",
+				"subtitle": "💨 CLIMA: Viento N 35 km/h - Seco y soleado (27°C) | 🔥 RIESGO: ALTO",
+				"text": "[color=#ff9944]MARTES - VALIDACIÓN EXTENDIDA.[/color]\n\nNuevos ingresos a la seccional. A los turistas y vecinos se suman [color=#ffffff]Trabajadores[/color] (técnicos, guías, cuadrillas).\n\n[color=#7be5ff]• DIRECTIVAS DE CONTROL:[/color]\n1. Se agrega el [color=#ffe680]Permiso de Actividad[/color] (3 papeles en mesa: DNI, Pase y Permiso).\n2. [color=#ff5555]LÓGICA DE ERROR:[/color] Continúa igual que el primer día (DNI no vencido y coincidencia de nombres).\n3. Mayor cantidad de papeles en el escritorio para cotejar datos básicos.\n\n[color=#a8b5c2]• EVENTO NARRATIVO:[/color]\n[color=#99eebb]Atento a la llegada de un Pescador Raro que opera en las restingas del acantilado...[/color]",
 				"button_text": "▶ ABRIR GARITA Y COMENZAR DÍA 2"
 			}
 		3:
 			return {
-				"agency": "DEFENSA CIVIL Y PARQUES NACIONALES - ALERTA ROJA",
-				"title": "═══ DÍA 3: MIÉRCOLES - TEMPORAL PATAGÓNICO ═══",
-				"subtitle": "💨 CLIMA: Viento O/NO 90 km/h (Temporal Extremo) | 🔥 RIESGO: EXTREMO",
-				"text": "[color=#ff4444]MIÉRCOLES - TEMPORAL DE VIENTO Y NIEBLA COSTERA.[/color]\n\nRáfagas de 90 km/h azotan la costa de Comodoro. La arena y el polvo cubren el asfalto y una densa niebla sube desde el mar.\n\n[color=#7be5ff]• DIRECTIVAS DE EMERGENCIA:[/color]\n1. [color=#ff5555]PROHIBICIÓN TOTAL DE MOTOSIERRAS, HACHAS, LEÑA Y BIDONES DE NAFTA[/color] (Riesgo de tala y desastre por fuego).\n2. [color=#ffe680]Máximo 4 pasajeros por vehículo[/color] para permitir evacuaciones de emergencia.\n3. Verificar con rigurosidad las fechas de vencimiento de la documentación.\n4. Interroga a conductores que justifiquen traslados nocturnos.\n\n[color=#a8b5c2]• ADVERTENCIA DE RADIO:[/color]\n[color=#99eebb]Silva pensó que podía decirles que no en plena niebla. Mantén la calma Chenque...[/color]",
+				"agency": "DEFENSA CIVIL Y PARQUES NACIONALES - NIEBLA COSTERA",
+				"title": "═══ DÍA 3: LA PALABRA VS EL PAPEL Y NIEBLA ═══",
+				"subtitle": "🌫️ AMBIENTE: Niebla Densa del Atlántico | ⚠️ VISIBILIDAD REDUCIDA",
+				"text": "[color=#a0d8ef]MIÉRCOLES - LA PALABRA VS EL PAPEL.[/color]\n\nUna densa niebla marina cubre todo el Chalet Huergo y los acantilados. Se suman [color=#ffffff]Científicos y Acampantes[/color].\n\n[color=#7be5ff]• DIRECTIVAS DE CONTROL:[/color]\n1. [color=#ff5555]LÓGICA DE ERROR: VALIDACIÓN DE DIÁLOGOS.[/color]\n2. El [color=#5af78e]diálogo del visitante DEBE coincidir con la Actividad Autorizada[/color] en su Permiso.\n3. [color=#ffe680]NO SE INCLUYE mecánica de inspección de baúl[/color]: Prioriza la declaración oral frente al papel.\n\n[color=#a8b5c2]• EVENTO DE MEDIANOCHE:[/color]\n[color=#ff7777]El último visitante es un Trabajador nocturno sin documentos válidos. Tu decisión tendrá consecuencias.[/color]",
 				"button_text": "▶ ABRIR GARITA Y COMENZAR DÍA 3"
 			}
 		4:
 			return {
-				"agency": "SECCIONAL PARQUE CHALET HUERGO - PROTOCOLO DE CONSERVACIÓN",
-				"title": "═══ DÍA 4: JUEVES - ANOMALÍAS Y PROTECCIÓN DE FAUNA ═══",
-				"subtitle": "💨 CLIMA: Viento Sur 40 km/h - Frío y llovizna (11°C) | ⚠️ RIESGO: CAZA Y USURPACIÓN",
-				"text": "[color=#7be5ff]JUEVES - OTOÑO INICIAL Y MAREA ANORMAL.[/color]\n\nLa marea alta golpea la base del Cerro Chenque y el suelo del puesto parece vibrar con una extraña frecuencia continua.\n\n[color=#7be5ff]• DIRECTIVAS DE PRESERVACIÓN:[/color]\n1. [color=#ff5555]TOLERANCIA CERO A LA CAZA FURTIVA:[/color] Rifles, gomeras, trampas o jaulas = [color=#ff5555]RECHAZO INMEDIATO[/color].\n2. [color=#ffaa44]Prohibido transportar materiales de construcción o alambre de púa[/color] sin orden de catastro (Riesgo de usurpación).\n3. Mascotas permitidas únicamente con correa reglamentaria para resguardar a los pingüinos.\n4. Verifica que la fotografía y datos del documento coincidan con el rostro del conductor.\n\n[color=#a8b5c2]• LIBRETA DE SILVA (ÚLTIMA PÁGINA ARRANCADA):[/color]\n[color=#99eebb]Los túneles bajo el Chalet conectan directo con la rompiente. No están solos...[/color]",
+				"agency": "SECCIONAL PARQUE CHALET HUERGO - ALERTA MAREA ALTA",
+				"title": "═══ DÍA 4: FALSIFICACIONES MÚLTIPLES Y MAREA ALTA ═══",
+				"subtitle": "🌊 AMBIENTE: Marea Alta Anormal | ⏱️ RITMO: FILA RÁPIDA",
+				"text": "[color=#7be5ff]JUEVES - FALSIFICACIONES MÚLTIPLES.[/color]\n\nLa marea alta azota la base del Cerro Chenque. Fila rápida con todos los casos mezclados bajo presión de tiempo.\n\n[color=#7be5ff]• DIRECTIVAS DE CONTROL:[/color]\n1. [color=#ff5555]LÓGICA DE ERROR: CONTROL INTEGRAL CRUZADO.[/color]\n2. Cruzar todos los datos visuales, DNI vigente, nombres y coherencia de diálogos.\n3. Atento a documentos anómalos que aparezcan mezclados por error.\n\n[color=#a8b5c2]• EVENTO OBLIGATORIO:[/color]\n[color=#99eebb]Circulan la legendaria fotografía de 1920 y el mapa de túneles bajo el Chalet Huergo...[/color]",
 				"button_text": "▶ ABRIR GARITA Y COMENZAR DÍA 4"
 			}
 		5:
 			return {
-				"agency": "MINISTERIO Y ADMINISTRACIÓN NACIONAL - AUDITORÍA GENERAL",
-				"title": "═══ DÍA 5: VIERNES - EL ÚLTIMO GUARDIA ═══",
-				"subtitle": "💨 CLIMA: Viento SO 65 km/h - Helada matinal (7°C) | 🚨 AUDITORÍA FINAL",
-				"text": "[color=#ffe680]VIERNES - ÚLTIMO DÍA DE SERVICIO Y CLÍMAX.[/color]\n\nEl silencio en la garita es sepulcral. Nadie contesta las llamadas por la frecuencia de radio oficial.\n\n[color=#7be5ff]• APLICACIÓN INTEGRAL DE PROTOCOLOS:[/color]\n1. Aplica [color=#ffffff]todas las normativas aprendidas en la semana[/color]: control de fuego, carnet de pesca y habilitaciones de oficio.\n2. [color=#ff4444]ATENCIÓN EXTREMA A CREDENCIALES FALSAS Y SUPLANTACIONES DE IDENTIDAD (DOPPELGÄNGERS)[/color].\n3. Exige órdenes de servicio válidas a todo vehículo que alegue inspección o mantenimiento.\n4. Tu balance económico final y la conservación de las 5 parcelas definirán tu destino como Guardaparques.\n\n[color=#5af78e]¡La Patagonia y tu familia cuentan con tu integridad, Mr. Chenque![/color]",
+				"agency": "ADMINISTRACIÓN NACIONAL - CLÍMAX Y AUDITORÍA FINAL",
+				"title": "═══ DÍA 5: EL LEGADO DE SILVA - DETECCIÓN DE ANOMALÍAS ═══",
+				"subtitle": "🚨 DETECCIÓN DE ANOMALÍAS ACTIVADA | 🚪 DECISIÓN FINAL",
+				"text": "[color=#ffe680]VIERNES - EL LEGADO DE SILVA.[/color]\n\nSilencio total en la radio de la garita. La niebla y la marea confluyen en el último turno.\n\n[color=#7be5ff]• LÓGICA DE ERROR - RECHAZO POR ANOMALÍAS:[/color]\n1. [color=#ff5555]RECHAZAR[/color] si el documento tiene [color=#ff5555]SELLO NEGRO[/color].\n2. [color=#ff5555]RECHAZAR[/color] si el documento está [color=#ff5555]FIRMADO POR SILVA[/color].\n3. [color=#ff5555]RECHAZAR[/color] si la [color=#ff5555]fecha es ilógica (ej. 1980 o 2099)[/color].\n\n[color=#a8b5c2]• EVENTO FINAL:[/color]\n[color=#ff7777]El último visitante es El Hombre Sin Rostro con documento de 1980. El destino de Mr. Chenque depende de ti.[/color]",
 				"button_text": "▶ ASUMIR TURNO FINAL (DÍA 5)"
 			}
 		_:

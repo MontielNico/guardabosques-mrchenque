@@ -124,13 +124,24 @@ FONDO FAMILIAR ACUMULADO: $%d""" % [
 			row.add_child(bar)
 			parcels_container.add_child(row)
 		
-	# Poblar logs del día
+	# Poblar logs y eventos narrativos del día
 	if logs_container:
 		for child in logs_container.get_children():
 			child.queue_free()
 			
+		var notes = summary.get("important_notes", [])
 		var logs = summary.get("logs", [])
-		if logs.is_empty():
+		
+		# Si hay notas importantes del día (Bitácora de Silva, Pescador Raro, etc.)
+		for note in notes:
+			var n_lbl = Label.new()
+			n_lbl.text = "★ " + note
+			n_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			n_lbl.add_theme_font_size_override("font_size", 12)
+			n_lbl.modulate = Color(1.0, 0.85, 0.4) # Dorado para eventos narrativos
+			logs_container.add_child(n_lbl)
+			
+		if logs.is_empty() and notes.is_empty():
 			var l_lbl = Label.new()
 			l_lbl.text = "Jornada tranquila sin incidentes mayores."
 			l_lbl.add_theme_font_size_override("font_size", 12)
@@ -145,6 +156,10 @@ FONDO FAMILIAR ACUMULADO: $%d""" % [
 					l_lbl.modulate = Color(1.0, 0.4, 0.4)
 				elif "CORRECTO" in log_msg:
 					l_lbl.modulate = Color(0.4, 1.0, 0.6)
+				elif "INQUIETUD" in log_msg or "AMENAZA" in log_msg:
+					l_lbl.modulate = Color(1.0, 0.65, 0.3)
+				elif "DECISIÓN FINAL" in log_msg or "Bitácora" in log_msg:
+					l_lbl.modulate = Color(0.7, 0.5, 1.0)
 				logs_container.add_child(l_lbl)
 			
 	if continue_btn:

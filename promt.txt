@@ -1,0 +1,35 @@
+Necesito que implementes la logica de progresion de dificultad de los 5 dias en el DayManager y Spawner de mi juego. 
+
+REGLA ESTRICTA: No modifiques la estructura visual, solo la logica de codigo que controla que cosas aparecen cada dia.
+
+Usa esta estructura exacta para programar los parametros de cada dia:
+
+Dia 1: Lo Basico
+* Visitantes: Solo Turistas y Vecinos.
+* Documentos: DNI y Pase de Visita Diario.
+* Logica de error: Validar que el DNI no este vencido y que el nombre coincida en ambos papeles.
+* Evento Final: Al terminar el turno, disparar evento para entregar la bitacora de Silva.
+
+Dia 2: Validacion Extendida
+* Visitantes: Se suman trabajadores.
+* Documentos: Se agrega el Permiso de Actividad.
+* Logica de error: Continua igual que el primer dia. El reto es validar datos basicos pero ahora con mas papeles en la mesa.
+* Evento Obligatorio: Forzar que aparezca un visitante Pescador Raro como evento narrativo.
+
+Dia 3: La Palabra vs El Papel y Niebla
+* Visitantes: Se suman cientificos y acampantes.
+* Logica de error: Implementar validacion de dialogos. El dialogo del visitante debe coincidir con la Actividad Autorizada en el Permiso. NO incluir mecanica de inspeccion de baul.
+* Evento Ambiental: Activar variable booleana de niebla al inicio del dia.
+* Evento Obligatorio: El ultimo visitante a medianoche es un Trabajador sin documentos validos. Programar ramificacion: aprobar dispara inquietud, rechazar dispara amenaza.
+
+Dia 4: Falsificaciones Multiples
+* Ritmo: Fila rapida con todos los casos mezclados.
+* Logica de error: Cruzar todos los datos visuales y dialogos bajo presion de tiempo.
+* Evento Ambiental: Activar variable de marea alta.
+* Evento Obligatorio: Hacer que aparezcan la foto de 1920 y el mapa de tuneles entregados por error entre los papeles.
+
+Dia 5: El Legado de Silva
+* Logica de error: Activar deteccion de anomalias. Rechazar si el documento tiene sello negro, si esta firmado por Silva o si la fecha es ilogica como 1980 o 2099.
+* Evento Final: El ultimo visitante es el hombre sin rostro con documento de 1980. Programar la decision final.
+
+Genera las modificaciones en los scripts para estructurar esta secuencia.

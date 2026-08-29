@@ -2,6 +2,7 @@ extends Control
 class_name MainGame
 
 # Controlador Principal del Puesto de Control en Chalet Huergo (5 Ventanas - Vista 1 y Vista 2)
+# Gestiona la lógica de decisiones, progresión de 5 días, eventos y ramificaciones narrativas
 
 const PatagoniaView = preload("res://scripts/patagonia_view.gd")
 const DocumentView = preload("res://scripts/document_view.gd")
@@ -70,19 +71,32 @@ func _ready() -> void:
 	start_day(GameManager.current_day)
 
 func start_day(day_num: int) -> void:
+	GameManager.setup_day_parameters(day_num)
 	day_info = DataDB.get_day_info(day_num)
 	visitors_today = DataDB.get_visitors_for_day(day_num)
 	current_visitor_idx = 0
 	is_processing_decision = false
 	
+	var env_tag = ""
+	if GameManager.fog_active:
+		env_tag = " | 🌫️ NIEBLA ACTIVA"
+	elif GameManager.high_tide_active:
+		env_tag = " | 🌊 MAREA ALTA"
+	elif GameManager.anomalies_active:
+		env_tag = " | 🚨 DETECCIÓN DE ANOMALÍAS"
+		
 	if day_badge:
-		day_badge.text = "📅 DÍA %d / %d: %s" % [day_num, GameManager.MAX_DAYS, day_info.get("season", "").to_upper()]
+		day_badge.text = "📅 DÍA %d / %d: %s%s" % [day_num, GameManager.MAX_DAYS, day_info.get("season", "").to_upper(), env_tag]
 	if funds_badge:
 		funds_badge.text = "💵 FONDO FAMILIAR: $%d" % int(GameManager.family_savings)
 	if fire_badge_mini:
 		var risk = day_info.get("fire_risk", "MEDIO")
 		fire_badge_mini.text = "🔥 RIESGO FUEGO: " + risk
 		fire_badge_mini.modulate = day_info.get("fire_risk_color", Color.YELLOW)
+		
+	# Día 3: Regla estricta: NO incluir mecánica de inspección de baúl (evaluar palabra vs papel)
+	if inspect_btn and day_num == 3:
+		inspect_btn.tooltip_text = "Día 3: Validación por diálogo y permiso (Inspección no requerida)"
 		
 	_set_investigation_mode(false)
 	_load_visitor(current_visitor_idx)
@@ -222,6 +236,7 @@ func _make_decision(approved: bool) -> void:
 	if document_view:
 		document_view.apply_stamp(approved)
 		
+	var event_id = current_visitor.get("event_id", "")
 	var decision_result = GameManager.record_decision(current_visitor, approved)
 	
 	if funds_badge:
@@ -231,14 +246,28 @@ func _make_decision(approved: bool) -> void:
 		if patagonia_view:
 			patagonia_view.open_barrier_and_pass()
 		if dialog_text:
-			dialog_text.text = '"Muchas gracias oficial Chenque, que tenga buena jornada."'
-			dialog_text.modulate = Color(0.7, 1.0, 0.7)
+			if event_id == "day3_midnight_worker":
+				dialog_text.text = '"...El camión avanza en la niebla sin luces traseras. Un escalofrío te recorre la espalda..."'
+				dialog_text.modulate = Color(1.0, 0.85, 0.3)
+			elif event_id == "day5_faceless_man":
+				dialog_text.text = '"Sellaste la entrada hacia los túneles. El legado de Silva continuará contigo bajo el cerro..."'
+				dialog_text.modulate = Color(0.7, 0.5, 1.0)
+			else:
+				dialog_text.text = '"Muchas gracias oficial Chenque, que tenga buena jornada."'
+				dialog_text.modulate = Color(0.7, 1.0, 0.7)
 	else:
 		if patagonia_view:
 			patagonia_view.reject_and_turn_back()
 		if dialog_text:
-			dialog_text.text = '"¡Qué barbaridad! Me voy a quejar formalmente..."'
-			dialog_text.modulate = Color(1.0, 0.6, 0.6)
+			if event_id == "day3_midnight_worker":
+				dialog_text.text = '"Silva pensó que podía decir que no en plena niebla. Mirá cómo terminó... Te vas a arrepentir, Chenque."'
+				dialog_text.modulate = Color(1.0, 0.3, 0.3)
+			elif event_id == "day5_faceless_man":
+				dialog_text.text = '"Clausuraste la garita. La barrera permanece baja, salvando la superficie del Parque Chalet Huergo."'
+				dialog_text.modulate = Color(0.4, 0.9, 1.0)
+			else:
+				dialog_text.text = '"¡Qué barbaridad! Me voy a quejar formalmente..."'
+				dialog_text.modulate = Color(1.0, 0.6, 0.6)
 			
 	if feedback_lbl:
 		if decision_result.get("status") == "CORRECTO":

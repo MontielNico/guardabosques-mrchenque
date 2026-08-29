@@ -28,16 +28,31 @@ func _ready() -> void:
 		
 	if stats_lbl:
 		var avg_health = GameManager.get_average_parcel_health()
+		var narrative_notes = ""
+		if GameManager.day5_final_choice == "embrace_mystery":
+			narrative_notes += "\n• Legado de Silva: Cruzaste la barrera hacia los túneles subterráneos."
+		elif GameManager.day5_final_choice == "protect_park":
+			narrative_notes += "\n• Legado de Silva: Garita clausurada, superficie del parque resguardada."
+			
+		if GameManager.day3_worker_decision == "approved_unease":
+			narrative_notes += "\n• Medianoche en la Niebla: El camión misterioso ingresó sin registro."
+		elif GameManager.day3_worker_decision == "rejected_threat":
+			narrative_notes += "\n• Medianoche en la Niebla: Resististe las advertencias del conductor."
+			
+		if GameManager.photo_1920_discovered:
+			narrative_notes += "\n• Archivos Ocultos: Fotografía de 1920 y Mapa de Túneles recuperados."
+			
 		stats_lbl.text = """═══════════════════════════════════════════════════════
 • Conservación Promedio de las 5 Parcelas: %.1f%%
 • Fondo Familiar Acumulado: $%d
 • Infractores Furtivos Detenidos en Garita: %d
-• Errores Cometidos en Puesto de Control: %d
+• Errores Cometidos en Puesto de Control: %d%s
 ═══════════════════════════════════════════════════════""" % [
 			avg_health,
 			int(GameManager.family_savings),
 			GameManager.total_infractors_stopped,
-			GameManager.total_mistakes_made
+			GameManager.total_mistakes_made,
+			narrative_notes
 		]
 
 func _on_retry_pressed() -> void:
