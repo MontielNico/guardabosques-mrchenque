@@ -6,11 +6,16 @@
 bg_color = Color(0.08, 0.1, 0.12, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
-bg_color = Color(0.14, 0.18, 0.22, 0.96)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+bg_color = Color(0.14, 0.18, 0.22, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.28, 0.36, 0.44, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 shadow_color = Color(0, 0, 0, 0.5)
 shadow_size = 10
 
@@ -26,22 +31,26 @@ content_margin_right = 16.0
 content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-bg_color = Color(0.2, 0.45, 0.3, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color(0.18, 0.45, 0.28, 1)
+border_width_bottom = 3
+border_color = Color(0.1, 0.3, 0.18, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 content_margin_left = 20.0
 content_margin_top = 12.0
 content_margin_right = 20.0
 content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_sec"]
-bg_color = Color(0.25, 0.3, 0.35, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color(0.25, 0.32, 0.38, 1)
+border_width_bottom = 3
+border_color = Color(0.16, 0.22, 0.28, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 content_margin_left = 20.0
 content_margin_top = 12.0
 content_margin_right = 20.0
@@ -56,97 +65,100 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_over")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+color = Color(0.07, 0.09, 0.11, 1)
 
-[node name="Panel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(760, 520)
+[node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -380.0
-offset_top = -260.0
-offset_right = 380.0
-offset_bottom = 260.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_card")
-
-[node name="Margin" type="MarginContainer" parent="Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 28
+theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 28
+theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 24
 
-[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+[node name="Panel" type="PanelContainer" parent="Margin"]
 layout_mode = 2
-theme_override_constants/separation = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 
-[node name="Header" type="VBoxContainer" parent="Panel/Margin/VBox"]
+[node name="InnerMargin" type="MarginContainer" parent="Margin/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 22
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel/InnerMargin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Header" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="TitleLabel" type="Label" parent="Panel/Margin/VBox/Header"]
+[node name="TitleLabel" type="Label" parent="Margin/Panel/InnerMargin/VBox/Header"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.5, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 text = "EVALUACIÓN FINAL DE SERVICIO"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Panel/Margin/VBox/Header"]
+[node name="Subtitle" type="Label" parent="Margin/Panel/InnerMargin/VBox/Header"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.8, 0.9, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 13
 text = "Administración de Parques Nacionales - Distrito Patagonia"
 horizontal_alignment = 1
 
-[node name="RankBadge" type="Label" parent="Panel/Margin/VBox"]
+[node name="RankBadge" type="Label" parent="Margin/Panel/InnerMargin/VBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_badge")
 text = "🌲🎖️🏡 SOBRESALIENTE (Rango S)"
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="Panel/Margin/VBox"]
+[node name="Description" type="Label" parent="Margin/Panel/InnerMargin/VBox"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.9, 0.92, 0.95, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 14
 text = "Mr. Chenque ha logrado el equilibrio legendario. El Parque Nacional Chalet Huergo y el Cerro Chenque están intactos, su fauna protegida florece y tu familia goza de estabilidad económica para pasar el crudo invierno patagónico con orgullo y bienestar."
 autowrap_mode = 3
 
-[node name="StatsDetail" type="Label" parent="Panel/Margin/VBox"]
+[node name="StatsDetail" type="Label" parent="Margin/Panel/InnerMargin/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.75, 0.85, 0.8, 1)
 theme_override_font_sizes/font_size = 13
-text = "• Conservación Promedio del Parque: 100%
+text = "• Conservación Promedio de las 5 Parcelas: 100%
 • Fondo Familiar Final Ahorrado: $85000
-• Patrullajes de Emergencia Realizados: 5
-• Infracciones Furtivas Neutralizadas: 8"
+• Infractores Furtivos Detenidos: 8
+• Errores Cometidos: 0"
 horizontal_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="Panel/Margin/VBox"]
+[node name="Buttons" type="HBoxContainer" parent="Margin/Panel/InnerMargin/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="RetryButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+[node name="RetryButton" type="Button" parent="Margin/Panel/InnerMargin/VBox/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 text = "🔄 JUGAR OTRA VEZ"
 
-[node name="MenuButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+[node name="MenuButton" type="Button" parent="Margin/Panel/InnerMargin/VBox/Buttons"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_sec")
 text = "🏠 MENÚ PRINCIPAL"

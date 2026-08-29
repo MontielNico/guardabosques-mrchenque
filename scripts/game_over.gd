@@ -3,12 +3,12 @@ class_name GameOverScreen
 
 # Pantalla de Conclusión de Servicio / Evaluación Final de Mr. Chenque (5 Días)
 
-@onready var title_lbl: Label = $Panel/Margin/VBox/Header/TitleLabel
-@onready var rank_lbl: Label = $Panel/Margin/VBox/RankBadge
-@onready var desc_lbl: Label = $Panel/Margin/VBox/Description
-@onready var stats_lbl: Label = $Panel/Margin/VBox/StatsDetail
-@onready var retry_btn: Button = $Panel/Margin/VBox/Buttons/RetryButton
-@onready var menu_btn: Button = $Panel/Margin/VBox/Buttons/MenuButton
+@onready var title_lbl: Label = $Margin/Panel/InnerMargin/VBox/Header/TitleLabel
+@onready var rank_lbl: Label = $Margin/Panel/InnerMargin/VBox/RankBadge
+@onready var desc_lbl: Label = $Margin/Panel/InnerMargin/VBox/Description
+@onready var stats_lbl: Label = $Margin/Panel/InnerMargin/VBox/StatsDetail
+@onready var retry_btn: Button = $Margin/Panel/InnerMargin/VBox/Buttons/RetryButton
+@onready var menu_btn: Button = $Margin/Panel/InnerMargin/VBox/Buttons/MenuButton
 
 func _ready() -> void:
 	if retry_btn:
