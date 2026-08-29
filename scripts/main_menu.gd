@@ -19,8 +19,7 @@ func _ready() -> void:
 
 func _on_start_pressed() -> void:
 	SoundManager.play_sound("click")
-	GameManager.reset_game()
-	get_tree().change_scene_to_file("res://scenes/main_game.tscn")
+	GameManager.play_prologue()
 
 func _on_manual_pressed() -> void:
 	SoundManager.play_sound("paper")

@@ -10,6 +10,11 @@ signal family_funds_changed(new_amount: float)
 var current_day: int = 1
 const MAX_DAYS: int = 5
 
+# Estado de la pantalla de introducción / briefing diario
+var intro_mode: String = "prologue" # "prologue", "day", "custom"
+var custom_intro_pages: Array[Dictionary] = []
+var custom_next_scene: String = "res://scenes/main_game.tscn"
+
 var family_savings: float = 12000.0 # Ahorro inicial de la familia de Mr. Chenque
 var base_salary_per_day: float = 30000.0
 var fine_per_mistake: float = 8000.0
@@ -258,3 +263,20 @@ func get_game_ending() -> Dictionary:
 			"description": "Las constantes multas y el daño ambiental acumulado colmaron la paciencia de la Administración de Parques Nacionales. Mr. Chenque ha sido destituido de su cargo, sin ahorros suficientes para su familia.",
 			"icon": "⚠️❄️🏚️"
 		}
+
+func play_prologue() -> void:
+	reset_game()
+	intro_mode = "prologue"
+	get_tree().change_scene_to_file("res://scenes/day_intro.tscn")
+
+func play_day_intro(day_num: int = -1) -> void:
+	if day_num > 0:
+		current_day = day_num
+	intro_mode = "day"
+	get_tree().change_scene_to_file("res://scenes/day_intro.tscn")
+
+func play_custom_intro(pages_array: Array[Dictionary], next_scene: String = "res://scenes/main_game.tscn") -> void:
+	intro_mode = "custom"
+	custom_intro_pages = pages_array
+	custom_next_scene = next_scene
+	get_tree().change_scene_to_file("res://scenes/day_intro.tscn")

@@ -1,22 +1,26 @@
-[gd_scene format=3 uid="uid://b2maingame003"]
+[gd_scene format=3 uid="uid://b2maingame002"]
 
-[ext_resource type="Script" path="res://scripts/main_game.gd" id="1_game"]
-[ext_resource type="Script" path="res://scripts/patagonia_view.gd" id="2_pata"]
-[ext_resource type="Script" path="res://scripts/park_map_view.gd" id="3_map"]
-[ext_resource type="Script" path="res://scripts/car_trunk_view.gd" id="4_trunk"]
-[ext_resource type="Script" path="res://scripts/document_view.gd" id="5_doc"]
-[ext_resource type="Script" path="res://scripts/rulebook_modal.gd" id="6_rule"]
+[ext_resource type="Script" uid="uid://if7ffs2rkw6c" path="res://scripts/main_game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://cnd44pafh5lhq" path="res://scripts/patagonia_view.gd" id="2_pata"]
+[ext_resource type="Script" uid="uid://c7m7ci5tg4onf" path="res://scripts/park_map_view.gd" id="3_map"]
+[ext_resource type="Script" uid="uid://dr8g2c6hf7dv0" path="res://scripts/car_trunk_view.gd" id="4_trunk"]
+[ext_resource type="Script" uid="uid://svaebupi4kiy" path="res://scripts/document_view.gd" id="5_doc"]
+[ext_resource type="Script" uid="uid://chk6s2mxchknk" path="res://scripts/rulebook_modal.gd" id="6_rule"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
-bg_color = Color(0.08, 0.12, 0.16, 0.9)
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
 content_margin_left = 10.0
 content_margin_top = 6.0
 content_margin_right = 10.0
 content_margin_bottom = 6.0
+bg_color = Color(0.08, 0.12, 0.16, 0.9)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_window_panel"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
 bg_color = Color(0.14, 0.18, 0.22, 0.95)
 border_width_left = 2
 border_width_top = 2
@@ -27,14 +31,55 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avatar_box"]
+bg_color = Color(0.08, 0.1, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.5, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialog"]
 content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 6.0
-shadow_color = Color(0, 0, 0, 0.3)
-shadow_size = 4
+bg_color = Color(0.1, 0.13, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.32, 0.4, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_interrogate_btn"]
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0.65, 0.45, 0.15, 1)
+border_width_bottom = 2
+border_color = Color(0.45, 0.3, 0.08, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_desk_wood"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
 bg_color = Color(0.22, 0.16, 0.12, 1)
 border_width_left = 2
 border_width_top = 3
@@ -45,10 +90,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-content_margin_left = 10.0
-content_margin_top = 8.0
-content_margin_right = 10.0
-content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paper"]
 bg_color = Color(0.94, 0.91, 0.84, 1)
@@ -64,35 +105,11 @@ corner_radius_bottom_left = 6
 shadow_color = Color(0, 0, 0, 0.25)
 shadow_size = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialog"]
-bg_color = Color(0.1, 0.13, 0.16, 0.95)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.25, 0.32, 0.4, 0.8)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-content_margin_left = 8.0
-content_margin_top = 6.0
-content_margin_right = 8.0
-content_margin_bottom = 6.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avatar_box"]
-bg_color = Color(0.08, 0.1, 0.12, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.4, 0.5, 0.6, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_approve_btn"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
 bg_color = Color(0.16, 0.52, 0.25, 1)
 border_width_bottom = 3
 border_color = Color(0.1, 0.36, 0.16, 1)
@@ -100,12 +117,12 @@ corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reject_btn"]
 content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reject_btn"]
 bg_color = Color(0.72, 0.2, 0.2, 1)
 border_width_bottom = 3
 border_color = Color(0.48, 0.12, 0.12, 1)
@@ -113,12 +130,12 @@ corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
-content_margin_left = 12.0
-content_margin_top = 10.0
-content_margin_right = 12.0
-content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inspect_btn"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
 bg_color = Color(0.22, 0.42, 0.58, 1)
 border_width_bottom = 3
 border_color = Color(0.14, 0.28, 0.4, 1)
@@ -126,23 +143,6 @@ corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
-content_margin_left = 10.0
-content_margin_top = 8.0
-content_margin_right = 10.0
-content_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_interrogate_btn"]
-bg_color = Color(0.65, 0.45, 0.15, 1)
-border_width_bottom = 2
-border_color = Color(0.45, 0.3, 0.08, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-content_margin_left = 8.0
-content_margin_top = 6.0
-content_margin_right = 8.0
-content_margin_bottom = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal"]
 bg_color = Color(0.12, 0.16, 0.2, 0.98)
@@ -155,10 +155,9 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 0.6)
 shadow_size = 12
 
-[node name="MainGame" type="Control"]
+[node name="MainGame" type="Control" unique_id=1759813208]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,7 +166,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_game")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1133132881]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,7 +175,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.08, 0.1, 0.12, 1)
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1204840922]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -185,108 +184,108 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="TopHUD" type="HBoxContainer" parent="VBox"]
+[node name="TopHUD" type="HBoxContainer" parent="VBox" unique_id=1212589431]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="DayBadge" type="Label" parent="VBox/TopHUD"]
+[node name="DayBadge" type="Label" parent="VBox/TopHUD" unique_id=1496230154]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
 text = "📅 DÍA 1 / 5: PRIMAVERA"
 
-[node name="VisitorCounter" type="Label" parent="VBox/TopHUD"]
+[node name="VisitorCounter" type="Label" parent="VBox/TopHUD" unique_id=115365818]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
 text = "🚗 VEHÍCULO 1 DE 4"
 
-[node name="FundsBadge" type="Label" parent="VBox/TopHUD"]
+[node name="FundsBadge" type="Label" parent="VBox/TopHUD" unique_id=1823739772]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 1, 0.6, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
 text = "💵 FONDO FAMILIAR: $12000"
 
-[node name="Spacer" type="Control" parent="VBox/TopHUD"]
+[node name="Spacer" type="Control" parent="VBox/TopHUD" unique_id=230925421]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ViewModeBadge" type="Label" parent="VBox/TopHUD"]
+[node name="ViewModeBadge" type="Label" parent="VBox/TopHUD" unique_id=210246607]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.9, 1, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
 text = "📋 VISTA 1: CONTROL PRINCIPAL"
 
-[node name="MainLayout" type="VBoxContainer" parent="VBox"]
+[node name="MainLayout" type="VBoxContainer" parent="VBox" unique_id=1830276404]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 6
 
-[node name="TopRow" type="HBoxContainer" parent="VBox/MainLayout"]
+[node name="TopRow" type="HBoxContainer" parent="VBox/MainLayout" unique_id=2133463388]
 custom_minimum_size = Vector2(0, 310)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 6
 
-[node name="Window1_Office" type="PanelContainer" parent="VBox/MainLayout/TopRow"]
+[node name="Window1_Office" type="PanelContainer" parent="VBox/MainLayout/TopRow" unique_id=1654189601]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window1_Office"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window1_Office" unique_id=1592040583]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window1_Office/VBox"]
+[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window1_Office/VBox" unique_id=1299626293]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
 theme_override_font_sizes/font_size = 12
 text = "🪟 1. VENTANA DE OFICINA (EXTERIOR)"
 horizontal_alignment = 1
 
-[node name="PatagoniaView" type="Control" parent="VBox/MainLayout/TopRow/Window1_Office/VBox"]
+[node name="PatagoniaView" type="Control" parent="VBox/MainLayout/TopRow/Window1_Office/VBox" unique_id=482344052]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_pata")
 
-[node name="Window2_Visitor" type="PanelContainer" parent="VBox/MainLayout/TopRow"]
+[node name="Window2_Visitor" type="PanelContainer" parent="VBox/MainLayout/TopRow" unique_id=1434491439]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor" unique_id=863829973]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin" unique_id=1361685418]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
+[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox" unique_id=1132857983]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
 theme_override_font_sizes/font_size = 12
 text = "👤 2. VISITANTE EN GARITA"
 horizontal_alignment = 1
 
-[node name="ProfileHBox" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
+[node name="ProfileHBox" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox" unique_id=702855678]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="AvatarContainer" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox"]
+[node name="AvatarContainer" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox" unique_id=1505509986]
 custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_avatar_box")
 
-[node name="AvatarTexture" type="TextureRect" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/AvatarContainer"]
+[node name="AvatarTexture" type="TextureRect" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/AvatarContainer" unique_id=1595224817]
 custom_minimum_size = Vector2(106, 106)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -294,30 +293,30 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 6
 
-[node name="InfoVBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox"]
+[node name="InfoVBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox" unique_id=1206873372]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="VisitorName" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox"]
+[node name="VisitorName" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox" unique_id=1475679953]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.4, 1)
 theme_override_font_sizes/font_size = 15
 text = "Nahuel Morales"
 
-[node name="VisitorCar" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox"]
+[node name="VisitorCar" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox" unique_id=1355359164]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.85, 0.95, 1)
 theme_override_font_sizes/font_size = 12
 text = "🚗 Renault 12 Celeste"
 
-[node name="DialogScroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
+[node name="DialogScroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox" unique_id=1924439623]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
 
-[node name="DialogText" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/DialogScroll"]
+[node name="DialogText" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/DialogScroll" unique_id=929965607]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.92, 0.94, 0.96, 1)
@@ -325,38 +324,38 @@ theme_override_font_sizes/font_size = 12
 text = "\"Buenas tardes oficial. Venimos a sacar unas fotos de los senderos y el mirador.\""
 autowrap_mode = 3
 
-[node name="InterrogateBtn" type="Button" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
+[node name="InterrogateBtn" type="Button" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox" unique_id=1300126999]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_interrogate_btn")
 text = "💬 Interrogar al visitante"
 
-[node name="Window3_MapAndTrunk" type="PanelContainer" parent="VBox/MainLayout/TopRow"]
+[node name="Window3_MapAndTrunk" type="PanelContainer" parent="VBox/MainLayout/TopRow" unique_id=1418033093]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
-[node name="ParkMapView" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk"]
+[node name="ParkMapView" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk" unique_id=904623589]
 layout_mode = 2
 script = ExtResource("3_map")
 
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView" unique_id=2090525996]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin" unique_id=1612935244]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Header" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox"]
+[node name="Header" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox" unique_id=1713453348]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox/Header"]
+[node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox/Header" unique_id=533952950]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
@@ -364,39 +363,39 @@ theme_override_font_sizes/font_size = 12
 text = "🗺️ 3. MAPA DEL PARQUE (5 PARCELAS)"
 horizontal_alignment = 1
 
-[node name="MapCanvas" type="Control" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox"]
+[node name="MapCanvas" type="Control" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox" unique_id=431000142]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
-[node name="Scroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox"]
+[node name="Scroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox" unique_id=619108959]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ParcelsList" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox/Scroll"]
+[node name="ParcelsList" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox/Scroll" unique_id=101220117]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="CarTrunkView" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk"]
+[node name="CarTrunkView" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk" unique_id=2059865011]
 visible = false
 layout_mode = 2
 script = ExtResource("4_trunk")
 
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView" unique_id=992227091]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin" unique_id=1182255889]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="TrunkHeader" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox"]
+[node name="TrunkHeader" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox" unique_id=322043422]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/TrunkHeader"]
+[node name="TitleLabel" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/TrunkHeader" unique_id=1452683991]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
@@ -404,75 +403,75 @@ theme_override_font_sizes/font_size = 12
 text = "📦 3. BAÚL E INTERIOR DEL VEHÍCULO"
 horizontal_alignment = 1
 
-[node name="PassengerBox" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox"]
+[node name="PassengerBox" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox" unique_id=60859464]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
 
-[node name="PassengersCountLabel" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/PassengerBox"]
+[node name="PassengersCountLabel" type="Label" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/PassengerBox" unique_id=2131415282]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "👥 Pasajeros reales a bordo: 2 | Declarados: 2"
 autowrap_mode = 3
 
-[node name="ItemsScroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox"]
+[node name="ItemsScroll" type="ScrollContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox" unique_id=947691060]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemsList" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/ItemsScroll"]
+[node name="ItemsList" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView/Margin/VBox/ItemsScroll" unique_id=70700876]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="BottomRow" type="HBoxContainer" parent="VBox/MainLayout"]
+[node name="BottomRow" type="HBoxContainer" parent="VBox/MainLayout" unique_id=1040730604]
 custom_minimum_size = Vector2(0, 320)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 6
 
-[node name="Window4_Desk" type="PanelContainer" parent="VBox/MainLayout/BottomRow"]
+[node name="Window4_Desk" type="PanelContainer" parent="VBox/MainLayout/BottomRow" unique_id=1173399688]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_desk_wood")
 
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk" unique_id=928825545]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin" unique_id=377718116]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox"]
+[node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox" unique_id=29721357]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.8, 0.6, 1)
 theme_override_font_sizes/font_size = 12
 text = "🗄️ 4. ESCRITORIO DE MR. CHENQUE - DOCUMENTACIÓN DEL VISITANTE"
 horizontal_alignment = 1
 
-[node name="DocumentView" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox"]
+[node name="DocumentView" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox" unique_id=1195446462]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
 script = ExtResource("5_doc")
 
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView" unique_id=788553856]
 layout_mode = 2
 theme_override_constants/margin_left = 14
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 14
 theme_override_constants/margin_bottom = 8
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin" unique_id=1472759238]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Header" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+[node name="Header" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=70369521]
 layout_mode = 2
 
-[node name="DocTitle" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Header"]
+[node name="DocTitle" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Header" unique_id=110797846]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 1)
@@ -480,117 +479,117 @@ theme_override_font_sizes/font_size = 14
 text = "🏛️ PASE DE INGRESO DIARIO"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+[node name="HSeparator" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=23172646]
 layout_mode = 2
 
-[node name="Grid" type="GridContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+[node name="Grid" type="GridContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=1329088301]
 layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="NameLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="NameLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=755212300]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
 theme_override_font_sizes/font_size = 12
 text = "Titular:"
 
-[node name="NameVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="NameVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=274464141]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Nahuel Morales"
 
-[node name="DniLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DniLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=95574470]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
 theme_override_font_sizes/font_size = 12
 text = "DNI / Documento:"
 
-[node name="DniVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DniVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=652340661]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 12
 text = "34.892.110"
 
-[node name="DateLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DateLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1849138485]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
 theme_override_font_sizes/font_size = 12
 text = "Fecha Validez:"
 
-[node name="DateVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="DateVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1436514875]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 12
 text = "28/11/2026 (Vigente)"
 
-[node name="PurposeLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PurposeLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1417287390]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
 theme_override_font_sizes/font_size = 12
 text = "Motivo de Visita:"
 
-[node name="PurposeVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PurposeVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=2119134712]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Turismo y Fotografía"
 
-[node name="PeopleLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PeopleLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1275400791]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
 theme_override_font_sizes/font_size = 12
 text = "Personas Autorizadas:"
 
-[node name="PeopleVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="PeopleVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=26338846]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 12
 text = "2 personas"
 
-[node name="JobPermitLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="JobPermitLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1429779652]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
 theme_override_font_sizes/font_size = 12
 text = "Permiso de Oficio:"
 
-[node name="JobPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid"]
+[node name="JobPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=114342568]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 12
 text = "Ninguno (Particular)"
 
-[node name="HSeparator2" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+[node name="HSeparator2" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=797505373]
 layout_mode = 2
 
-[node name="PermitsBox" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox"]
+[node name="PermitsBox" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=1715581420]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="FireLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FireLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=1498793857]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
 theme_override_font_sizes/font_size = 11
 text = "Permiso Fuego:"
 
-[node name="FirePermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FirePermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=1113504604]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "NO AUTORIZADO ❌"
 
-[node name="FishingLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FishingLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=2118484143]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
 theme_override_font_sizes/font_size = 11
 text = "Permiso Pesca:"
 
-[node name="FishingPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox"]
+[node name="FishingPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=1292400662]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "NO AUTORIZADO ❌"
 
-[node name="StampVisual" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView"]
+[node name="StampVisual" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView" unique_id=735666133]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -599,81 +598,81 @@ text = "【 AUTORIZADO 】
 PARQUE CHALET HUERGO"
 horizontal_alignment = 1
 
-[node name="Window5_Decisions" type="PanelContainer" parent="VBox/MainLayout/BottomRow"]
+[node name="Window5_Decisions" type="PanelContainer" parent="VBox/MainLayout/BottomRow" unique_id=210197867]
 custom_minimum_size = Vector2(370, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions"]
+[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions" unique_id=1158184675]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 6
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin"]
+[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin" unique_id=704953227]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+[node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=1866599361]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
 theme_override_font_sizes/font_size = 13
 text = "⚖️ 5. BOTONES DE DECISIÓN"
 horizontal_alignment = 1
 
-[node name="InfoMini" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+[node name="InfoMini" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=51294562]
 layout_mode = 2
 
-[node name="FireBadgeMini" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/InfoMini"]
+[node name="FireBadgeMini" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/InfoMini" unique_id=1787682586]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
 text = "🔥 RIESGO INCENDIO: MEDIO"
 horizontal_alignment = 1
 
-[node name="DecisionsBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+[node name="DecisionsBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=52553894]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ApproveBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
+[node name="ApproveBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=555596461]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_approve_btn")
 text = "🟢 AUTORIZAR ACCESO (Sello Verde)"
 
-[node name="RejectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
+[node name="RejectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=546862011]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_reject_btn")
 text = "🔴 DENEGAR ACCESO (Sello Rojo)"
 
-[node name="InspectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
+[node name="InspectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=2040792103]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
 text = "🔍 INSPECCIONAR VEHÍCULO (Vista 2)"
 
-[node name="BackToMapBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox"]
+[node name="BackToMapBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=98885368]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
 text = "🗺️ VOLVER AL MAPA GENERAL (Vista 1)"
 
-[node name="RulebookBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+[node name="RulebookBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=677952951]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
 text = "📖 LEER REGLAS DEL PARQUE"
 
-[node name="FeedbackLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox"]
+[node name="FeedbackLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=1971190056]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Modals" type="Control" parent="."]
+[node name="Modals" type="Control" parent="." unique_id=635782930]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -682,7 +681,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="RulebookModal" type="PanelContainer" parent="Modals"]
+[node name="RulebookModal" type="PanelContainer" parent="Modals" unique_id=1106554309]
 visible = false
 custom_minimum_size = Vector2(680, 480)
 layout_mode = 1
@@ -700,76 +699,76 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
 script = ExtResource("6_rule")
 
-[node name="Margin" type="MarginContainer" parent="Modals/RulebookModal"]
+[node name="Margin" type="MarginContainer" parent="Modals/RulebookModal" unique_id=521626841]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 16
 
-[node name="VBox" type="VBoxContainer" parent="Modals/RulebookModal/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Modals/RulebookModal/Margin" unique_id=1390357321]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Header" type="HBoxContainer" parent="Modals/RulebookModal/Margin/VBox"]
+[node name="Header" type="HBoxContainer" parent="Modals/RulebookModal/Margin/VBox" unique_id=815672858]
 layout_mode = 2
 
-[node name="DayTitle" type="Label" parent="Modals/RulebookModal/Margin/VBox/Header"]
+[node name="DayTitle" type="Label" parent="Modals/RulebookModal/Margin/VBox/Header" unique_id=1943019958]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.9, 0.85, 0.5, 1)
 theme_override_font_sizes/font_size = 18
 text = "📖 REGLAMENTO DEL GUARDAPARQUES"
 
-[node name="CloseButton" type="Button" parent="Modals/RulebookModal/Margin/VBox/Header"]
+[node name="CloseButton" type="Button" parent="Modals/RulebookModal/Margin/VBox/Header" unique_id=523910500]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = " ✕ CERRAR "
 
-[node name="HSeparator" type="HSeparator" parent="Modals/RulebookModal/Margin/VBox"]
+[node name="HSeparator" type="HSeparator" parent="Modals/RulebookModal/Margin/VBox" unique_id=22284388]
 layout_mode = 2
 
-[node name="Content" type="VBoxContainer" parent="Modals/RulebookModal/Margin/VBox"]
+[node name="Content" type="VBoxContainer" parent="Modals/RulebookModal/Margin/VBox" unique_id=424861245]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="WeatherBox" type="HBoxContainer" parent="Modals/RulebookModal/Margin/VBox/Content"]
+[node name="WeatherBox" type="HBoxContainer" parent="Modals/RulebookModal/Margin/VBox/Content" unique_id=1022783861]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="FireBadge" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/WeatherBox"]
+[node name="FireBadge" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/WeatherBox" unique_id=1430522184]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "RIESGO DE INCENDIO: MEDIO"
 
-[node name="WeatherLabel" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/WeatherBox"]
+[node name="WeatherLabel" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/WeatherBox" unique_id=750085599]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.85, 0.95, 1)
 theme_override_font_sizes/font_size = 13
 text = "Clima: Viento O/SO 50 km/h"
 
-[node name="FaunaBox" type="PanelContainer" parent="Modals/RulebookModal/Margin/VBox/Content"]
+[node name="FaunaBox" type="PanelContainer" parent="Modals/RulebookModal/Margin/VBox/Content" unique_id=719526118]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dialog")
 
-[node name="FaunaLabel" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/FaunaBox"]
+[node name="FaunaLabel" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content/FaunaBox" unique_id=1332862640]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.9, 0.7, 1)
 theme_override_font_sizes/font_size = 13
 text = "Fauna y Zonas Sensibles: Pingüinos de Magallanes"
 
-[node name="RulesTitle" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content"]
+[node name="RulesTitle" type="Label" parent="Modals/RulebookModal/Margin/VBox/Content" unique_id=384846277]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.8, 0.5, 1)
 theme_override_font_sizes/font_size = 14
 text = "Normas Obligatorias de Control para la Jornada:"
 
-[node name="RulesScroll" type="ScrollContainer" parent="Modals/RulebookModal/Margin/VBox/Content"]
+[node name="RulesScroll" type="ScrollContainer" parent="Modals/RulebookModal/Margin/VBox/Content" unique_id=1651408713]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RulesList" type="VBoxContainer" parent="Modals/RulebookModal/Margin/VBox/Content/RulesScroll"]
+[node name="RulesList" type="VBoxContainer" parent="Modals/RulebookModal/Margin/VBox/Content/RulesScroll" unique_id=887780270]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8

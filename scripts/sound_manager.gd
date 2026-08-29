@@ -126,6 +126,28 @@ func _generate_sound(type: String) -> AudioStreamWAV:
 				var val = clampf(sin(2.0 * PI * freq * t) * env, -1.0, 1.0)
 				data.append(int((val + 1.0) * 127.5))
 
+		"typewriter_key": # Tecleo mecánico retro de máquina / terminal
+			duration = 0.035
+			var total_samples = int(sample_rate * duration)
+			var base_freq = 600.0 + randf() * 350.0
+			for i in range(total_samples):
+				var t = float(i) / sample_rate
+				var env = exp(-t * 120.0)
+				var click = (randf() * 2.0 - 1.0) * 0.75
+				var tone = sin(2.0 * PI * base_freq * t) * 0.35
+				var val = clampf((click + tone) * env, -1.0, 1.0)
+				data.append(int((val + 1.0) * 127.5))
+
+		"typewriter_return": # Timbre/Chime mecánico al finalizar párrafo
+			duration = 0.28
+			var total_samples = int(sample_rate * duration)
+			for i in range(total_samples):
+				var t = float(i) / sample_rate
+				var env = exp(-t * 14.0)
+				var bell = sin(2.0 * PI * 1760.0 * t) * 0.6 + sin(2.0 * PI * 2640.0 * t) * 0.3
+				var val = clampf(bell * env, -1.0, 1.0)
+				data.append(int((val + 1.0) * 127.5))
+
 		_: # Sonido genérico
 			duration = 0.08
 			var total_samples = int(sample_rate * duration)
