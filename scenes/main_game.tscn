@@ -202,23 +202,9 @@ theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
 text = "🚗 VEHÍCULO 1 DE 4"
 
-[node name="FundsBadge" type="Label" parent="VBox/TopHUD" unique_id=1823739772]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 1, 0.6, 1)
-theme_override_font_sizes/font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
-text = "💵 FONDO FAMILIAR: $12000"
-
 [node name="Spacer" type="Control" parent="VBox/TopHUD" unique_id=230925421]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="ViewModeBadge" type="Label" parent="VBox/TopHUD" unique_id=210246607]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.9, 1, 1)
-theme_override_font_sizes/font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
-text = "📋 VISTA 1: CONTROL PRINCIPAL"
 
 [node name="MainLayout" type="VBoxContainer" parent="VBox" unique_id=1830276404]
 layout_mode = 2
@@ -243,8 +229,8 @@ theme_override_constants/separation = 4
 [node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window1_Office/VBox" unique_id=1299626293]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
-theme_override_font_sizes/font_size = 12
-text = "🪟 1. VENTANA DE OFICINA (EXTERIOR)"
+theme_override_font_sizes/font_size = 15
+text = "VENTANA DE OFICINA (EXTERIOR)"
 horizontal_alignment = 1
 
 [node name="PatagoniaView" type="Control" parent="VBox/MainLayout/TopRow/Window1_Office/VBox" unique_id=482344052]
@@ -272,8 +258,8 @@ theme_override_constants/separation = 6
 [node name="Title" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox" unique_id=1132857983]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
-theme_override_font_sizes/font_size = 12
-text = "👤 2. VISITANTE EN GARITA"
+theme_override_font_sizes/font_size = 15
+text = "VISITANTE EN GARITA"
 horizontal_alignment = 1
 
 [node name="ProfileHBox" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox" unique_id=702855678]
@@ -359,8 +345,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
-theme_override_font_sizes/font_size = 12
-text = "🗺️ 3. MAPA DEL PARQUE (5 PARCELAS)"
+theme_override_font_sizes/font_size = 15
+text = "MAPA DEL PARQUE "
 horizontal_alignment = 1
 
 [node name="MapCanvas" type="Control" parent="VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView/Margin/VBox" unique_id=431000142]
@@ -447,8 +433,8 @@ theme_override_constants/separation = 4
 [node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox" unique_id=29721357]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.8, 0.6, 1)
-theme_override_font_sizes/font_size = 12
-text = "🗄️ 4. ESCRITORIO DE MR. CHENQUE - DOCUMENTACIÓN DEL VISITANTE"
+theme_override_font_sizes/font_size = 15
+text = "ESCRITORIO - DOCUMENTACIÓN DEL VISITANTE"
 horizontal_alignment = 1
 
 [node name="DocumentView" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox" unique_id=1195446462]
@@ -593,7 +579,7 @@ text = "NO AUTORIZADO ❌"
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "【 AUTORIZADO 】
 PARQUE CHALET HUERGO"
 horizontal_alignment = 1
@@ -617,8 +603,8 @@ theme_override_constants/separation = 8
 [node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=1866599361]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
-theme_override_font_sizes/font_size = 13
-text = "⚖️ 5. BOTONES DE DECISIÓN"
+theme_override_font_sizes/font_size = 15
+text = "BOTONES DE DECISIÓN"
 horizontal_alignment = 1
 
 [node name="InfoMini" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=51294562]
@@ -637,21 +623,23 @@ theme_override_constants/separation = 8
 
 [node name="ApproveBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=555596461]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_approve_btn")
-text = "🟢 AUTORIZAR ACCESO (Sello Verde)"
+text = "AUTORIZAR ACCESO
+"
 
 [node name="RejectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=546862011]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_reject_btn")
-text = "🔴 DENEGAR ACCESO (Sello Rojo)"
+text = "DENEGAR ACCESO"
 
 [node name="InspectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=2040792103]
 layout_mode = 2
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
-text = "🔍 INSPECCIONAR VEHÍCULO (Vista 2)"
+text = "INSPECCIONAR VEHÍCULO 
+"
 
 [node name="BackToMapBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=98885368]
 visible = false
@@ -662,9 +650,9 @@ text = "🗺️ VOLVER AL MAPA GENERAL (Vista 1)"
 
 [node name="RulebookBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=677952951]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
-text = "📖 LEER REGLAS DEL PARQUE"
+text = "REGLAS DEL PARQUE"
 
 [node name="FeedbackLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=1971190056]
 layout_mode = 2

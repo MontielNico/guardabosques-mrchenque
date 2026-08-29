@@ -52,6 +52,10 @@ func _start_screen(step_idx: int) -> void:
 		narrative_label.text = screen_data.get("text", "")
 		narrative_label.visible_characters = 0
 		total_character_count = narrative_label.get_total_character_count()
+		narrative_label.scroll_to_line(0)
+		var v_scroll = narrative_label.get_v_scroll_bar()
+		if v_scroll:
+			v_scroll.value = 0
 		
 	current_visible_chars = 0.0
 	last_sound_char_index = -1
