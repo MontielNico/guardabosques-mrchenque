@@ -1,16 +1,28 @@
 extends Control
 class_name DaySummaryScreen
 
-# Pantalla de Resumen de Fin de Día (Sueldo, Gastos Familiares y Estado de Parcelas)
+# Pantalla de Resumen de Fin de Día (Sueldo, Gastos Familiares, Estado de Parcelas y Descargo Personal de Mr. Chenque)
 
 @onready var title_label: Label = $Margin/Panel/InnerMargin/VBox/Header/TitleLabel
 @onready var stats_label: Label = $Margin/Panel/InnerMargin/VBox/Content/LeftCol/StatsBox/StatsLabel
 @onready var finance_label: Label = $Margin/Panel/InnerMargin/VBox/Content/LeftCol/FinanceBox/FinanceLabel
 @onready var parcels_container: VBoxContainer = $Margin/Panel/InnerMargin/VBox/Content/RightCol/ParcelsBox/VBox/ParcelsList
 @onready var logs_container: VBoxContainer = $Margin/Panel/InnerMargin/VBox/Content/RightCol/LogsBox/VBox/LogsScroll/LogsList
+@onready var descargo_box: PanelContainer = $Margin/Panel/InnerMargin/VBox/DescargoBox
+@onready var descargo_header: Label = $Margin/Panel/InnerMargin/VBox/DescargoBox/InnerMargin/VBox/DescargoHeader
+@onready var descargo_text: RichTextLabel = $Margin/Panel/InnerMargin/VBox/DescargoBox/InnerMargin/VBox/DescargoText
 @onready var continue_btn: Button = $Margin/Panel/InnerMargin/VBox/Footer/ContinueButton
 
 var is_final_day: bool = false
+
+# Descargos diarios de Mr. Chenque por defecto (pueden ser modificados o insertados externamente)
+var chenque_daily_descargos: Dictionary = {
+	1: "Primer día terminado, fue más tranquilo de lo que esperaba. La mayoría de los visitantes tenía sus papeles en regla y no hubo ningún problema importante. Alguno que otro quiso hacerse el distraído con las normas, pero nada que no pudiera resolver. Supongo que esto es lo que significa ser guardabosques, revisar permisos. Hacer cumplir las reglas. Esperar.\n Aunque hay algo que me llamó la atención, durante la tarde el viento empezó a golpear contra la garita con bastante fuerza. Por momentos parecía que alguien caminaba alrededor del puesto, salí a mirar un par de veces pero no había nadie. Debe haber sido el viento.\n Mañana será otro día. Por ahora, no tengo de qué preocuparme.",
+	2: "Segundo día terminado. La nota de Silva no me gustó, pensé que exageraba ya que después de todo, ayer no pasó nada y supongo que cada guardaparque termina viendo cosas donde no las hay. Pero hoy apareció el pescador y traía algo en el cajón. No sé exactamente qué era. Nunca había visto algo así, no parecía un pez normal y tampoco parecía completamente muerto.\n Decidí no dejarlo salir con eso, no discutió demasiado. Eso fue lo que más me llamó la atención. Se fue sin decir casi nada y desde entonces no puedo dejar de pensar en la nota\n "Se alimentan de eso."\n No sé qué quiso decir esa nota. Por ahora prefiero no sacar conclusiones.\n Mañana será otro día. Espero que las cosas vuelvan a la normalidad.",
+	3: "Tercer día terminado. Hoy vino el agente. Ahora entiendo la nota de Silva, tenía la documentación incompleta. Le expliqué que no podía dejarlo pasar así, pero no pareció importarle demasiado. Dijo que Silva siempre lo dejaba entrar.\n Cuando le dije que las reglas habían cambiado, se quedó mirándome unos segundos.\n Después me dijo:\n "Silva también pensó que podía decir que no."\n Y se fue, no sé qué quiso decir con eso. Odio admitirlo, pero me asustó, no por lo que dijo, sino por la forma en que lo dijo. Como si supiera algo que yo no.\n Revisé dos veces la cerradura antes de irme, quizás estoy exagerando.\n Quizás debería dejar de leer las notas de Silva, pero si él desconfiaba de ese hombre... Creo que yo también debería hacerlo.",
+	4: "No sé cómo escribir esto. Esas fotografías...fotografías mías. No de alguien parecido a mí. Mías!. Una de ellas está fechada en 1960. No había nacido. No debería existir.\n También encontré un mapa. Mostraba túneles debajo del parque, algunos conectados con los acantilados. No sabía que existían. Ahora no sé qué creer. Anoche sentí que la garita temblaba. Hoy encontré esos mapas y esas fotografías.\n Todo lo que encontré esta semana parece estar conectado. Silva sabía algo y el agente sabía algo. Y ahora empiezo a pensar que quizás yo también estoy involucrado en esto, aunque no tenga idea de cómo. Tengo miedo no quiero volver mañana.\n Pero tampoco quiero irme. Sé que si me voy, este parque podría perder todos sus animales y sus arboles. Necesito saber qué pasó con Silva y necesito saber quién sacó esas fotografías. Porque si esa foto realmente es de 1960... ¿Quién carajo soy yo?",
+	5: "Quinto día. Se terminó la semana. La garita quedó en silencio absoluto tras el paso del Hombre Sin Rostro. El destino del parque y lo que habita en las entrañas del Cerro Chenque quedaron sellados. Cumplí mi deber hasta el último minuto."
+}
 
 func _ready() -> void:
 	if continue_btn:
@@ -104,14 +116,14 @@ FONDO FAMILIAR ACUMULADO: $%d""" % [
 			var name_lbl = Label.new()
 			name_lbl.text = "%s %s" % [icons.get(p_name, "📍"), p_name]
 			name_lbl.custom_minimum_size = Vector2(220, 0)
-			name_lbl.add_theme_font_size_override("font_size", 12)
+			name_lbl.add_theme_font_size_override("font_size", 11)
 			row.add_child(name_lbl)
 			
 			var bar = ProgressBar.new()
 			bar.value = p_val
 			bar.max_value = 100.0
 			bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			bar.custom_minimum_size = Vector2(100, 16)
+			bar.custom_minimum_size = Vector2(100, 14)
 			bar.show_percentage = true
 			
 			if p_val >= 75.0:
@@ -137,14 +149,14 @@ FONDO FAMILIAR ACUMULADO: $%d""" % [
 			var n_lbl = Label.new()
 			n_lbl.text = "★ " + note
 			n_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			n_lbl.add_theme_font_size_override("font_size", 12)
+			n_lbl.add_theme_font_size_override("font_size", 11)
 			n_lbl.modulate = Color(1.0, 0.85, 0.4) # Dorado para eventos narrativos
 			logs_container.add_child(n_lbl)
 			
 		if logs.is_empty() and notes.is_empty():
 			var l_lbl = Label.new()
 			l_lbl.text = "Jornada tranquila sin incidentes mayores."
-			l_lbl.add_theme_font_size_override("font_size", 12)
+			l_lbl.add_theme_font_size_override("font_size", 11)
 			logs_container.add_child(l_lbl)
 		else:
 			for log_msg in logs:
@@ -161,12 +173,29 @@ FONDO FAMILIAR ACUMULADO: $%d""" % [
 				elif "DECISIÓN FINAL" in log_msg or "Bitácora" in log_msg:
 					l_lbl.modulate = Color(0.7, 0.5, 1.0)
 				logs_container.add_child(l_lbl)
+	
+	# Poblar el Descargo / Reflexión de Mr. Chenque al finalizar el día
+	if descargo_header:
+		descargo_header.text = "📓 DESCARGO / REFLEXIÓN PERSONAL DE MR. CHENQUE (CIERRE DEL DÍA %d):" % day
+	if descargo_text:
+		var custom_descargo = summary.get("chenque_descargo", "")
+		if custom_descargo.is_empty():
+			custom_descargo = chenque_daily_descargos.get(day, "Jornada completada. Sin novedades en la bitácora personal de Mr. Chenque.")
+		descargo_text.text = custom_descargo
 			
 	if continue_btn:
 		if is_final_day:
 			continue_btn.text = "🏆 VER EVALUACIÓN FINAL DE MR. CHENQUE"
 		else:
 			continue_btn.text = "➡️ COMENZAR DÍA %d" % (day + 1)
+
+# Método público para insertar o actualizar el descargo dinámicamente
+func set_chenque_descargo(text: String) -> void:
+	if descargo_text:
+		descargo_text.text = text
+
+func get_chenque_descargo_for_day(day_num: int) -> String:
+	return chenque_daily_descargos.get(day_num, "")
 
 func _on_continue_pressed() -> void:
 	SoundManager.play_sound("click")

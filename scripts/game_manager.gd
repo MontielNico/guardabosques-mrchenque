@@ -368,7 +368,7 @@ func get_game_ending() -> Dictionary:
 func play_prologue() -> void:
 	reset_game()
 	intro_mode = "prologue"
-	get_tree().change_scene_to_file("res://scenes/day_intro.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_intro.tscn")
 
 func play_day_intro(day_num: int = -1) -> void:
 	if day_num > 0:
