@@ -5,59 +5,59 @@
 [ext_resource type="FontFile" uid="uid://bxp77kdvusiey" path="res://fonts/PressStart2P-Regular.ttf" id="3_press_start"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
-bg_color = Color(0.12, 0.15, 0.19, 0.98)
+bg_color = Color(0.08, 0.1, 0.13, 0.98)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.28, 0.36, 0.44, 1)
+border_color = Color(0.25, 0.35, 0.45, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 0.45)
-shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_subbox"]
-content_margin_left = 10.0
-content_margin_top = 6.0
-content_margin_right = 10.0
-content_margin_bottom = 6.0
-bg_color = Color(0.08, 0.11, 0.14, 0.85)
-border_width_left = 1
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.05, 0.07, 0.09, 0.9)
+border_width_left = 2
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.22, 0.28, 0.35, 0.8)
+border_color = Color(0.2, 0.28, 0.36, 0.9)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_descargo"]
-content_margin_left = 10.0
-content_margin_top = 6.0
-content_margin_right = 10.0
-content_margin_bottom = 6.0
-bg_color = Color(0.07, 0.09, 0.12, 0.95)
-border_width_left = 2
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.04, 0.06, 0.08, 0.95)
+border_width_left = 3
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.35, 0.48, 0.6, 0.9)
+border_color = Color(0.35, 0.5, 0.65, 0.9)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-content_margin_left = 18.0
-content_margin_top = 8.0
-content_margin_right = 18.0
-content_margin_bottom = 8.0
-bg_color = Color(0.18, 0.45, 0.28, 1)
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.16, 0.48, 0.28, 1)
 border_width_bottom = 3
-border_color = Color(0.1, 0.3, 0.18, 1)
+border_color = Color(0.08, 0.28, 0.16, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -79,7 +79,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.07, 0.09, 1)
+color = Color(0.04, 0.05, 0.07, 1)
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=501085501]
 layout_mode = 1
@@ -88,10 +88,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 18
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 18
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
 
 [node name="Panel" type="PanelContainer" parent="Margin" unique_id=1400683049]
 layout_mode = 2
@@ -101,31 +101,33 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 
 [node name="InnerMargin" type="MarginContainer" parent="Margin/Panel" unique_id=2075041567]
 layout_mode = 2
-theme_override_constants/margin_left = 14
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 14
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
 
 [node name="VBox" type="VBoxContainer" parent="Margin/Panel/InnerMargin" unique_id=1019763846]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 10
 
 [node name="Header" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox" unique_id=1554925323]
 layout_mode = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 
 [node name="TitleLabel" type="Label" parent="Margin/Panel/InnerMargin/VBox/Header" unique_id=681099903]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.85, 0.5, 1)
-theme_override_font_sizes/font_size = 18
-text = "RESUMEN DEL DÍA 1 - CIERRE DE JORNADA"
+theme_override_colors/font_color = Color(0.96, 0.84, 0.45, 1)
+theme_override_fonts/font = ExtResource("3_press_start")
+theme_override_font_sizes/font_size = 17
+text = "═══ RESUMEN DEL DÍA 1 - CIERRE DE JORNADA ═══"
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Margin/Panel/InnerMargin/VBox/Header" unique_id=1042017368]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.82, 0.92, 1)
-theme_override_font_sizes/font_size = 12
-text = "Informe de Control de Ingreso y Liquidación de Sueldo - Mr. Chenque"
+theme_override_colors/font_color = Color(0.75, 0.85, 0.9, 1)
+theme_override_fonts/font = ExtResource("2_vt323")
+theme_override_font_sizes/font_size = 22
+text = "INFORME DE CONTROL DE INGRESO Y SERVICIO - MR. CHENQUE"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Margin/Panel/InnerMargin/VBox" unique_id=1580629821]
@@ -134,71 +136,63 @@ layout_mode = 2
 [node name="Content" type="HBoxContainer" parent="Margin/Panel/InnerMargin/VBox" unique_id=1259000426]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 12
+size_flags_stretch_ratio = 1.1
+theme_override_constants/separation = 14
 
 [node name="LeftCol" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content" unique_id=639216976]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 6
+theme_override_constants/separation = 10
 
 [node name="StatsBox" type="PanelContainer" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol" unique_id=2024711813]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
 
-[node name="StatsLabel" type="Label" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/StatsBox" unique_id=1809755476]
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/StatsBox"]
 layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StatsTitle" type="Label" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/StatsBox/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.85, 0.95, 1)
+theme_override_fonts/font = ExtResource("3_press_start")
 theme_override_font_sizes/font_size = 11
+text = "📊 DESEMPEÑO DEL TURNO"
+
+[node name="StatsLabel" type="Label" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/StatsBox/VBox" unique_id=1809755476]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_fonts/font = ExtResource("2_vt323")
+theme_override_font_sizes/font_size = 23
+theme_override_constants/line_spacing = 4
 text = "• Aciertos y Decisiones Correctas: 4
 • Infracciones o Errores Cometidos: 0"
 
-[node name="FinanceBox" type="PanelContainer" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol" unique_id=1381193570]
+[node name="ParcelsBox" type="PanelContainer" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol" unique_id=1115629697]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
 
-[node name="FinanceLabel" type="Label" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/FinanceBox" unique_id=246061129]
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/ParcelsBox" unique_id=1111119471]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/ParcelsBox/VBox" unique_id=1896857180]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.9, 0.65, 1)
+theme_override_fonts/font = ExtResource("3_press_start")
+theme_override_font_sizes/font_size = 11
+text = "🌲 ESTADO DE LAS 5 PARCELAS"
+
+[node name="ParcelsList" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content/LeftCol/ParcelsBox/VBox" unique_id=1737747830]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
-theme_override_font_sizes/font_size = 11
-text = "[ BALANCE ECONÓMICO PERSONAL ]
-Sueldo Base: +$30000
-Bonos por Infracciones: +$0
-Multas por Errores: -$0
-----------------------------------------
-Sueldo Neto de Jornada: +$30000
-
-[ GASTOS DEL HOGAR Y FAMILIA ]
-   - Alimentos: -$8000
-   - Gas Patagónico: -$5000
-   - Medicamentos: -$2000
-Total Gastos Familiares: -$15000
-----------------------------------------
-Resultado Neto del Día: +$15000
-FONDO FAMILIAR ACUMULADO: $27000"
+theme_override_constants/separation = 6
 
 [node name="RightCol" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content" unique_id=1818931694]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 6
-
-[node name="ParcelsBox" type="PanelContainer" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol" unique_id=1115629697]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
-
-[node name="VBox" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol/ParcelsBox" unique_id=1111119471]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="Title" type="Label" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol/ParcelsBox/VBox" unique_id=1896857180]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.85, 0.7, 1)
-theme_override_font_sizes/font_size = 12
-text = "🌲 ESTADO DE CONSERVACIÓN DE LAS 5 PARCELAS:"
-
-[node name="ParcelsList" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol/ParcelsBox/VBox" unique_id=1737747830]
-layout_mode = 2
-theme_override_constants/separation = 3
+theme_override_constants/separation = 10
 
 [node name="LogsBox" type="PanelContainer" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol" unique_id=1776467166]
 layout_mode = 2
@@ -207,13 +201,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_subbox")
 
 [node name="VBox" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol/LogsBox" unique_id=1459320457]
 layout_mode = 2
-theme_override_constants/separation = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
 
 [node name="Title" type="Label" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol/LogsBox/VBox" unique_id=16003981]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.85, 0.6, 1)
+theme_override_colors/font_color = Color(0.95, 0.85, 0.5, 1)
+theme_override_fonts/font = ExtResource("3_press_start")
 theme_override_font_sizes/font_size = 11
-text = "📜 Sucesos Registrados en la Jornada:"
+text = "📜 SUCESOS REGISTRADOS"
 
 [node name="LogsScroll" type="ScrollContainer" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol/LogsBox/VBox" unique_id=1093684867]
 layout_mode = 2
@@ -222,39 +218,44 @@ size_flags_vertical = 3
 [node name="LogsList" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/Content/RightCol/LogsBox/VBox/LogsScroll" unique_id=1337379363]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
 
 [node name="DescargoBox" type="PanelContainer" parent="Margin/Panel/InnerMargin/VBox" unique_id=2089472185]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.95
 theme_override_styles/panel = SubResource("StyleBoxFlat_descargo")
 
 [node name="InnerMargin" type="MarginContainer" parent="Margin/Panel/InnerMargin/VBox/DescargoBox"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 6
 
 [node name="VBox" type="VBoxContainer" parent="Margin/Panel/InnerMargin/VBox/DescargoBox/InnerMargin"]
 layout_mode = 2
-theme_override_constants/separation = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 6
 
 [node name="DescargoHeader" type="Label" parent="Margin/Panel/InnerMargin/VBox/DescargoBox/InnerMargin/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.86, 0.48, 1)
-theme_override_font_sizes/font_size = 12
-text = "📓 DESCARGO / REFLEXIÓN PERSONAL DE MR. CHENQUE (CIERRE DEL DÍA 1):"
+theme_override_fonts/font = ExtResource("3_press_start")
+theme_override_font_sizes/font_size = 11
+text = "📓 BITÁCORA / REFLEXIÓN PERSONAL DE MR. CHENQUE (CIERRE DEL DÍA 1):"
 
 [node name="DescargoText" type="RichTextLabel" parent="Margin/Panel/InnerMargin/VBox/DescargoBox/InnerMargin/VBox"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.92, 0.95, 0.97, 1)
+theme_override_constants/line_separation = 4
 theme_override_fonts/normal_font = ExtResource("2_vt323")
-theme_override_font_sizes/normal_font_size = 20
-theme_override_constants/line_separation = 2
+theme_override_font_sizes/normal_font_size = 23
 bbcode_enabled = true
 text = "Texto del descargo de Mr. Chenque al finalizar el día..."
-fit_content = true
-scroll_active = false
+scroll_active = true
 autowrap_mode = 3
 
 [node name="Footer" type="HBoxContainer" parent="Margin/Panel/InnerMargin/VBox" unique_id=844837814]
@@ -266,4 +267,4 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_press_start")
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-text = "➡️ COMENZAR SIGUIENTE DÍA"
+text = "▶ COMENZAR SIGUIENTE DÍA"
