@@ -117,7 +117,7 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 				},
 				{
 					"name": "Rodrigo 'El Asador' Vega",
-					"avatar_file": "camionConSobrePesoDeLena.jpg",
+					"avatar_file": "camionConSobrePesoDeLeña.jpg",
 					"car_name": "Ford F-100 Oxidada",
 					"car_color": Color(0.7, 0.35, 0.2),
 					"declared_passengers": 3,

@@ -254,16 +254,16 @@ size_flags_vertical = 3
 script = ExtResource("2_pata")
 
 [node name="Window2_Visitor" type="PanelContainer" parent="VBox/MainLayout/TopRow"]
-custom_minimum_size = Vector2(390, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
 [node name="Margin" type="MarginContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor"]
 layout_mode = 2
-theme_override_constants/margin_left = 6
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 6
+theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
 [node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin"]
@@ -279,27 +279,31 @@ horizontal_alignment = 1
 
 [node name="ProfileHBox" type="HBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 10
 
 [node name="AvatarContainer" type="PanelContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox"]
-custom_minimum_size = Vector2(96, 96)
+custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_avatar_box")
 
 [node name="AvatarTexture" type="TextureRect" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/AvatarContainer"]
+custom_minimum_size = Vector2(106, 106)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 6
 
 [node name="InfoVBox" type="VBoxContainer" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 2
+theme_override_constants/separation = 4
+alignment = 1
 
 [node name="VisitorName" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.4, 1)
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 15
 text = "Nahuel Morales"
 
 [node name="VisitorCar" type="Label" parent="VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox"]

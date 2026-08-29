@@ -17,12 +17,12 @@ const DataDB = preload("res://scripts/data_db.gd")
 @onready var view_mode_badge: Label = $VBox/TopHUD/ViewModeBadge
 
 # 1° Ventana Superior Izquierda: Oficina y Auto
-@onready var patagonia_view: PatagoniaView = $VBox/MainLayout/TopRow/Window1_Office/PatagoniaView
+@onready var patagonia_view: PatagoniaView = $VBox/MainLayout/TopRow/Window1_Office/VBox/PatagoniaView
 
 # 2° Ventana Superior Centro: Visitante, Cara (/public), Diálogo e Interrogatorio
-@onready var visitor_avatar_rect: TextureRect = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/AvatarContainer/AvatarTexture
-@onready var visitor_name_lbl: Label = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/VisitorName
-@onready var visitor_car_lbl: Label = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/VisitorCar
+@onready var visitor_avatar_rect: TextureRect = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/AvatarContainer/AvatarTexture
+@onready var visitor_name_lbl: Label = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox/VisitorName
+@onready var visitor_car_lbl: Label = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/ProfileHBox/InfoVBox/VisitorCar
 @onready var dialog_text: Label = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/DialogScroll/DialogText
 @onready var interrogate_btn: Button = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/InterrogateBtn
 
@@ -31,7 +31,7 @@ const DataDB = preload("res://scripts/data_db.gd")
 @onready var car_trunk_view: CarTrunkView = $VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView
 
 # 4° Ventana Inferior Izquierda: Escritorio y Documentos
-@onready var document_view: DocumentView = $VBox/MainLayout/BottomRow/Window4_Desk/DocumentView
+@onready var document_view: DocumentView = $VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView
 
 # 5° Ventana Inferior Derecha: Decisiones y Reglamento
 @onready var approve_btn: Button = $VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox/ApproveBtn
@@ -114,6 +114,7 @@ func _load_visitor(idx: int) -> void:
 		visitor_car_lbl.text = "🚗 " + current_visitor.get("car_name", "Vehículo")
 	if dialog_text:
 		dialog_text.text = '"' + current_visitor.get("dialog_intro", "Buenas tardes oficial.") + '"'
+		dialog_text.modulate = Color(0.92, 0.94, 0.96)
 		
 	# 3. Ventana 3: Actualizar datos de baúl y mapa
 	if park_map_view:
@@ -132,19 +133,29 @@ func _load_visitor_avatar(avatar_filename: String) -> void:
 	if not visitor_avatar_rect or avatar_filename.is_empty():
 		return
 		
-	var path = "res://public/" + avatar_filename
-	if ResourceLoader.exists(path):
-		var tex = load(path)
-		if tex:
-			visitor_avatar_rect.texture = tex
-			return
-			
-	# Si no se encuentra con el nombre exacto, buscar fallback
-	var safe_path = path.replace("Leña", "Lena").replace("leña", "lena")
-	if ResourceLoader.exists(safe_path):
-		var tex = load(safe_path)
-		if tex:
-			visitor_avatar_rect.texture = tex
+	var possible_paths = [
+		"res://public/" + avatar_filename,
+		"res://public/" + avatar_filename.replace("Leña", "Lena").replace("leña", "lena"),
+		"res://public/" + avatar_filename.replace("Lena", "Leña").replace("lena", "leña")
+	]
+	
+	var loaded_tex: Texture2D = null
+	for p in possible_paths:
+		if ResourceLoader.exists(p):
+			var res = load(p)
+			if res is Texture2D:
+				loaded_tex = res
+				break
+		if FileAccess.file_exists(p):
+			var img = Image.load_from_file(p)
+			if img:
+				loaded_tex = ImageTexture.create_from_image(img)
+				break
+				
+	if loaded_tex:
+		visitor_avatar_rect.texture = loaded_tex
+	else:
+		push_warning("No se pudo cargar la imagen de avatar: " + avatar_filename)
 
 func _set_investigation_mode(enabled: bool) -> void:
 	is_in_investigation_mode = enabled
