@@ -21,6 +21,13 @@ var today_mistakes: int = 0
 var today_bonuses: float = 0.0
 var today_fines: float = 0.0
 var today_logs: Array[String] = []
+var today_visitors_seen: int = 0
+var today_visitors_passed: int = 0
+var today_visitors_rejected: int = 0
+var today_harmful_visits: int = 0
+var today_found_objects: Array[String] = []
+var today_important_notes: Array[String] = []
+var last_day_summary: Dictionary = {}
 
 # Salud de las 5 parcelas del Parque Nacional Chalet Huergo (0 a 100)
 var parcels_health: Dictionary = {
@@ -83,22 +90,44 @@ func _reset_today_stats() -> void:
 	today_bonuses = 0.0
 	today_fines = 0.0
 	today_logs.clear()
+	today_visitors_seen = 0
+	today_visitors_passed = 0
+	today_visitors_rejected = 0
+	today_harmful_visits = 0
+	today_found_objects.clear()
+	today_important_notes.clear()
+
+func _track_object_found(item_name: String) -> void:
+	if item_name.is_empty():
+		return
+	item_name = item_name.strip_edges()
+	if item_name.is_empty():
+		return
+	if not today_found_objects.has(item_name):
+		today_found_objects.append(item_name)
 
 func record_decision(visitor: Dictionary, approved: bool) -> Dictionary:
 	var should_pass = visitor.get("should_pass", true)
 	var is_correct = (approved == should_pass)
 	var result_info = {}
 	var vis_name = visitor.get("name", "Visitante")
+	today_visitors_seen += 1
+	
+	for item in visitor.get("car_items", []):
+		_track_object_found(str(item))
 	
 	if is_correct:
 		today_correct += 1
 		if not approved:
+			today_visitors_rejected += 1
 			total_infractors_stopped += 1
 			today_bonuses += bonus_per_infractor_caught
 			var reasons = visitor.get("rejection_reasons", [])
 			var r_str = ", ".join(reasons) if not reasons.is_empty() else "Infracción detectada"
 			today_logs.append("✔ RECHAZO CORRECTO a %s (%s). Bonus: +$%d" % [vis_name, r_str, int(bonus_per_infractor_caught)])
+			today_important_notes.append("✅ %s fue rechazado por: %s" % [vis_name, r_str])
 		else:
+			today_visitors_passed += 1
 			today_logs.append("✔ INGRESO AUTORIZADO a %s: Documentación y pertenencias en regla." % vis_name)
 		result_info["status"] = "CORRECTO"
 	else:
@@ -106,11 +135,14 @@ func record_decision(visitor: Dictionary, approved: bool) -> Dictionary:
 		total_mistakes_made += 1
 		today_fines += fine_per_mistake
 		if approved and not should_pass:
-			# Dejó pasar a alguien indebido -> Impacto negativo y visual en parcelas
+			today_visitors_passed += 1
+			today_harmful_visits += 1
 			var reasons = visitor.get("rejection_reasons", ["Infracción no detectada"])
 			var reason_str = ", ".join(reasons)
 			today_logs.append("✖ ERROR GRAVE: Dejaste entrar a %s (%s). Multa: -$%d" % [vis_name, reason_str, int(fine_per_mistake)])
-			
+			today_important_notes.append("⚠️ %s entró indebidamente: %s" % [vis_name, reason_str])
+			for item in visitor.get("car_items", []):
+				_track_object_found(str(item))
 			var impacts = visitor.get("parcel_impact", {})
 			for parcel in impacts:
 				var imp_data = impacts[parcel]
@@ -121,8 +153,9 @@ func record_decision(visitor: Dictionary, approved: bool) -> Dictionary:
 				elif imp_data is float or imp_data is int:
 					apply_parcel_damage(parcel, abs(float(imp_data)), "daño")
 		else:
-			# Rechazó a alguien que cumplía
+			today_visitors_rejected += 1
 			today_logs.append("✖ ERROR: Denegaste el paso injustamente a %s. Queja ciudadana y multa: -$%d" % [vis_name, int(fine_per_mistake)])
+			today_important_notes.append("⚠️ %s fue rechazado en un caso legítimo y generó queja" % vis_name)
 		result_info["status"] = "ERROR"
 	
 	return result_info
@@ -162,9 +195,16 @@ func finish_current_day() -> Dictionary:
 		"parcels_damage_tags": parcels_damage_tags.duplicate(),
 		"logs": today_logs.duplicate(),
 		"correct": today_correct,
-		"mistakes": today_mistakes
+		"mistakes": today_mistakes,
+		"visitors_seen": today_visitors_seen,
+		"visitors_passed": today_visitors_passed,
+		"visitors_rejected": today_visitors_rejected,
+		"harmful_visits": today_harmful_visits,
+		"objects_found": today_found_objects.duplicate(),
+		"important_notes": today_important_notes.duplicate()
 	}
 	
+	last_day_summary = summary
 	day_ended.emit(summary)
 	return summary
 
