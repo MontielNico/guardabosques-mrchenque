@@ -114,7 +114,31 @@ FONDO FAMILIAR ACUMULADO: $%d""" % [
 			elif "PATRULLA" in log_msg:
 				l_lbl.modulate = Color(0.4, 1.0, 0.6)
 			logs_container.add_child(l_lbl)
-			
+
+	# ============================================================
+	# NUEVO: Ganchos de la Matriz Narrativa en la pantalla de cierre.
+	# Se agregan DESPUÉS de los logs normales del día, como entradas
+	# especiales, y consumen (apagan) las banderas transitorias de
+	# GameManager para no repetirse en días siguientes.
+	# ============================================================
+	if GameManager.logbook_just_found:
+		var logbook_lbl = Label.new()
+		logbook_lbl.text = "📓 Entre tus cosas aparece la bitácora de Silva. Alguien la dejó ahí a propósito."
+		logbook_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		logbook_lbl.add_theme_font_size_override("font_size", 13)
+		logbook_lbl.modulate = Color(0.75, 0.65, 0.95)
+		logs_container.add_child(logbook_lbl)
+		GameManager.logbook_just_found = false # consumida: no se repite
+
+	if not GameManager.pending_narrative_banner.is_empty():
+		var banner_lbl = Label.new()
+		banner_lbl.text = "😨 " + GameManager.pending_narrative_banner
+		banner_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		banner_lbl.add_theme_font_size_override("font_size", 13)
+		banner_lbl.modulate = Color(0.85, 0.35, 0.35)
+		logs_container.add_child(banner_lbl)
+		GameManager.pending_narrative_banner = "" # consumida: no se repite
+
 	if continue_btn:
 		if is_final_day:
 			continue_btn.text = "🏆 VER EVALUACIÓN FINAL DE MR. CHENQUE"

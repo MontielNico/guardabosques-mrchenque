@@ -53,12 +53,42 @@ var family_daily_expenses: Dictionary = {
 var total_infractors_stopped: int = 0
 var total_mistakes_made: int = 0
 
+# NUEVO: bandera PERSISTENTE para el jugador que encontró la bitácora de
+# Silva (Día 1, ver DayManager.OnLogbookFound). Guardado acá porque
+# GameManager ya es el lugar donde vive el estado persistente entre escenas.
+var player_has_logbook: bool = false
+
+# NUEVO: bandera de "recién pasó" que day_summary.gd consume UNA vez para
+# mostrar el aviso de la bitácora en la pantalla de cierre, y después apaga.
+# Separada de player_has_logbook para no repetir el aviso todos los días.
+var logbook_just_found: bool = false
+
+# NUEVO: mensaje de texto narrativo pendiente de mostrar en la próxima
+# pantalla de cierre (ej. "Inquietud y Miedo" del Día 3). day_summary.gd lo
+# consume y lo vacía. Genérico a propósito para no tener que agregar una
+# variable nueva por cada evento de texto que sume la trama.
+var pending_narrative_banner: String = ""
+
+# NUEVO: clave del final forzado por decisiones de guion (Día 5, clímax).
+# "" = sin override -> get_game_ending() sigue calculando por stats como
+# siempre. Ver DayManager.EndGame_SilvaClue / EndGame_FleePost.
+var forced_ending_key: String = ""
+
 func _ready() -> void:
 	reset_game()
+
+## NUEVO: setter dedicado (en vez de tocar la variable directo desde afuera)
+## para dejar un único punto de entrada documentado hacia el override de final.
+func set_forced_ending(key: String) -> void:
+	forced_ending_key = key
 
 func reset_game() -> void:
 	current_day = 1
 	family_savings = 12000.0
+	player_has_logbook = false # NUEVO
+	logbook_just_found = false # NUEVO
+	pending_narrative_banner = "" # NUEVO
+	forced_ending_key = "" # NUEVO
 	parcels_health = {
 		"Chalet Histórico": 100.0,
 		"Bosque de Lengas": 100.0,
@@ -183,6 +213,29 @@ func get_average_parcel_health() -> float:
 	return sum / float(parcels_health.size())
 
 func get_game_ending() -> Dictionary:
+	# MODIFICADO: el clímax del Día 5 pesa más que el balance de stats.
+	# Si el jugador definió el destino de Mr. Chenque con su decisión sobre
+	# el "Hombre sin rostro", ese final gana siempre — las 4 evaluaciones de
+	# stats de abajo quedan intactas como fallback para cuando no hubo
+	# override (ej. si el visitante del Día 5 nunca llegó a resolverse).
+	match forced_ending_key:
+		"SILVA_CLUE":
+			return {
+				"title": "FINAL DE CULTO: LA PISTA DE SILVA",
+				"rating": "FINAL ESPECIAL",
+				"color": Color(0.55, 0.35, 0.85),
+				"description": "Sellaste el paso del Hombre sin Rostro. Esa misma noche, algo golpea la puerta de tu garita: es la libreta de Silva, empapada, con una página marcada. Mr. Chenque ya no es un simple reemplazo — es el siguiente en la lista de algo mucho más viejo que el parque.",
+				"icon": "🕯️📓🌊"
+			}
+		"FLEE_POST":
+			return {
+				"title": "FINAL DE CULTO: ABANDONAR EL PUESTO",
+				"rating": "FINAL ESPECIAL",
+				"color": Color(0.3, 0.3, 0.4),
+				"description": "Rechazaste al Hombre sin Rostro. Esa madrugada, sin avisar a la Administración de Parques Nacionales, Mr. Chenque carga el auto y abandona Chalet Huergo para siempre. Nunca sabrás qué fue de Silva. Algunas noches, eso te parece la mejor parte.",
+				"icon": "🚗🌫️❓"
+			}
+
 	var avg_health = get_average_parcel_health()
 	var funds = family_savings
 	

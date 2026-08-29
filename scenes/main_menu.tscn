@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1mainmenu001"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" uid="uid://dbirllrpa1nn5" path="res://scripts/main_menu.gd" id="1_menu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.117647, 0.156863, 0.180392, 1)
@@ -15,28 +15,28 @@ shadow_color = Color(0, 0, 0, 0.4)
 shadow_size = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
 bg_color = Color(0.231373, 0.407843, 0.282353, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-content_margin_left = 16.0
-content_margin_top = 12.0
-content_margin_right = 16.0
-content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
 bg_color = Color(0.25, 0.32, 0.38, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=266020167]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="." unique_id=963071793]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,7 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=1651416188]
 custom_minimum_size = Vector2(700, 530)
 layout_mode = 1
 anchors_preset = 8
@@ -70,39 +70,39 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_card")
 
-[node name="Margin" type="MarginContainer" parent="Panel"]
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=938805445]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 28
 
-[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin" unique_id=854507459]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Header" type="VBoxContainer" parent="Panel/Margin/VBox"]
+[node name="Header" type="VBoxContainer" parent="Panel/Margin/VBox" unique_id=1083471889]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Title" type="Label" parent="Panel/Margin/VBox/Header"]
+[node name="Title" type="Label" parent="Panel/Margin/VBox/Header" unique_id=1534886611]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.94, 0.82, 0.55, 1)
 theme_override_font_sizes/font_size = 26
 text = "🌲 GUARDA-BOSQUES: PATAGONIA"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Panel/Margin/VBox/Header"]
+[node name="Subtitle" type="Label" parent="Panel/Margin/VBox/Header" unique_id=2070912774]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.84, 0.9, 1)
 theme_override_font_sizes/font_size = 15
 text = "Puesto de Control - Parque Nacional Chalet Huergo & Cerro Chenque"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Panel/Margin/VBox"]
+[node name="HSeparator" type="HSeparator" parent="Panel/Margin/VBox" unique_id=1576181910]
 layout_mode = 2
 
-[node name="LoreLabel" type="Label" parent="Panel/Margin/VBox"]
+[node name="LoreLabel" type="Label" parent="Panel/Margin/VBox" unique_id=1289770029]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.88, 0.9, 1)
 theme_override_font_sizes/font_size = 13
@@ -113,32 +113,32 @@ text = "Eres Mr. Chenque, guardaparques a cargo del control de acceso durante 5 
 • Cada infracción no detectada degradará visiblemente las parcelas del parque en el mapa general y descontará multas de tu fondo familiar."
 autowrap_mode = 3
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/Margin/VBox"]
+[node name="HSeparator2" type="HSeparator" parent="Panel/Margin/VBox" unique_id=206230768]
 layout_mode = 2
 
-[node name="Buttons" type="VBoxContainer" parent="Panel/Margin/VBox"]
+[node name="Buttons" type="VBoxContainer" parent="Panel/Margin/VBox" unique_id=639822783]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="StartButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+[node name="StartButton" type="Button" parent="Panel/Margin/VBox/Buttons" unique_id=1702034978]
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
 text = "▶ INICIAR SERVICIO (DÍA 1)"
 
-[node name="ManualButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+[node name="ManualButton" type="Button" parent="Panel/Margin/VBox/Buttons" unique_id=1367758821]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
 text = "📖 MANUAL DE PROCEDIMIENTOS DEL GUARDAPARQUES"
 
-[node name="CreditsButton" type="Button" parent="Panel/Margin/VBox/Buttons"]
+[node name="CreditsButton" type="Button" parent="Panel/Margin/VBox/Buttons" unique_id=613666938]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
 text = "ℹ️ ACERCA DE CHALET HUERGO Y CRÉDITOS"
 
-[node name="ManualDialog" type="AcceptDialog" parent="."]
+[node name="ManualDialog" type="AcceptDialog" parent="." unique_id=551059612]
 title = "Manual de Procedimientos de Parques"
 initial_position = 2
 size = Vector2i(580, 420)
@@ -153,7 +153,7 @@ dialog_text = "INSTRUCCIONES DEL PUESTO DE CONTROL:
    - Consulta el 'Manual de Normas' para chequear riesgo de incendio y vedas.
    - Sella: AUTORIZAR (Verde) o DENEGAR (Rojo)."
 
-[node name="CreditsDialog" type="AcceptDialog" parent="."]
+[node name="CreditsDialog" type="AcceptDialog" parent="." unique_id=1663789765]
 title = "Créditos"
 initial_position = 2
 size = Vector2i(450, 260)

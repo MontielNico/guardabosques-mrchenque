@@ -13,6 +13,10 @@ var cloud_offsets: Array[float] = [0.0, 140.0, 280.0, 420.0]
 var wind_particles: Array[Vector2] = []
 const NUM_PARTICLES = 16
 
+## NUEVO: hook visual para DayManager.environment_flags_applied (Día 3).
+## No sabe nada de "por qué" hay niebla, solo pinta un velo gris si se lo piden.
+var is_foggy: bool = false
+
 func _ready() -> void:
 	for i in range(NUM_PARTICLES):
 		wind_particles.append(Vector2(randf() * 400.0, randf() * 300.0))
@@ -36,6 +40,11 @@ func _process(delta: float) -> void:
 			
 	# Suavizado de auto
 	car_pos_x = lerpf(car_pos_x, car_target_x, delta * 5.0)
+	queue_redraw()
+
+## NUEVO: llamado desde MainGame al recibir DayManager.environment_flags_applied.
+func apply_environment_flags(flags: Dictionary) -> void:
+	is_foggy = flags.get("is_foggy", false)
 	queue_redraw()
 
 func set_visitor(visitor_data: Dictionary) -> void:
@@ -97,6 +106,10 @@ func _draw() -> void:
 		
 	# 11. Marco de Ventana de Madera de la Garita
 	_draw_window_frame(w, h)
+
+	# 12. NUEVO: velo de niebla costera (Día 3 - is_foggy)
+	if is_foggy:
+		draw_rect(Rect2(0, 0, w, h), Color(0.75, 0.78, 0.8, 0.32))
 
 func _draw_sky_gradient(w: float, sky_h: float) -> void:
 	var top_color = Color(0.25, 0.48, 0.72)
