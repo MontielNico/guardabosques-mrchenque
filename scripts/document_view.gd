@@ -29,6 +29,8 @@ func _ready() -> void:
 	_load_textures()
 	_setup_interaction()
 	_configure_stamp_visual()
+	if doc_container:
+		doc_container.pivot_offset = doc_container.custom_minimum_size / 2.0
 
 func _load_textures() -> void:
 	# Cargar wood_table.png

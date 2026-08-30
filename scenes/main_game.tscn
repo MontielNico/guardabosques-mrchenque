@@ -513,9 +513,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="DocPreviewCard" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer" unique_id=1531321662]
-custom_minimum_size = Vector2(250, 210)
+custom_minimum_size = Vector2(178, 235)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_paper_card")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_doc_btn")
 
 [node name="DocTexture" type="TextureRect" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard" unique_id=256841503]
 layout_mode = 2
@@ -533,14 +533,14 @@ theme_override_constants/separation = 1
 [node name="DocTypeLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard/DocInfoOverlay" unique_id=271499799]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.12, 0.1, 0.08, 1)
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 10
 text = "🏛️ PASE DE VISITA DIARIO"
 horizontal_alignment = 1
 
 [node name="DocOwnerLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard/DocInfoOverlay" unique_id=1248265820]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.16, 0.12, 1)
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 9
 text = "Titular: Nahuel Morales"
 horizontal_alignment = 1
 
@@ -553,8 +553,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_inspect_badge")
 [node name="InspectBadgeLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard/InspectBadge" unique_id=14817725]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.98, 0.95, 0.85, 1)
-theme_override_font_sizes/font_size = 10
-text = "🔍 CLICK PARA REVISAR DOCUMENTO"
+theme_override_font_sizes/font_size = 9
+text = "🔍 REVISAR DOCUMENTO"
 
 [node name="StampVisual" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard" unique_id=1672402293]
 visible = false
