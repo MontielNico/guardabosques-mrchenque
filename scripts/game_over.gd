@@ -56,10 +56,28 @@ func _ready() -> void:
 			narrative_notes += "\n• NIEBLA: Resististe las advertencias del conductor."
 			
 		if GameManager.photo_1920_discovered:
+<<<<<<< HEAD
 			narrative_notes += "\n• SECRETOS: Fotografía de 1920 y Mapa recuperados."
 
 		stats_lbl.text = """• CONSERVACIÓN DE PARCELAS: %.1f%% | FONDO FAMILIAR: $%d
 • INFRACTORES DETENIDOS: %d | ERRORES EN GARITA: %d%s""" % [
+=======
+			narrative_notes += "\n• Archivos Ocultos: Fotografía de 1920 y Mapa de Túneles recuperados."
+			
+		var collapsed_count = 0
+		for p_name in GameManager.parcels_collapsed:
+			if GameManager.parcels_collapsed[p_name]:
+				collapsed_count += 1
+		if collapsed_count > 0:
+			narrative_notes += "\n• Colapso Ecológico: %d parcela(s) devastada(s) por completo bajo tu guardia." % collapsed_count
+			
+		stats_lbl.text = """═══════════════════════════════════════════════════════
+• Conservación Promedio de las 5 Parcelas: %.1f%%
+• Fondo Familiar Acumulado: $%d
+• Infractores Furtivos Detenidos en Garita: %d
+• Errores Cometidos en Puesto de Control: %d%s
+═══════════════════════════════════════════════════════""" % [
+>>>>>>> 30d144a455a8f89e31afae9f3d82f75ac05dacc0
 			avg_health,
 			int(GameManager.family_savings),
 			GameManager.total_infractors_stopped,

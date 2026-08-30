@@ -100,6 +100,7 @@ func update_map() -> void:
 					"usurpacion": tag_text += "🏗️ Usurpación/Chapas  "
 					"pesca_furtiva": tag_text += "🚫 Pesca Ilegal  "
 					"acampe": tag_text += "🏕️ Acampe Indebido  "
+					"colapso": tag_text += "💀 Parcela Colapsada  "
 					_: tag_text += "⚠️ Parcela Afectada  "
 			
 			if tag_text.is_empty():

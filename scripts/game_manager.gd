@@ -5,6 +5,7 @@ extends Node
 signal day_started(day_num: int)
 signal day_ended(day_summary: Dictionary)
 signal parcel_health_changed(parcel_name: String, new_health: float)
+signal parcel_collapsed(parcel_name: String)
 signal family_funds_changed(new_amount: float)
 
 var current_day: int = 1
@@ -33,6 +34,7 @@ var family_savings: float = 12000.0 # Ahorro inicial de la familia de Mr. Chenqu
 var base_salary_per_day: float = 30000.0
 var fine_per_mistake: float = 8000.0
 var bonus_per_infractor_caught: float = 2000.0
+var parcel_collapse_penalty: float = 10000.0 # Multa de emergencia por dejar una parcela llegar a 0%
 
 # Estadísticas del día actual
 var today_correct: int = 0
@@ -64,6 +66,15 @@ var parcels_damage_tags: Dictionary = {
 	"Costa y Pingüinera": [],
 	"Cerro Chenque y Acantilados": [],
 	"Humedal y Laguna de Aves": []
+}
+
+# Marca si una parcela ya colapsó (llegó a 0%) para no re-penalizar la misma parcela dos veces
+var parcels_collapsed: Dictionary = {
+	"Chalet Histórico": false,
+	"Bosque de Lengas": false,
+	"Costa y Pingüinera": false,
+	"Cerro Chenque y Acantilados": false,
+	"Humedal y Laguna de Aves": false
 }
 
 # Gastos familiares diarios
@@ -108,6 +119,13 @@ func reset_game() -> void:
 		"Costa y Pingüinera": [],
 		"Cerro Chenque y Acantilados": [],
 		"Humedal y Laguna de Aves": []
+	}
+	parcels_collapsed = {
+		"Chalet Histórico": false,
+		"Bosque de Lengas": false,
+		"Costa y Pingüinera": false,
+		"Cerro Chenque y Acantilados": false,
+		"Humedal y Laguna de Aves": false
 	}
 	total_infractors_stopped = 0
 	total_mistakes_made = 0
@@ -248,11 +266,31 @@ func record_decision(visitor: Dictionary, approved: bool) -> Dictionary:
 
 func apply_parcel_damage(parcel_name: String, damage: float, damage_tag: String = "") -> void:
 	if parcels_health.has(parcel_name):
+		var was_collapsed = parcels_collapsed.get(parcel_name, false)
 		parcels_health[parcel_name] = maxf(0.0, parcels_health[parcel_name] - damage)
 		if not damage_tag.is_empty() and parcels_damage_tags.has(parcel_name):
 			if not damage_tag in parcels_damage_tags[parcel_name]:
 				parcels_damage_tags[parcel_name].append(damage_tag)
 		parcel_health_changed.emit(parcel_name, parcels_health[parcel_name])
+
+		# Colapso de parcela: se dispara UNA sola vez, la primera vez que toca 0%
+		if parcels_health[parcel_name] <= 0.0 and not was_collapsed:
+			_trigger_parcel_collapse(parcel_name)
+
+func _trigger_parcel_collapse(parcel_name: String) -> void:
+	parcels_collapsed[parcel_name] = true
+	if parcels_damage_tags.has(parcel_name) and not "colapso" in parcels_damage_tags[parcel_name]:
+		parcels_damage_tags[parcel_name].append("colapso")
+
+	# Penalización económica INMEDIATA: sanción de emergencia de Administración de Parques Nacionales
+	family_savings = maxf(0.0, family_savings - parcel_collapse_penalty)
+	family_funds_changed.emit(family_savings)
+
+	var log_msg = "💀 COLAPSO ECOLÓGICO: %s quedó devastada por completo (0%% de conservación). Administración de Parques Nacionales aplicó una multa de emergencia de -$%d." % [parcel_name, int(parcel_collapse_penalty)]
+	today_logs.append(log_msg)
+	today_important_notes.append("💀 %s colapsó por completo: el daño acumulado es irreversible y generó una sanción severa a Mr. Chenque." % parcel_name)
+
+	parcel_collapsed.emit(parcel_name)
 
 func trigger_silva_logbook_event() -> void:
 	silva_logbook_unlocked = true
@@ -288,6 +326,7 @@ func finish_current_day() -> Dictionary:
 		"final_family_savings": family_savings,
 		"parcels_health": parcels_health.duplicate(),
 		"parcels_damage_tags": parcels_damage_tags.duplicate(),
+		"parcels_collapsed": parcels_collapsed.duplicate(),
 		"logs": today_logs.duplicate(),
 		"correct": today_correct,
 		"mistakes": today_mistakes,
