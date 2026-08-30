@@ -134,7 +134,6 @@ func _load_visitor(idx: int) -> void:
 		feedback_lbl.text = ""
 	
 	if mandatory_inspection_required:
-		_set_investigation_mode(true)
 		if feedback_lbl:
 			feedback_lbl.text = "🔎 INSPECCIÓN OBLIGATORIA: Revisa el pescado anómalo antes de decidir."
 			feedback_lbl.modulate = Color(1.0, 0.8, 0.32)
