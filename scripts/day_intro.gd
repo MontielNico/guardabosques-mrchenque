@@ -10,7 +10,7 @@ class_name DayIntro
 @onready var title_label: Label = $Margin/Card/CardMargin/VBox/Header/TitleLabel
 @onready var subtitle_label: Label = $Margin/Card/CardMargin/VBox/Header/SubtitleLabel
 @onready var text_label: RichTextLabel = $Margin/Card/CardMargin/VBox/ContentBox/MarginText/HBox/RichTextLabel
-# @onready var cursor_label: Label = $Margin/Card/CardMargin/VBox/ContentBox/MarginText/HBox/CursorLabel
+@onready var cursor_label: Label = $Margin/Card/CardMargin/VBox/ContentBox/MarginText/HBox/CursorLabel
 @onready var skip_hint: Label = $Margin/Card/CardMargin/VBox/Footer/SkipHint
 @onready var menu_btn: Button = $Margin/Card/CardMargin/VBox/Footer/ButtonsBox/MenuButton
 @onready var fast_forward_btn: Button = $Margin/Card/CardMargin/VBox/Footer/ButtonsBox/FastForwardButton
@@ -173,7 +173,8 @@ func _start_page(page_idx: int) -> void:
 func _process(delta: float) -> void:
 	# Parpadeo del cursor retro
 	cursor_blink_timer += delta
-	
+	if cursor_label:
+		cursor_label.visible = int(cursor_blink_timer * 3.0) % 2 == 0
 		
 	if is_typing:
 		current_visible_chars += typing_speed * delta

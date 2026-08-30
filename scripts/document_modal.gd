@@ -1,76 +1,213 @@
-﻿extends PanelContainer
+extends PanelContainer
 class_name DocumentModal
 
-# Modal interactivo para inspección detallada del documento.png del visitante
+# Modal interactivo para inspección minuciosa y detallada del documento del visitante
+# Muestra DNI, nombres en papeles, fechas, actividad autorizada, sellos, firmas y anomalías
 
 signal closed
 
-@onready var doc_title: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/Header/DocTitle
-@onready var name_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/Grid/NameVal
-@onready var dni_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/Grid/DniVal
-@onready var date_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/Grid/DateVal
-@onready var purpose_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/Grid/PurposeVal
-@onready var people_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/Grid/PeopleVal
-@onready var job_permit_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/Grid/JobPermitVal
-@onready var fire_permit_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/PermitsBox/FirePermitVal
-@onready var fishing_permit_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/PermitsBox/FishingPermitVal
-@onready var notes_val: Label = $Margin/VBox/Content/PaperPanel/Margin/VBox/NotesVal
+const FONT_SPECIAL_ELITE: FontFile = preload("res://fonts/SpecialElite-Regular.ttf")
+const FONT_VT323: FontFile = preload("res://fonts/VT323-Regular.ttf")
+const FONT_PRESS_START: FontFile = preload("res://fonts/PressStart2P-Regular.ttf")
+
+@onready var agency_header: Label = $Margin/VBox/Header/VBox/AgencyHeader
+@onready var doc_title: Label = $Margin/VBox/Header/VBox/DocTitle
+@onready var doc_subtitle: Label = $Margin/VBox/Header/VBox/DocSubtitle
 @onready var close_btn: Button = $Margin/VBox/Header/CloseButton
+
+@onready var name_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid/NameVal
+@onready var dni_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid/DniVal
+@onready var date_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid/DateVal
+@onready var purpose_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid/PurposeVal
+@onready var people_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid/PeopleVal
+@onready var job_permit_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid/JobPermitVal
+
+@onready var fire_permit_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/PermitsBox/FirePermitVal
+@onready var fishing_permit_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/PermitsBox/FishingPermitVal
+@onready var notes_val: Label = $Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/NotesVal
+
+@onready var stamp_visual: Label = $Margin/VBox/Content/Scroll/PaperPanel/StampVisual
+@onready var bottom_close_btn: Button = $Margin/VBox/Footer/BottomCloseButton
+
+var current_doc_data: Dictionary = {}
 
 func _ready() -> void:
 	if close_btn:
 		close_btn.pressed.connect(_on_close_pressed)
+	if bottom_close_btn:
+		bottom_close_btn.pressed.connect(_on_close_pressed)
+	_configure_stamp_visual()
+
+func _configure_stamp_visual() -> void:
+	if not stamp_visual:
+		return
+	stamp_visual.visible = false
+	stamp_visual.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	stamp_visual.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	stamp_visual.add_theme_font_override("font", FONT_SPECIAL_ELITE)
+	stamp_visual.add_theme_font_size_override("font_size", 34)
+	stamp_visual.add_theme_constant_override("outline_size", 4)
+	stamp_visual.add_theme_color_override("font_outline_color", Color(0.1, 0.08, 0.05, 0.95))
+	stamp_visual.modulate = Color(1.0, 1.0, 1.0, 0.0)
 
 func open_document(doc_data: Dictionary, visitor_data: Dictionary = {}) -> void:
+	current_doc_data = doc_data
 	visible = true
 	SoundManager.play_sound("paper")
 	
+	if stamp_visual:
+		stamp_visual.visible = false
+		stamp_visual.text = ""
+		stamp_visual.modulate = Color(1.0, 1.0, 1.0, 0.0)
+		
+	var doc_type_str = doc_data.get("type", "Pase de Visita Diario")
 	if doc_title:
-		doc_title.text = "🏛️ " + doc_data.get("type", "Pase de Ingreso Diario").to_upper()
+		doc_title.text = "🏛️ " + doc_type_str.to_upper()
+	if doc_subtitle:
+		var category = doc_data.get("job_permit", visitor_data.get("visitor_type", "Particular"))
+		doc_subtitle.text = "EXPEDIENTE OFICIAL DE CONTROL — REGISTRO: %s" % category.to_upper()
+		
+	# 1. Nombre / Titular en papeles (DNI vs Pase vs Permiso)
 	if name_val:
-		name_val.text = doc_data.get("name", "Desconocido")
+		var dni_name = doc_data.get("name_on_dni", doc_data.get("name", "Desconocido"))
+		var pass_name = doc_data.get("name_on_pass", dni_name)
+		var permit_name = doc_data.get("name_on_permit", pass_name)
+		
+		if dni_name == pass_name and pass_name == permit_name:
+			name_val.text = "%s  (✔️ Coincide en todos los papeles)" % dni_name
+			name_val.modulate = Color(0.1, 0.45, 0.2)
+		else:
+			var disp_text = "DNI: %s" % dni_name
+			if pass_name != dni_name:
+				disp_text += "\n⚠️ Pase de Visita a nombre de: '%s'" % pass_name
+			if permit_name != pass_name and permit_name != dni_name:
+				disp_text += "\n⚠️ Permiso de Actividad a nombre de: '%s'" % permit_name
+			name_val.text = disp_text
+			name_val.modulate = Color(0.9, 0.2, 0.1)
+			
+	# 2. DNI / Documento y Vencimiento
 	if dni_val:
-		dni_val.text = doc_data.get("dni", "00.000.000")
+		var dni_num = doc_data.get("dni", "00.000.000")
+		var is_expired = doc_data.get("is_dni_expired", doc_data.get("is_expired", false))
+		var expiry_date = doc_data.get("dni_expiry", "28/11/2026")
+		
+		if is_expired:
+			dni_val.text = "%s  (Vencimiento: %s — ⚠️ ¡DNI VENCIDO! NO VÁLIDO)" % [dni_num, expiry_date]
+			dni_val.modulate = Color(0.95, 0.15, 0.15)
+		else:
+			dni_val.text = "%s  (Vencimiento: %s — Vigente ✔️)" % [dni_num, expiry_date]
+			dni_val.modulate = Color(0.12, 0.52, 0.22)
+			
+	# 3. Fecha de Validez del Documento
 	if date_val:
 		var dt = doc_data.get("date", "28/11/2026")
-		var expired = doc_data.get("is_expired", false)
-		if expired:
-			date_val.text = dt + " (⚠️ VENCIDO - NO AUTORIZADO)"
-			date_val.modulate = Color(0.9, 0.15, 0.15)
+		var has_illogical_date = doc_data.get("illogical_date", false)
+		
+		if has_illogical_date:
+			date_val.text = "%s  (⚠️ ¡FECHA ANÓMALA / IMPOSIBLE!)" % dt
+			date_val.modulate = Color(0.95, 0.15, 0.15)
 		else:
-			date_val.text = dt + " (Vigente y Autorizado)"
-			date_val.modulate = Color(0.12, 0.55, 0.18)
+			date_val.text = "%s  (Jornada en Curso — Válido)" % dt
+			date_val.modulate = Color(0.12, 0.52, 0.22)
+			
+	# 4. Actividad Autorizada (Cotejar con el diálogo oral)
 	if purpose_val:
-		purpose_val.text = doc_data.get("purpose", "Paseo y Recreación")
+		var auth_act = doc_data.get("authorized_activity", doc_data.get("purpose", "Paseo"))
+		purpose_val.text = auth_act
+		purpose_val.modulate = Color(0.08, 0.3, 0.65)
+		
+	# 5. Cantidad de Personas
 	if people_val:
 		var decl = doc_data.get("passengers", 1)
 		var actual = visitor_data.get("actual_passengers", decl)
-		people_val.text = "%d persona(s) declarada(s) en documento" % decl
 		if actual != decl:
-			people_val.text += " (⚠️ Reales a bordo: %d)" % actual
-	if job_permit_val:
-		var job = doc_data.get("job_permit", "Ninguno (Particular)")
-		job_permit_val.text = job
-		if "Ninguno" in job:
-			job_permit_val.modulate = Color(0.35, 0.3, 0.25)
+			people_val.text = "%d persona(s) declarada(s)  |  ⚠️ ¡A BORDO HAY %d PERSONAS!" % [decl, actual]
+			people_val.modulate = Color(0.95, 0.2, 0.15)
 		else:
-			job_permit_val.modulate = Color(0.08, 0.35, 0.65)
+			people_val.text = "%d persona(s) autorizada(s) (Coincide con vehículo ✔️)" % decl
+			people_val.modulate = Color(0.15, 0.15, 0.15)
+			
+	# 6. Permiso de Oficio / Firmante / Sello
+	if job_permit_val:
+		var job = doc_data.get("job_permit", "Particular")
+		var signer = doc_data.get("signed_by", "Administración")
+		var stamp_type = doc_data.get("stamp", "Sello Oficial Verde")
+		var has_black_seal = doc_data.get("has_black_seal", false)
+		var signed_by_silva = doc_data.get("signed_by_silva", false)
 		
+		var job_text = "• Habilitación: %s\n• Emisor / Firmante: %s\n• Tipo de Sello: %s" % [job, signer, stamp_type]
+		
+		if has_black_seal:
+			job_text = "🚨 ¡ANOMALÍA GRAVE: SELLO NEGRO DE CLAUSURA DETECTADO! ⬛\n" + job_text
+			job_permit_val.modulate = Color(0.9, 0.1, 0.1)
+		elif signed_by_silva:
+			job_text = "🚨 ¡ANOMALÍA GRAVE: FIRMADO POR EL DESAPARECIDO GUARDABOSQUES SILVA! ✍️\n" + job_text
+			job_permit_val.modulate = Color(0.95, 0.35, 0.1)
+		else:
+			job_permit_val.modulate = Color(0.1, 0.35, 0.6)
+			
+		job_permit_val.text = job_text
+		
+	# 7. Permisos de Fuego y Pesca / Anexos Históricos
 	if fire_permit_val:
-		var has_fire = doc_data.get("fire_permit", false)
-		fire_permit_val.text = "HABILITADO PARA ENCENDER FUEGO ✔️" if has_fire else "PROHIBIDO ENCENDER FUEGO ❌"
-		fire_permit_val.modulate = Color(0.1, 0.6, 0.2) if has_fire else Color(0.85, 0.15, 0.15)
-		
+		if doc_data.get("has_photo_1920", false):
+			fire_permit_val.text = "📷 FOTOGRAFÍA DE 1920: Anexo en sepia encontrado en las rocas"
+			fire_permit_val.modulate = Color(0.65, 0.25, 0.85)
+		else:
+			var has_fire = doc_data.get("fire_permit", false)
+			fire_permit_val.text = "HABILITADO PARA FUEGO ✔️" if has_fire else "PROHIBIDO ENCENDER FUEGO ❌"
+			fire_permit_val.modulate = Color(0.15, 0.65, 0.2) if has_fire else Color(0.7, 0.25, 0.25)
+			
 	if fishing_permit_val:
-		var has_fishing = doc_data.get("fishing_permit", false)
-		fishing_permit_val.text = "HABILITADO PARA PESCA DEPORTIVA ✔️" if has_fishing else "PROHIBIDA LA PESCA DEPORTIVA ❌"
-		fishing_permit_val.modulate = Color(0.1, 0.6, 0.2) if has_fishing else Color(0.85, 0.15, 0.15)
-		
+		if doc_data.get("has_tunnel_map", false):
+			fishing_permit_val.text = "🗺️ MAPA DE TÚNELES: Plano manuscrito de galerías bajo Chalet Huergo"
+			fishing_permit_val.modulate = Color(0.65, 0.25, 0.85)
+		else:
+			var has_fishing = doc_data.get("fishing_permit", false)
+			fishing_permit_val.text = "HABILITADO PARA PESCA ✔️" if has_fishing else "PROHIBIDA LA PESCA DEPORTIVA ❌"
+			fishing_permit_val.modulate = Color(0.15, 0.65, 0.2) if has_fishing else Color(0.7, 0.25, 0.25)
+			
 	if notes_val:
-		var notes = "• Presentar este pase ante las autoridades del Parque Nacional Chalet Huergo.\n• Prohibido arrojar residuos o dañar la flora/fauna nativa de la costa y cerro."
+		var notes = "• Presentar este pase ante la autoridad de control en la garita del Parque Nacional Chalet Huergo.\n• Prohibido salir de senderos habilitados o perturbar la fauna en Cerro Chenque y costa marina."
 		notes_val.text = notes
+
+func apply_stamp(approved: bool) -> void:
+	if not stamp_visual:
+		return
+	stamp_visual.visible = true
+	stamp_visual.text = ""
+	
+	var stamp_color: Color
+	var stamp_text: String
+	var end_rotation: float
+	
+	if approved:
+		stamp_text = "AUTORIZADO\nPARQUE CHALET HUERGO"
+		stamp_color = Color(0.12, 0.72, 0.26, 1.0)
+		end_rotation = -0.15
+	else:
+		stamp_text = "DENEGADO\nACCESO RECHAZADO"
+		stamp_color = Color(0.85, 0.18, 0.18, 1.0)
+		end_rotation = 0.18
+		
+	stamp_visual.text = stamp_text
+	stamp_visual.modulate = stamp_color
+	stamp_visual.rotation = end_rotation
+	stamp_visual.scale = Vector2(0.5, 0.5)
+	
+	var tw = create_tween()
+	tw.set_parallel(true)
+	tw.tween_property(stamp_visual, "scale", Vector2(1.15, 1.15), 0.18).from(Vector2(0.5, 0.5)).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(stamp_visual, "rotation", end_rotation, 0.18).from(end_rotation + 0.4).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(stamp_visual, "modulate:a", 0.95, 0.12)
 
 func _on_close_pressed() -> void:
 	SoundManager.play_sound("click")
 	visible = false
 	closed.emit()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if visible and event is InputEventKey and event.is_pressed() and not event.is_echo():
+		if event.keycode == KEY_ESCAPE or event.keycode == KEY_SPACE or event.keycode == KEY_ENTER:
+			_on_close_pressed()
+

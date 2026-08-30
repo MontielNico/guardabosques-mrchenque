@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://dr8g2c6hf7dv0" path="res://scripts/car_trunk_view.gd" id="4_trunk"]
 [ext_resource type="Script" uid="uid://svaebupi4kiy" path="res://scripts/document_view.gd" id="5_doc"]
 [ext_resource type="Script" uid="uid://chk6s2mxchknk" path="res://scripts/rulebook_modal.gd" id="6_rule"]
+[ext_resource type="Script" path="res://scripts/document_modal.gd" id="7_doc_modal"]
+[ext_resource type="Texture2D" path="res://public/wood_table.png" id="8_wood_tex"]
+[ext_resource type="Texture2D" path="res://public/documento.png" id="9_doc_tex"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
 content_margin_left = 10.0
@@ -13,6 +16,55 @@ content_margin_top = 6.0
 content_margin_right = 10.0
 content_margin_bottom = 6.0
 bg_color = Color(0.08, 0.12, 0.16, 0.9)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paper_card"]
+bg_color = Color(0.95, 0.92, 0.85, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.62, 0.48, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 6
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inspect_badge"]
+bg_color = Color(0.12, 0.18, 0.24, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.75, 0.35, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+content_margin_left = 8.0
+content_margin_top = 3.0
+content_margin_right = 8.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_doc_btn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.2, 0.26, 0.32, 1)
+border_width_bottom = 2
+border_color = Color(0.12, 0.16, 0.2, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
@@ -417,172 +469,114 @@ theme_override_constants/separation = 6
 [node name="Window4_Desk" type="PanelContainer" parent="VBox/MainLayout/BottomRow" unique_id=1173399688]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_desk_wood")
+theme_override_styles/panel = SubResource("StyleBoxFlat_window_panel")
 
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk" unique_id=928825545]
+[node name="DocumentView" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk" unique_id=1195446462]
 layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("5_doc")
 
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin" unique_id=377718116]
+[node name="TableBackground" type="TextureRect" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("8_wood_tex")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DeskMargin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="DeskVBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin"]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox" unique_id=29721357]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.8, 0.6, 1)
-theme_override_font_sizes/font_size = 15
-text = "ESCRITORIO - DOCUMENTACIÓN DEL VISITANTE"
-horizontal_alignment = 1
-
-[node name="DocumentView" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox" unique_id=1195446462]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
-script = ExtResource("5_doc")
-
-[node name="Margin" type="MarginContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView" unique_id=788553856]
-layout_mode = 2
-theme_override_constants/margin_left = 14
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 14
-theme_override_constants/margin_bottom = 8
-
-[node name="VBox" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin" unique_id=1472759238]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Header" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=70369521]
+[node name="DeskHeader" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox"]
 layout_mode = 2
 
-[node name="DocTitle" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Header" unique_id=110797846]
+[node name="DeskTitle" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DeskHeader"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.18, 0.14, 0.1, 1)
-theme_override_font_sizes/font_size = 14
-text = "🏛️ PASE DE INGRESO DIARIO"
+theme_override_colors/font_color = Color(0.95, 0.88, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "ESCRITORIO DE MR. CHENQUE — PAPELES SOBRE LA MESA"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=23172646]
+[node name="DocCenterContainer" type="CenterContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Grid" type="GridContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=1329088301]
+[node name="DocPreviewCard" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer"]
+custom_minimum_size = Vector2(250, 210)
 layout_mode = 2
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 4
-columns = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_paper_card")
 
-[node name="NameLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=755212300]
+[node name="DocTexture" type="TextureRect" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 12
-text = "Titular:"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_doc_tex")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="NameVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=274464141]
+[node name="DocInfoOverlay" type="VBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 12
-text = "Nahuel Morales"
+size_flags_vertical = 8
+theme_override_constants/separation = 1
 
-[node name="DniLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=95574470]
+[node name="DocTypeLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard/DocInfoOverlay"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 12
-text = "DNI / Documento:"
-
-[node name="DniVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=652340661]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 12
-text = "34.892.110"
-
-[node name="DateLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1849138485]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 12
-text = "Fecha Validez:"
-
-[node name="DateVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1436514875]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 12
-text = "28/11/2026 (Vigente)"
-
-[node name="PurposeLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1417287390]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 12
-text = "Motivo de Visita:"
-
-[node name="PurposeVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=2119134712]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 12
-text = "Turismo y Fotografía"
-
-[node name="PeopleLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1275400791]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 12
-text = "Personas Autorizadas:"
-
-[node name="PeopleVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=26338846]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 12
-text = "2 personas"
-
-[node name="JobPermitLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=1429779652]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.4, 0.35, 0.3, 1)
-theme_override_font_sizes/font_size = 12
-text = "Permiso de Oficio:"
-
-[node name="JobPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/Grid" unique_id=114342568]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_font_sizes/font_size = 12
-text = "Ninguno (Particular)"
-
-[node name="HSeparator2" type="HSeparator" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=797505373]
-layout_mode = 2
-
-[node name="PermitsBox" type="HBoxContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox" unique_id=1715581420]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="FireLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=1498793857]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
+theme_override_colors/font_color = Color(0.12, 0.1, 0.08, 1)
 theme_override_font_sizes/font_size = 11
-text = "Permiso Fuego:"
+text = "🏛️ PASE DE VISITA DIARIO"
+horizontal_alignment = 1
 
-[node name="FirePermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=1113504604]
+[node name="DocOwnerLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard/DocInfoOverlay"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "NO AUTORIZADO ❌"
+theme_override_colors/font_color = Color(0.2, 0.16, 0.12, 1)
+theme_override_font_sizes/font_size = 10
+text = "Titular: Nahuel Morales"
+horizontal_alignment = 1
 
-[node name="FishingLbl" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=2118484143]
+[node name="InspectBadge" type="PanelContainer" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.25, 0.2, 1)
-theme_override_font_sizes/font_size = 11
-text = "Permiso Pesca:"
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inspect_badge")
 
-[node name="FishingPermitVal" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView/Margin/VBox/PermitsBox" unique_id=1292400662]
+[node name="InspectBadgeLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard/InspectBadge"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
-text = "NO AUTORIZADO ❌"
+theme_override_colors/font_color = Color(0.98, 0.95, 0.85, 1)
+theme_override_font_sizes/font_size = 10
+text = "🔍 CLICK PARA REVISAR DOCUMENTO"
 
-[node name="StampVisual" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView" unique_id=735666133]
+[node name="StampVisual" type="Label" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 40
-text = "【 AUTORIZADO 】
-PARQUE CHALET HUERGO"
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 22
+text = "AUTORIZADO
+CHALET HUERGO"
 horizontal_alignment = 1
+
+[node name="OpenDocButton" type="Button" parent="VBox/MainLayout/BottomRow/Window4_Desk/DocumentView/DeskMargin/DeskVBox/DocCenterContainer/DocPreviewCard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_doc_btn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_doc_btn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_doc_btn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_doc_btn")
+flat = true
 
 [node name="Window5_Decisions" type="PanelContainer" parent="VBox/MainLayout/BottomRow" unique_id=210197867]
 custom_minimum_size = Vector2(370, 0)
@@ -603,7 +597,7 @@ theme_override_constants/separation = 8
 [node name="Title" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=1866599361]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 14
 text = "BOTONES DE DECISIÓN"
 horizontal_alignment = 1
 
@@ -623,23 +617,21 @@ theme_override_constants/separation = 8
 
 [node name="ApproveBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=555596461]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_approve_btn")
-text = "AUTORIZAR ACCESO
-"
+text = "✔ AUTORIZAR ACCESO"
 
 [node name="RejectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=546862011]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_reject_btn")
-text = "DENEGAR ACCESO"
+text = "✖ DENEGAR ACCESO"
 
 [node name="InspectBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=2040792103]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
-text = "INSPECCIONAR VEHÍCULO 
-"
+text = "📦 INSPECCIONAR VEHÍCULO"
 
 [node name="BackToMapBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox" unique_id=98885368]
 visible = false
@@ -650,9 +642,9 @@ text = "🗺️ VOLVER AL MAPA GENERAL (Vista 1)"
 
 [node name="RulebookBtn" type="Button" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=677952951]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_inspect_btn")
-text = "REGLAS DEL PARQUE"
+text = "📖 REGLAS DEL PARQUE"
 
 [node name="FeedbackLabel" type="Label" parent="VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox" unique_id=1971190056]
 layout_mode = 2
@@ -760,3 +752,230 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
+
+[node name="DocumentModal" type="PanelContainer" parent="Modals" unique_id=1214819203]
+visible = false
+custom_minimum_size = Vector2(780, 520)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -390.0
+offset_top = -260.0
+offset_right = 390.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+script = ExtResource("7_doc_modal")
+
+[node name="Margin" type="MarginContainer" parent="Modals/DocumentModal"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="Modals/DocumentModal/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="Modals/DocumentModal/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBox" type="VBoxContainer" parent="Modals/DocumentModal/Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="AgencyHeader" type="Label" parent="Modals/DocumentModal/Margin/VBox/Header/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.72, 0.95, 1)
+theme_override_font_sizes/font_size = 11
+text = "ADMINISTRACIÓN DE PARQUES NACIONALES — SECTOR CHALET HUERGO"
+
+[node name="DocTitle" type="Label" parent="Modals/DocumentModal/Margin/VBox/Header/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.86, 0.45, 1)
+theme_override_font_sizes/font_size = 16
+text = "🏛️ PASE DE VISITA DIARIO"
+
+[node name="DocSubtitle" type="Label" parent="Modals/DocumentModal/Margin/VBox/Header/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 11
+text = "EXPEDIENTE OFICIAL DE CONTROL"
+
+[node name="CloseButton" type="Button" parent="Modals/DocumentModal/Margin/VBox/Header"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
+text = " ✕ CERRAR [ESC] "
+
+[node name="HSeparator" type="HSeparator" parent="Modals/DocumentModal/Margin/VBox"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Modals/DocumentModal/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="Modals/DocumentModal/Margin/VBox/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PaperPanel" type="PanelContainer" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_paper")
+
+[node name="Margin" type="MarginContainer" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Grid" type="GridContainer" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 6
+columns = 2
+
+[node name="NameLbl" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.3, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Titular en Documentos:"
+
+[node name="NameVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Nahuel Morales"
+autowrap_mode = 3
+
+[node name="DniLbl" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.3, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "DNI y Vencimiento:"
+
+[node name="DniVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "34.892.110 (Vto: 28/11/2028 - Vigente)"
+autowrap_mode = 3
+
+[node name="DateLbl" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.3, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Fecha de Emisión:"
+
+[node name="DateVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "28/11/2026 (Jornada Vigente)"
+autowrap_mode = 3
+
+[node name="PurposeLbl" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.3, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Actividad Autorizada:"
+
+[node name="PurposeVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.08, 0.3, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Turismo y Fotografía"
+autowrap_mode = 3
+
+[node name="PeopleLbl" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.3, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Pasajeros en Documento:"
+
+[node name="PeopleVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "2 personas autorizadas"
+autowrap_mode = 3
+
+[node name="JobPermitLbl" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.3, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Permiso, Firma y Sello:"
+
+[node name="JobPermitVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/Grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.1, 0.35, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "Particular | Dirección Provincial | Sello Oficial Verde"
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox"]
+layout_mode = 2
+
+[node name="PermitsBox" type="HBoxContainer" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="FirePermitVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/PermitsBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "PROHIBIDO ENCENDER FUEGO ❌"
+
+[node name="FishingPermitVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox/PermitsBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "PROHIBIDA LA PESCA DEPORTIVA ❌"
+
+[node name="NotesVal" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38, 0.34, 0.3, 1)
+theme_override_font_sizes/font_size = 11
+text = "• Presentar este pase ante las autoridades del Parque Nacional Chalet Huergo."
+autowrap_mode = 3
+
+[node name="StampVisual" type="Label" parent="Modals/DocumentModal/Margin/VBox/Content/Scroll/PaperPanel"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "AUTORIZADO
+CHALET HUERGO"
+horizontal_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="Modals/DocumentModal/Margin/VBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="BottomCloseButton" type="Button" parent="Modals/DocumentModal/Margin/VBox/Footer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
+text = "✔ VOLVER AL ESCRITORIO"

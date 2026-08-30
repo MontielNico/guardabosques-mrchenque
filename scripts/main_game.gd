@@ -9,6 +9,7 @@ const DocumentView = preload("res://scripts/document_view.gd")
 const ParkMapView = preload("res://scripts/park_map_view.gd")
 const CarTrunkView = preload("res://scripts/car_trunk_view.gd")
 const RulebookModal = preload("res://scripts/rulebook_modal.gd")
+const DocumentModal = preload("res://scripts/document_modal.gd")
 const DataDB = preload("res://scripts/data_db.gd")
 
 # Top HUD
@@ -31,8 +32,8 @@ const DataDB = preload("res://scripts/data_db.gd")
 @onready var park_map_view: ParkMapView = $VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView
 @onready var car_trunk_view: CarTrunkView = $VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView
 
-# 4° Ventana Inferior Izquierda: Escritorio y Documentos
-@onready var document_view: DocumentView = $VBox/MainLayout/BottomRow/Window4_Desk/Margin/VBox/DocumentView
+# 4° Ventana Inferior Izquierda: Escritorio de Mr. Chenque y Documento sobre la mesa
+@onready var document_view: DocumentView = $VBox/MainLayout/BottomRow/Window4_Desk/DocumentView
 
 # 5° Ventana Inferior Derecha: Decisiones y Reglamento
 @onready var approve_btn: Button = $VBox/MainLayout/BottomRow/Window5_Decisions/Margin/VBox/DecisionsBox/ApproveBtn
@@ -45,6 +46,7 @@ const DataDB = preload("res://scripts/data_db.gd")
 
 # Modales
 @onready var rulebook_modal: RulebookModal = $Modals/RulebookModal
+@onready var document_modal: DocumentModal = $Modals/DocumentModal
 
 var day_info: Dictionary = {}
 var visitors_today: Array[Dictionary] = []
@@ -54,7 +56,7 @@ var is_processing_decision: bool = false
 var is_in_investigation_mode: bool = false
 
 func _ready() -> void:
-	# Conexión de botones
+	# Conexión de botones y señales
 	if approve_btn:
 		approve_btn.pressed.connect(_on_approve_pressed)
 	if reject_btn:
@@ -67,6 +69,8 @@ func _ready() -> void:
 		rulebook_btn.pressed.connect(_on_rulebook_pressed)
 	if interrogate_btn:
 		interrogate_btn.pressed.connect(_on_interrogate_pressed)
+	if document_view:
+		document_view.document_clicked.connect(_on_document_preview_clicked)
 		
 	start_day(GameManager.current_day)
 
@@ -136,12 +140,21 @@ func _load_visitor(idx: int) -> void:
 	if car_trunk_view:
 		car_trunk_view.set_visitor(current_visitor)
 		
-	# 4. Ventana 4: Cargar documentos en escritorio
+	# 4. Ventana 4: Cargar documentos en escritorio de madera
 	if document_view:
 		var doc_data = current_visitor.get("doc", {})
-		document_view.load_document(doc_data)
+		document_view.load_document(doc_data, current_visitor)
+		
+	# Si el modal de detalle del documento estaba abierto, actualizarlo con el nuevo visitante
+	if document_modal and document_modal.visible:
+		var doc_data = current_visitor.get("doc", {})
+		document_modal.open_document(doc_data, current_visitor)
 		
 	_enable_decision_buttons(true)
+
+func _on_document_preview_clicked(doc_data: Dictionary) -> void:
+	if document_modal:
+		document_modal.open_document(doc_data, current_visitor)
 
 func _load_visitor_avatar(avatar_filename: String) -> void:
 	if not visitor_avatar_rect or avatar_filename.is_empty():
@@ -235,6 +248,8 @@ func _make_decision(approved: bool) -> void:
 	
 	if document_view:
 		document_view.apply_stamp(approved)
+	if document_modal and document_modal.visible:
+		document_modal.apply_stamp(approved)
 		
 	var event_id = current_visitor.get("event_id", "")
 	var decision_result = GameManager.record_decision(current_visitor, approved)
