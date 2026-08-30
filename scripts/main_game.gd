@@ -103,7 +103,9 @@ func start_day(day_num: int) -> void:
 		env_tag = " | 🚨 DETECCIÓN DE ANOMALÍAS"
 		
 	if day_badge:
-		day_badge.text = "📅 DÍA %d / %d: %s%s" % [day_num, GameManager.MAX_DAYS, day_info.get("season", "").to_upper(), env_tag]
+		var day_dates = ["31/08", "01/09", "02/09", "03/09", "04/09"]
+		var day_date = day_dates[day_num - 1] if day_num >= 1 and day_num <= day_dates.size() else ""
+		day_badge.text = "📅 DÍA %d / %d: %s | %s%s" % [day_num, GameManager.MAX_DAYS, day_info.get("season", "").to_upper(), day_date, env_tag]
 	if funds_badge:
 		funds_badge.text = "💵 FONDO FAMILIAR: $%d" % int(GameManager.family_savings)
 	if fire_badge_mini:

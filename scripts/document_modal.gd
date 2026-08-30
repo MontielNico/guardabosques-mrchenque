@@ -73,42 +73,24 @@ func open_document(doc_data: Dictionary, visitor_data: Dictionary = {}) -> void:
 		var pass_name = doc_data.get("name_on_pass", dni_name)
 		var permit_name = doc_data.get("name_on_permit", pass_name)
 		
-		if dni_name == pass_name and pass_name == permit_name:
-			name_val.text = "%s  (✔️ Coincide en todos los papeles)" % dni_name
-			name_val.modulate = Color(0.1, 0.45, 0.2)
-		else:
-			var disp_text = "DNI: %s" % dni_name
-			if pass_name != dni_name:
-				disp_text += "\n⚠️ Pase de Visita a nombre de: '%s'" % pass_name
-			if permit_name != pass_name and permit_name != dni_name:
-				disp_text += "\n⚠️ Permiso de Actividad a nombre de: '%s'" % permit_name
-			name_val.text = disp_text
-			name_val.modulate = Color(0.9, 0.2, 0.1)
+		var name_text = "DNI: %s\nPase de Visita: %s" % [dni_name, pass_name]
+		if doc_data.has("name_on_permit"):
+			name_text += "\nPermiso de Actividad: %s" % permit_name
+		name_val.text = name_text
+		name_val.modulate = Color(0.08, 0.3, 0.65)
 			
 	# 2. DNI / Documento y Vencimiento
 	if dni_val:
 		var dni_num = doc_data.get("dni", "00.000.000")
-		var is_expired = doc_data.get("is_dni_expired", doc_data.get("is_expired", false))
 		var expiry_date = doc_data.get("dni_expiry", "28/11/2026")
-		
-		if is_expired:
-			dni_val.text = "%s  (Vencimiento: %s — ⚠️ ¡DNI VENCIDO! NO VÁLIDO)" % [dni_num, expiry_date]
-			dni_val.modulate = Color(0.95, 0.15, 0.15)
-		else:
-			dni_val.text = "%s  (Vencimiento: %s — Vigente ✔️)" % [dni_num, expiry_date]
-			dni_val.modulate = Color(0.12, 0.52, 0.22)
+		dni_val.text = "%s\nVencimiento: %s" % [dni_num, expiry_date]
+		dni_val.modulate = Color(0.08, 0.3, 0.65)
 			
 	# 3. Fecha de Validez del Documento
 	if date_val:
 		var dt = doc_data.get("date", "28/11/2026")
-		var has_illogical_date = doc_data.get("illogical_date", false)
-		
-		if has_illogical_date:
-			date_val.text = "%s  (⚠️ ¡FECHA ANÓMALA / IMPOSIBLE!)" % dt
-			date_val.modulate = Color(0.95, 0.15, 0.15)
-		else:
-			date_val.text = "%s  (Jornada en Curso — Válido)" % dt
-			date_val.modulate = Color(0.12, 0.52, 0.22)
+		date_val.text = dt
+		date_val.modulate = Color(0.08, 0.3, 0.65)
 			
 	# 4. Actividad Autorizada (Cotejar con el diálogo oral)
 	if purpose_val:
@@ -119,33 +101,16 @@ func open_document(doc_data: Dictionary, visitor_data: Dictionary = {}) -> void:
 	# 5. Cantidad de Personas
 	if people_val:
 		var decl = doc_data.get("passengers", 1)
-		var actual = visitor_data.get("actual_passengers", decl)
-		if actual != decl:
-			people_val.text = "%d persona(s) declarada(s)  |  ⚠️ ¡A BORDO HAY %d PERSONAS!" % [decl, actual]
-			people_val.modulate = Color(0.95, 0.2, 0.15)
-		else:
-			people_val.text = "%d persona(s) autorizada(s) (Coincide con vehículo ✔️)" % decl
-			people_val.modulate = Color(0.15, 0.15, 0.15)
+		people_val.text = "%d persona(s) declarada(s)" % decl
+		people_val.modulate = Color(0.08, 0.3, 0.65)
 			
 	# 6. Permiso de Oficio / Firmante / Sello
 	if job_permit_val:
 		var job = doc_data.get("job_permit", "Particular")
 		var signer = doc_data.get("signed_by", "Administración")
 		var stamp_type = doc_data.get("stamp", "Sello Oficial Verde")
-		var has_black_seal = doc_data.get("has_black_seal", false)
-		var signed_by_silva = doc_data.get("signed_by_silva", false)
-		
 		var job_text = "• Habilitación: %s\n• Emisor / Firmante: %s\n• Tipo de Sello: %s" % [job, signer, stamp_type]
-		
-		if has_black_seal:
-			job_text = "🚨 ¡ANOMALÍA GRAVE: SELLO NEGRO DE CLAUSURA DETECTADO! ⬛\n" + job_text
-			job_permit_val.modulate = Color(0.9, 0.1, 0.1)
-		elif signed_by_silva:
-			job_text = "🚨 ¡ANOMALÍA GRAVE: FIRMADO POR EL DESAPARECIDO GUARDABOSQUES SILVA! ✍️\n" + job_text
-			job_permit_val.modulate = Color(0.95, 0.35, 0.1)
-		else:
-			job_permit_val.modulate = Color(0.1, 0.35, 0.6)
-			
+		job_permit_val.modulate = Color(0.1, 0.35, 0.6)
 		job_permit_val.text = job_text
 		
 	# 7. Permisos de Fuego y Pesca / Anexos Históricos
@@ -155,8 +120,8 @@ func open_document(doc_data: Dictionary, visitor_data: Dictionary = {}) -> void:
 			fire_permit_val.modulate = Color(0.65, 0.25, 0.85)
 		else:
 			var has_fire = doc_data.get("fire_permit", false)
-			fire_permit_val.text = "HABILITADO PARA FUEGO ✔️" if has_fire else "PROHIBIDO ENCENDER FUEGO ❌"
-			fire_permit_val.modulate = Color(0.15, 0.65, 0.2) if has_fire else Color(0.7, 0.25, 0.25)
+			fire_permit_val.text = "Permiso de fuego: Sí" if has_fire else "Permiso de fuego: No"
+			fire_permit_val.modulate = Color(0.1, 0.35, 0.6)
 			
 	if fishing_permit_val:
 		if doc_data.get("has_tunnel_map", false):
@@ -164,8 +129,8 @@ func open_document(doc_data: Dictionary, visitor_data: Dictionary = {}) -> void:
 			fishing_permit_val.modulate = Color(0.65, 0.25, 0.85)
 		else:
 			var has_fishing = doc_data.get("fishing_permit", false)
-			fishing_permit_val.text = "HABILITADO PARA PESCA ✔️" if has_fishing else "PROHIBIDA LA PESCA DEPORTIVA ❌"
-			fishing_permit_val.modulate = Color(0.15, 0.65, 0.2) if has_fishing else Color(0.7, 0.25, 0.25)
+			fishing_permit_val.text = "Permiso de pesca: Sí" if has_fishing else "Permiso de pesca: No"
+			fishing_permit_val.modulate = Color(0.1, 0.35, 0.6)
 			
 	if notes_val:
 		var notes = "• Presentar este pase ante la autoridad de control en la garita del Parque Nacional Chalet Huergo.\n• Prohibido salir de senderos habilitados o perturbar la fauna en Cerro Chenque y costa marina."
