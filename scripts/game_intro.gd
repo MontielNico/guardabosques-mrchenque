@@ -30,6 +30,7 @@ var intro_screens: Array[Dictionary] = [
 ]
 
 func _ready() -> void:
+	SoundManager.play_music("ambient", 1.2, -6.0)
 	if menu_btn:
 		menu_btn.pressed.connect(_on_menu_pressed)
 	_start_screen(0)

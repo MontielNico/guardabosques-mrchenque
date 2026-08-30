@@ -77,6 +77,9 @@ func _setup_day_morning(day_num: int) -> void:
 		GameManager.play_day_briefing(1)
 		return
 	
+	# Audio según Plan Audio: Lunes/Martes -> Ambient | Miércoles/Jueves/Viernes -> Investigation
+	SoundManager.play_day_intro_music(target_day)
+	
 	if day_badge:
 		day_badge.text = "═══ DÍA %d: INICIO DE TURNO LABORAL ═══" % day_num
 		

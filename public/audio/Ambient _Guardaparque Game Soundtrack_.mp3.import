@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://brukxumbgiusl"
+path="res://.godot/imported/Ambient _Guardaparque Game Soundtrack_.mp3-d1106fc36aeade900d31440d1d986b8b.mp3str"
+
+[deps]
+
+source_file="res://public/audio/Ambient _Guardaparque Game Soundtrack_.mp3"
+dest_files=["res://.godot/imported/Ambient _Guardaparque Game Soundtrack_.mp3-d1106fc36aeade900d31440d1d986b8b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

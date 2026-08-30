@@ -44,8 +44,9 @@ func _ready() -> void:
 	display_summary(summary)
 
 func display_summary(summary: Dictionary) -> void:
-	SoundManager.play_sound("paper")
 	var day = summary.get("day", 1)
+	SoundManager.play_music_for_day(day)
+	SoundManager.play_sound("paper")
 	is_final_day = (day >= GameManager.MAX_DAYS)
 	
 	if title_label:
@@ -169,10 +170,30 @@ func set_chenque_descargo(text: String) -> void:
 func get_chenque_descargo_for_day(day_num: int) -> String:
 	return chenque_daily_descargos.get(day_num, "")
 
+@onready var fade_overlay: ColorRect = get_node_or_null("FadeOverlay")
+
 func _on_continue_pressed() -> void:
 	SoundManager.play_sound("click")
 	if is_final_day:
-		get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+		if continue_btn:
+			continue_btn.disabled = true
+		
+		# Iniciar la transición de audio hacia Jazz_Radio mientras la pantalla se va a negro (cero silencios)
+		SoundManager.play_jazz_radio_game_over(3.5, -4.0)
+		
+		# Transición visual a negro
+		if fade_overlay:
+			fade_overlay.visible = true
+			fade_overlay.modulate.a = 0.0
+			var tw = create_tween()
+			tw.set_trans(Tween.TRANS_SINE)
+			tw.set_ease(Tween.EASE_IN_OUT)
+			tw.tween_property(fade_overlay, "modulate:a", 1.0, 1.2)
+			tw.tween_callback(func():
+				get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+			)
+		else:
+			get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 	else:
 		GameManager.advance_to_next_day()
 		GameManager.play_day_intro()

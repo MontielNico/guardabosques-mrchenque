@@ -6,13 +6,221 @@ extends Node
 var sfx_players: Array[AudioStreamPlayer] = []
 const POOL_SIZE = 8
 
+# Pistas de música según el Plan Audio
+const MUSIC_PATHS = {
+	"ambient": "res://public/audio/Ambient _Guardaparque Game Soundtrack_.mp3",
+	"investigation": "res://public/audio/(Fast)_Investigation__Guardaparque_Game_Soundtrack_.mp3",
+	"jazz_radio": "res://public/audio/Jazz__Radio_.mp3"
+}
+
+var music_player_a: AudioStreamPlayer = null
+var music_player_b: AudioStreamPlayer = null
+var active_player: AudioStreamPlayer = null
+var music_tween_a: Tween = null
+var music_tween_b: Tween = null
+var current_track_key: String = ""
+var music_cache: Dictionary = {}
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Pool de efectos de sonido
 	for i in range(POOL_SIZE):
 		var player = AudioStreamPlayer.new()
 		player.bus = "Master"
 		add_child(player)
 		sfx_players.append(player)
+		
+	# Dos reproductores para cross-fade perfecto sin vacíos de audio
+	music_player_a = AudioStreamPlayer.new()
+	music_player_a.bus = "Master"
+	add_child(music_player_a)
+	
+	music_player_b = AudioStreamPlayer.new()
+	music_player_b.bus = "Master"
+	add_child(music_player_b)
+	
+	active_player = music_player_a
+	
+	# Precarga de pistas musicales con loop activado
+	for key in MUSIC_PATHS:
+		var path = MUSIC_PATHS[key]
+		if ResourceLoader.exists(path):
+			var stream = load(path)
+			if stream is AudioStreamMP3:
+				stream.loop = true
+			music_cache[key] = stream
+
+# ==============================================================================
+# MÉTODOS DE CONTROL DE MÚSICA (CROSS-FADE SIN SILENCIOS)
+# ==============================================================================
+
+## Reproduce una pista de música con cross-fade suave
+func play_music(track_key: String, fade_duration: float = 1.2, target_volume_db: float = -6.0) -> void:
+	var stream = _get_or_load_stream(track_key)
+	if stream == null:
+		return
+
+	# Si ya está sonando la misma pista en el reproductor activo
+	if current_track_key == track_key and active_player and active_player.playing:
+		if active_player.volume_db < target_volume_db:
+			var tw = _get_tween_for_player(active_player)
+			if tw and tw.is_valid():
+				tw.kill()
+			tw = create_tween()
+			tw.tween_property(active_player, "volume_db", target_volume_db, fade_duration)
+			_set_tween_for_player(active_player, tw)
+		return
+
+	current_track_key = track_key
+	var outgoing_player = active_player
+	var incoming_player = music_player_b if active_player == music_player_a else music_player_a
+	active_player = incoming_player
+
+	# Desvanecer reproductor saliente sin cortar el audio de golpe
+	if outgoing_player and outgoing_player.playing:
+		var out_tw = _get_tween_for_player(outgoing_player)
+		if out_tw and out_tw.is_valid():
+			out_tw.kill()
+		out_tw = create_tween()
+		out_tw.set_trans(Tween.TRANS_SINE)
+		out_tw.set_ease(Tween.EASE_IN)
+		out_tw.tween_property(outgoing_player, "volume_db", -80.0, maxf(0.8, fade_duration * 0.8))
+		out_tw.tween_callback(func():
+			if is_instance_valid(outgoing_player) and outgoing_player != active_player:
+				outgoing_player.stop()
+		)
+		_set_tween_for_player(outgoing_player, out_tw)
+
+	# Iniciar reproductor entrante con crossfade inmediato
+	var in_tw = _get_tween_for_player(incoming_player)
+	if in_tw and in_tw.is_valid():
+		in_tw.kill()
+
+	incoming_player.stream = stream
+	# Arrancar en volumen sutil audible (-36 dB) para evitar el segundo de silencio digital
+	incoming_player.volume_db = -36.0 if fade_duration > 0.0 else target_volume_db
+	incoming_player.play()
+
+	if fade_duration > 0.0:
+		in_tw = create_tween()
+		in_tw.set_trans(Tween.TRANS_SINE)
+		in_tw.set_ease(Tween.EASE_OUT)
+		in_tw.tween_property(incoming_player, "volume_db", target_volume_db, fade_duration)
+		_set_tween_for_player(incoming_player, in_tw)
+
+## Lógica de pista por día:
+## - Menú hasta Día 2 (Martes): Ambient
+## - Día 3 (Miércoles) hasta Game Over: Investigation
+func play_music_for_day(day_num: int) -> void:
+	if day_num <= 2:
+		play_music("ambient", 1.2, -6.0)
+	else:
+		play_music("investigation", 1.2, -6.0)
+
+func play_day_intro_music(day_num: int) -> void:
+	play_music_for_day(day_num)
+
+## Transición especial de menos a más para Game Over con Jazz_Radio (Cross-fade continuo)
+func play_jazz_radio_game_over(fade_duration: float = 3.5, target_volume_db: float = -4.0) -> void:
+	if current_track_key == "jazz_radio" and active_player and active_player.playing:
+		return
+
+	current_track_key = "jazz_radio"
+	var stream = _get_or_load_stream("jazz_radio")
+	if stream == null:
+		return
+
+	var outgoing_player = active_player
+	var incoming_player = music_player_b if active_player == music_player_a else music_player_a
+	active_player = incoming_player
+
+	# El audio previo (Investigation) baja de volumen gradualmente en 2.0s
+	if outgoing_player and outgoing_player.playing:
+		var out_tw = _get_tween_for_player(outgoing_player)
+		if out_tw and out_tw.is_valid():
+			out_tw.kill()
+		out_tw = create_tween()
+		out_tw.set_trans(Tween.TRANS_SINE)
+		out_tw.set_ease(Tween.EASE_IN)
+		out_tw.tween_property(outgoing_player, "volume_db", -80.0, 2.0)
+		out_tw.tween_callback(func():
+			if is_instance_valid(outgoing_player) and outgoing_player != active_player:
+				outgoing_player.stop()
+		)
+		_set_tween_for_player(outgoing_player, out_tw)
+
+	# Jazz_Radio inicia de forma inmediata a un volumen base suave y emerge de menos a más
+	var in_tw = _get_tween_for_player(incoming_player)
+	if in_tw and in_tw.is_valid():
+		in_tw.kill()
+
+	incoming_player.stream = stream
+	incoming_player.volume_db = -32.0 # Nivel base audible sin corte
+	incoming_player.play()
+
+	in_tw = create_tween()
+	in_tw.set_trans(Tween.TRANS_QUAD)
+	in_tw.set_ease(Tween.EASE_OUT)
+	in_tw.tween_property(incoming_player, "volume_db", target_volume_db, fade_duration)
+	_set_tween_for_player(incoming_player, in_tw)
+
+## Mutea y detiene la música con transición suave
+func fade_out_music(duration: float = 1.2) -> void:
+	if active_player and active_player.playing:
+		var tw = _get_tween_for_player(active_player)
+		if tw and tw.is_valid():
+			tw.kill()
+		if duration > 0.0:
+			tw = create_tween()
+			tw.set_trans(Tween.TRANS_SINE)
+			tw.set_ease(Tween.EASE_IN)
+			tw.tween_property(active_player, "volume_db", -80.0, duration)
+			tw.tween_callback(func():
+				if is_instance_valid(active_player):
+					active_player.stop()
+				current_track_key = ""
+			)
+			_set_tween_for_player(active_player, tw)
+		else:
+			active_player.stop()
+			active_player.volume_db = -80.0
+			current_track_key = ""
+
+## Detiene la música inmediatamente en ambos canales
+func stop_music() -> void:
+	if music_tween_a and music_tween_a.is_valid():
+		music_tween_a.kill()
+	if music_tween_b and music_tween_b.is_valid():
+		music_tween_b.kill()
+	if music_player_a:
+		music_player_a.stop()
+		music_player_a.volume_db = -80.0
+	if music_player_b:
+		music_player_b.stop()
+		music_player_b.volume_db = -80.0
+	current_track_key = ""
+
+func _get_or_load_stream(key: String) -> AudioStream:
+	if music_cache.has(key):
+		return music_cache[key]
+	var path = MUSIC_PATHS.get(key, "")
+	if not path.is_empty() and ResourceLoader.exists(path):
+		var stream = load(path)
+		if stream is AudioStreamMP3:
+			stream.loop = true
+		music_cache[key] = stream
+		return stream
+	return null
+
+func _get_tween_for_player(player: AudioStreamPlayer) -> Tween:
+	return music_tween_a if player == music_player_a else music_tween_b
+
+func _set_tween_for_player(player: AudioStreamPlayer, tw: Tween) -> void:
+	if player == music_player_a:
+		music_tween_a = tw
+	else:
+		music_tween_b = tw
+
 
 func _get_available_player() -> AudioStreamPlayer:
 	for player in sfx_players:

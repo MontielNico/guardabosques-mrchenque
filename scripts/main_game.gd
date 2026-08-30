@@ -57,6 +57,9 @@ var is_in_investigation_mode: bool = false
 var mandatory_inspection_required: bool = false
 
 func _ready() -> void:
+	# Mantener música activa en la escena de juego según el día (Lunes/Martes: Ambient | Mié/Jue/Vie: Investigation)
+	SoundManager.play_music_for_day(GameManager.current_day)
+	
 	# Conexión de botones y señales
 	if approve_btn:
 		approve_btn.pressed.connect(_on_approve_pressed)

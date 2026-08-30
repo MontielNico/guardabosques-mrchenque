@@ -8,6 +8,7 @@ class_name MainMenu
 @onready var credits_dialog: AcceptDialog = get_node_or_null("CreditsDialog")
 
 func _ready() -> void:
+	SoundManager.play_music("ambient", 1.2, -6.0)
 	if not start_btn:
 		start_btn = find_child("StartButton", true, false) as Button
 	if not credits_btn:

@@ -51,13 +51,16 @@ func _setup_intro_content() -> void:
 	if mode == "prologue":
 		pages = _get_prologue_pages()
 		next_scene_path = "res://scenes/main_game.tscn"
+		SoundManager.play_music("ambient", 1.2, -6.0)
 	elif mode == "custom" and GameManager.get("custom_intro_pages") != null:
 		pages = GameManager.custom_intro_pages
 		if GameManager.get("custom_next_scene") != null:
 			next_scene_path = GameManager.custom_next_scene
+		SoundManager.play_day_intro_music(target_day)
 	else:
 		pages = _get_day_pages(target_day)
 		next_scene_path = "res://scenes/main_game.tscn"
+		SoundManager.play_day_intro_music(target_day)
 
 func _get_prologue_pages() -> Array[Dictionary]:
 	return [
