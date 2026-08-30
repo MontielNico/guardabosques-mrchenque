@@ -174,7 +174,13 @@ func record_decision(visitor: Dictionary, approved: bool) -> Dictionary:
 	# Manejo de Eventos Narrativos Especiales
 	if event_id == "rare_fisherman":
 		rare_fisherman_met = true
-		today_important_notes.append("🐟 Pescador Raro: 'Las cuevas respiran bajo la marea baja del acantilado...'")
+		var confiscated = not approved
+		var outcome = "no confiscado" if not confiscated else "confiscado"
+		today_important_notes.append("🐟 Pescador en veda: 'El pescado anómalo sale con la marea, pero la inspección quedó registrada.'")
+		today_logs.append("🧪 INSPECCIÓN NARRATIVA: %s el pescado anómalo del pescador en veda. No hay consecuencia operativa." % outcome)
+		result_info["status"] = "NARRATIVE"
+		result_info["confiscated"] = confiscated
+		return result_info
 	elif event_id == "day3_midnight_worker":
 		if approved:
 			day3_worker_decision = "approved_unease"
