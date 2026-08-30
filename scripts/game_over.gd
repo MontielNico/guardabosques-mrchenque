@@ -42,6 +42,13 @@ func _ready() -> void:
 		if GameManager.photo_1920_discovered:
 			narrative_notes += "\n• Archivos Ocultos: Fotografía de 1920 y Mapa de Túneles recuperados."
 			
+		var collapsed_count = 0
+		for p_name in GameManager.parcels_collapsed:
+			if GameManager.parcels_collapsed[p_name]:
+				collapsed_count += 1
+		if collapsed_count > 0:
+			narrative_notes += "\n• Colapso Ecológico: %d parcela(s) devastada(s) por completo bajo tu guardia." % collapsed_count
+			
 		stats_lbl.text = """═══════════════════════════════════════════════════════
 • Conservación Promedio de las 5 Parcelas: %.1f%%
 • Fondo Familiar Acumulado: $%d

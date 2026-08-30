@@ -55,6 +55,7 @@ var current_visitor: Dictionary = {}
 var is_processing_decision: bool = false
 var is_in_investigation_mode: bool = false
 var mandatory_inspection_required: bool = false
+var last_collapsed_parcel_name: String = "" # Guarda el nombre de la parcela que acaba de colapsar en esta decisión
 
 func _ready() -> void:
 	# Conexión de botones y señales
@@ -72,8 +73,19 @@ func _ready() -> void:
 		interrogate_btn.pressed.connect(_on_interrogate_pressed)
 	if document_view:
 		document_view.document_clicked.connect(_on_document_preview_clicked)
+	if not GameManager.parcel_collapsed.is_connected(_on_parcel_collapsed):
+		GameManager.parcel_collapsed.connect(_on_parcel_collapsed)
 		
 	start_day(GameManager.current_day)
+
+func _on_parcel_collapsed(parcel_name: String) -> void:
+	# Reacción inmediata y visible al colapso de una parcela (0% de conservación)
+	SoundManager.play_sound("alarm")
+	last_collapsed_parcel_name = parcel_name
+	if funds_badge:
+		funds_badge.text = "💵 FONDO FAMILIAR: $%d" % int(GameManager.family_savings)
+	if park_map_view:
+		park_map_view.update_map()
 
 func start_day(day_num: int) -> void:
 	GameManager.setup_day_parameters(day_num)
@@ -344,6 +356,16 @@ func _make_decision(approved: bool) -> void:
 	# Actualizar mapa por si hubo impacto ecológico
 	if park_map_view:
 		park_map_view.update_map()
+
+	# Si esta decisión provocó el colapso de una parcela, mostrarlo en primer plano
+	if last_collapsed_parcel_name != "":
+		if dialog_text:
+			dialog_text.text = "💀 ¡%s ha colapsado por completo! La Administración de Parques Nacionales aplicó una multa de emergencia de -$%d." % [last_collapsed_parcel_name, int(GameManager.parcel_collapse_penalty)]
+			dialog_text.modulate = Color(1.0, 0.25, 0.25)
+		if feedback_lbl:
+			feedback_lbl.text = "💀 COLAPSO ECOLÓGICO • MULTA DE EMERGENCIA"
+			feedback_lbl.modulate = Color(1.0, 0.2, 0.2)
+		last_collapsed_parcel_name = ""
 
 	# Esperar 2.2 segundos antes del siguiente auto
 	await get_tree().create_timer(2.2).timeout
