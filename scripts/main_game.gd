@@ -56,6 +56,8 @@ var is_processing_decision: bool = false
 var is_in_investigation_mode: bool = false
 var mandatory_inspection_required: bool = false
 var last_collapsed_parcel_name: String = "" # Guarda el nombre de la parcela que acaba de colapsar en esta decisión
+var final_dialogue_index: int = 0
+var final_dialogue_finished: bool = true
 
 func _ready() -> void:
 	# Mantener música activa en la escena de juego según el día (Lunes/Martes: Ambient | Mié/Jue/Vie: Investigation)
@@ -131,6 +133,8 @@ func _load_visitor(idx: int) -> void:
 	current_visitor = visitors_today[idx]
 	is_processing_decision = false
 	mandatory_inspection_required = current_visitor.get("event_id", "") == "rare_fisherman"
+	final_dialogue_index = 0
+	final_dialogue_finished = current_visitor.get("event_id", "") != "day5_faceless_man"
 	_set_investigation_mode(false)
 	
 	if visitor_counter_lbl:
@@ -143,6 +147,8 @@ func _load_visitor(idx: int) -> void:
 			feedback_lbl.text = "🔎 INSPECCIÓN OBLIGATORIA: Revisa el pescado anómalo antes de decidir."
 			feedback_lbl.modulate = Color(1.0, 0.8, 0.32)
 			feedback_lbl.visible = true
+		_enable_decision_buttons(false)
+	elif not final_dialogue_finished:
 		_enable_decision_buttons(false)
 		
 	# 1. Ventana 1: Auto y exterior
@@ -218,6 +224,7 @@ func _set_investigation_mode(enabled: bool) -> void:
 		interrogate_btn.visible = enabled
 		if enabled:
 			interrogate_btn.modulate = Color(1.0, 0.9, 0.4)
+			interrogate_btn.text = "💬 CONTINUAR DIÁLOGO" if current_visitor.get("event_id", "") == "day5_faceless_man" else "💬 INTERROGAR VISITANTE"
 			
 	# Ventana 3: Alternar entre Mapa (Vista 1) y Baúl (Vista 2)
 	if park_map_view:
@@ -261,6 +268,19 @@ func _on_back_to_map_pressed() -> void:
 func _on_interrogate_pressed() -> void:
 	SoundManager.play_sound("paper")
 	if dialog_text and not current_visitor.is_empty():
+		if current_visitor.get("event_id", "") == "day5_faceless_man":
+			var final_dialogue: Array = current_visitor.get("final_dialogue", [])
+			if final_dialogue_index < final_dialogue.size():
+				var line: Dictionary = final_dialogue[final_dialogue_index]
+				dialog_text.text = '💬 "%s"' % line.get("text", "")
+				dialog_text.modulate = Color(0.95, 0.85, 0.55) if line.get("speaker", "visitor") == "visitor" else Color(0.75, 0.9, 1.0)
+				final_dialogue_index += 1
+				if final_dialogue_index >= final_dialogue.size():
+					final_dialogue_finished = true
+					_enable_decision_buttons(true)
+					interrogate_btn.text = "💬 DIÁLOGO COMPLETADO"
+				return
+			return
 		var inter_dialog = current_visitor.get("dialog_interrogate", "No tengo nada que ocultar oficial.")
 		dialog_text.text = '💬 "' + inter_dialog + '"'
 		dialog_text.modulate = Color(1.0, 0.95, 0.7)
@@ -372,13 +392,16 @@ func _make_decision(approved: bool) -> void:
 		last_collapsed_parcel_name = ""
 
 	# Esperar 2.2 segundos antes del siguiente auto
-	await get_tree().create_timer(2.2).timeout
+	var dialogue_display_time = 5.0 if event_id == "day3_midnight_worker" else 2.2
+	await get_tree().create_timer(dialogue_display_time).timeout
 	current_visitor_idx += 1
 	_load_visitor(current_visitor_idx)
 
 func _enable_decision_buttons(enabled: bool) -> void:
 	var final_enabled = enabled
 	if current_visitor.get("event_id", "") == "rare_fisherman" and mandatory_inspection_required:
+		final_enabled = false
+	if current_visitor.get("event_id", "") == "day5_faceless_man" and not final_dialogue_finished:
 		final_enabled = false
 	if approve_btn:
 		approve_btn.disabled = not final_enabled

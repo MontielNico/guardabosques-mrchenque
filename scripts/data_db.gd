@@ -12,7 +12,7 @@ static func _get_day_rule_list(day_number: int) -> Array:
 				"Documentos a revisar: DNI y Pase de Visita Diario.",
 				"LÓGICA DE ERROR: Validar que el DNI no esté vencido.",
 				"LÓGICA DE ERROR: Validar que el nombre coincida en ambos papeles (DNI vs Pase).",
-				"Evento Final: Al culminar el turno, se entregará la Bitácora de Silva."
+				"Notas extrañas..."
 			]
 		2:
 			return [
@@ -20,7 +20,7 @@ static func _get_day_rule_list(day_number: int) -> Array:
 				"Documentos a revisar: DNI, Pase de Visita y Permiso de Actividad.",
 				"LÓGICA DE ERROR: Validar DNI vigente y coincidencia de nombres en los 3 documentos.",
 				"El reto de hoy es validar datos básicos con mayor cantidad de papeles en el escritorio.",
-				"Evento Obligatorio: Atento a la llegada de un Pescador Raro de costa."
+				"Pescador Raro..."
 			]
 		3:
 			return [
@@ -29,14 +29,14 @@ static func _get_day_rule_list(day_number: int) -> Array:
 				"El diálogo del visitante debe coincidir con la Actividad Autorizada en su Permiso.",
 				"NO SE INCLUYE mecánica de inspección de baúl: Priorizar la declaración oral.",
 				"Evento Ambiental: Niebla costera activa en toda la seccional.",
-				"Evento Obligatorio: Trabajador nocturno sin documentos válidos a medianoche (Decisión ramificada)."
+				"Trabajador nocturno..."
 			]
 		4:
 			return [
 				"RITMO: Fila rápida con todos los casos mezclados.",
 				"LÓGICA DE ERROR: Cruzar todos los datos visuales, DNI, nombres y diálogos.",
 				"Evento Ambiental: Alerta de Marea Alta en la base del acantilado.",
-				"Evento Obligatorio: Atento a documentos anómalos extraviados (Foto de 1920 y Mapa de Túneles)."
+				"Atento a documentos anómalos..."
 			]
 		5:
 			return [
@@ -44,7 +44,7 @@ static func _get_day_rule_list(day_number: int) -> Array:
 				"RECHAZAR si el documento tiene SELLO NEGRO.",
 				"RECHAZAR si el documento está FIRMADO POR SILVA.",
 				"RECHAZAR si la fecha es ILÓGICA (ej. 1980 o 2099).",
-				"Evento Final: El Hombre Sin Rostro con documento de 1980 (Decisión que define el destino)."
+				"El Hombre Sin Rostro..."
 			]
 		_:
 			return []
@@ -108,7 +108,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 					"Documentos a revisar: DNI y Pase de Visita Diario.",
 					"LÓGICA DE ERROR: Validar que el DNI no esté vencido.",
 					"LÓGICA DE ERROR: Validar que el nombre coincida en ambos papeles (DNI vs Pase).",
-					"Evento Final: Al culminar el turno, se entregará la Bitácora de Silva."
+					"Notas raras..."
 				]
 			}
 		2:
@@ -124,7 +124,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 					"Documentos a revisar: DNI, Pase de Visita y Permiso de Actividad.",
 					"LÓGICA DE ERROR: Validar DNI vigente y coincidencia de nombres en los 3 documentos.",
 					"El reto de hoy es validar datos básicos con mayor cantidad de papeles en el escritorio.",
-					"Evento Obligatorio: Atento a la llegada de un Pescador Raro de costa."
+					"Pescador Raro..."
 				]
 			}
 		3:
@@ -141,7 +141,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 					"El diálogo del visitante debe coincidir con la Actividad Autorizada en su Permiso.",
 					"NO SE INCLUYE mecánica de inspección de baúl: Priorizar la declaración oral.",
 					"Evento Ambiental: Niebla costera activa en toda la seccional.",
-					"Evento Obligatorio: Trabajador nocturno sin documentos válidos a medianoche (Decisión ramificada)."
+					"Trabajador nocturno..."
 				]
 			}
 		4:
@@ -156,7 +156,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 					"RITMO: Fila rápida con todos los casos mezclados.",
 					"LÓGICA DE ERROR: Cruzar todos los datos visuales, DNI, nombres y diálogos.",
 					"Evento Ambiental: Alerta de Marea Alta en la base del acantilado.",
-					"Evento Obligatorio: Atento a documentos anómalos extraviados (Foto de 1920 y Mapa de Túneles)."
+					"Documentos anómalos..."
 				]
 			}
 		5:
@@ -172,7 +172,7 @@ static func get_day_info(day_number: int) -> Dictionary:
 					"RECHAZAR si el documento tiene SELLO NEGRO.",
 					"RECHAZAR si el documento está FIRMADO POR SILVA.",
 					"RECHAZAR si la fecha es ILÓGICA (ej. 1980 o 2099).",
-					"Evento Final: El Hombre Sin Rostro con documento de 1980 (Decisión que define el destino)."
+					"El Hombre Sin Rostro..."
 				]
 			}
 		_:
@@ -291,7 +291,7 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 					}
 				},
 				{
-					"name": "Silvina Aonikenk",
+					"name": "Fernando Aonikenk",
 					"avatar_file": "acampanteIndebido.jpg",
 					"car_name": "Volkswagen Gol Blanco",
 					"car_color": Color(0.95, 0.95, 0.98),
@@ -361,7 +361,7 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 					"parcel_impact": {}
 				},
 				{
-					"name": "Héctor Leiva",
+					"name": "Alma Leiva",
 					"avatar_file": "recolectorDeFlora.jpg",
 					"car_name": "Camioneta Ranger Vieja",
 					"car_color": Color(0.45, 0.35, 0.25),
@@ -682,7 +682,7 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 					"parcel_impact": {}
 				},
 				{
-					"name": "Mauro 'El Trampero' Solís",
+					"name": "Mauro  Solís",
 					"avatar_file": "cazadorFurtivo.jpg",
 					"car_name": "Jeep Ika Negro",
 					"car_color": Color(0.2, 0.2, 0.2),
@@ -789,8 +789,8 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 					}
 				},
 				{
-					"name": "Mariano 'Doppelgänger'",
-					"avatar_file": "personajeRepetidoConDopelganger.jpg",
+					"name": "Mariano Doppelgänger",
+					"avatar_file": "dopelganger.jpg",
 					"car_name": "Volkswagen Saveiro Negra",
 					"car_color": Color(0.15, 0.15, 0.18),
 					"declared_passengers": 2,
@@ -862,7 +862,7 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 			# DÍA 5: El Legado de Silva (Detección de Anomalías: Sello Negro, Firma de Silva, Fecha ilógica 1980/2099; Evento Final: Hombre sin rostro con doc de 1980)
 			return [
 				{
-					"name": "Falso Inspector Valenzuela",
+					"name": "Inspector Valenzuela",
 					"avatar_file": "falsoAgenteDelMinisterio.jpg",
 					"car_name": "Ford Ranger Oficial Trucha",
 					"car_color": Color(0.85, 0.85, 0.85),
@@ -898,15 +898,15 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 					}
 				},
 				{
-					"name": "Rubén Silva (Ex Empleado)",
+					"name": "Rubén Silva",
 					"avatar_file": "exEmpleadoSilva.jpg",
 					"car_name": "Camión F-350 Rojo",
 					"car_color": Color(0.75, 0.2, 0.2),
 					"declared_passengers": 2,
 					"actual_passengers": 2,
 					"visitor_type": "Ex Empleado (Anomalía: Firma de Silva)",
-					"dialog_intro": "Hola Chenque, soy Silva, trabajé acá antes. Vengo a descargar unos materiales para las cuevas.",
-					"dialog_interrogate": "Tengo el pase firmado de puño y letra por el Guardabosques Silva de anoche.",
+					"dialog_intro": "Buenas tardes. Vengo a descargar unos materiales para las cuevas...",
+					"dialog_interrogate": "Tengo el pase firmado de puño y letra por el Guardabosques de anoche.",
 					"stated_activity": "Descarga de Materiales en Cañadones",
 					"doc": {
 						"name": "Rubén Silva",
@@ -934,7 +934,7 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 					}
 				},
 				{
-					"name": "Marcos Anormal",
+					"name": "Marcos Freak",
 					"avatar_file": "observadorDeAvesAnormal.jpg",
 					"car_name": "Furgón Gris Oscuro",
 					"car_color": Color(0.35, 0.35, 0.4),
@@ -1007,7 +1007,7 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 				},
 				{
 					"name": "El Hombre Sin Rostro",
-					"avatar_file": "personajeRepetidoConDopelganger.jpg",
+					"avatar_file": "hombreEnmascarado.jpg",
 					"car_name": "Vehículo Espectral Oscuro",
 					"car_color": Color(0.08, 0.08, 0.1),
 					"declared_passengers": 1,
@@ -1015,8 +1015,53 @@ static func get_visitors_for_day(day_number: int) -> Array[Dictionary]:
 					"visitor_type": "El Hombre Sin Rostro (Evento Final / Clímax)",
 					"is_mandatory_event": true,
 					"event_id": "day5_faceless_man",
-					"dialog_intro": "La marea ya cubrió los túneles, Chenque. Silva te dejó la bitácora porque sabía que tú eras el único que podía cerrar la barrera... o unirte a lo que vigila bajo el cerro. ¿Qué vas a sellar?",
+					"dialog_intro": "...",
 					"dialog_interrogate": "Mi permiso data de 1980 y lleva la firma que conoces bien. La decisión final está en tu escritorio...",
+					"final_dialogue": [
+						{"speaker": "chenque", "text": "MrChenque: Buenas tardes. Permiso de ingreso..."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: ..."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Me escucha?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Sí."},
+						{"speaker": "chenque", "text": "MrChenque: Este permiso está vencido."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Lo sé."},
+						{"speaker": "chenque", "text": "MrChenque: Está fechado en 1980."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: También lo sé."},
+						{"speaker": "chenque", "text": "MrChenque: Y está firmado por... *vuelve a mirar el documento* ... por mi"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Sí."},
+						{"speaker": "chenque", "text": "MrChenque: ...Esto no tiene ningún sentido."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Todavía no..."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Quién es usted?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Alguien que vino a terminar algo que Silva empezó."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Conocía a Silva?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Sí."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Dónde está?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: *silencio*"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Abajo"},
+						{"speaker": "chenque", "text": "MrChenque: ¿Abajo dónde?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Donde él encontró las marcas."},
+						{"speaker": "chenque", "text": "MrChenque: Las cuevas..."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Ahora entendés."},
+						{"speaker": "chenque", "text": "MrChenque: No. No entiendo absolutamente nada."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Todavía no."},
+						{"speaker": "chenque", "text": "MrChenque: Entonces explíqueme."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Si me dejás pasar, vas a entender qué le pasó a Silva."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Y después?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Después vas a entender por qué te eligieron a vos."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Quiénes?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Los mismos que llevan cincuenta años esperando."},
+						{"speaker": "chenque", "text": "MrChenque: *silencio*"},
+						{"speaker": "chenque", "text": "MrChenque: ¿Por qué debería confiar en usted?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: No deberías."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Solo tenés que decidir si querés seguir haciendo preguntas."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Y si digo que no?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Entonces mañana vas a estar lejos de acá."},
+						{"speaker": "chenque", "text": "MrChenque: ¿Y si digo que sí?"},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Entonces mañana vas a empezar a entender."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: ..."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: Abrí la puerta, Chenque."},
+						{"speaker": "visitor", "text": "Hombre sin rostro: O cerrala para siempre"},
+
+					],
 					"stated_activity": "Clausura Definitiva o Apertura de Túneles",
 					"doc": {
 						"name": "El Hombre Sin Rostro",
