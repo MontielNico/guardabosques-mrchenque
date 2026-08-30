@@ -52,28 +52,28 @@ var last_day_summary: Dictionary = {}
 
 # Salud de las 5 parcelas del Parque Nacional Chalet Huergo (0 a 100)
 var parcels_health: Dictionary = {
+	"Cerro Chenque y Acantilados": 100.0,
+	"Costa y Pingüinera": 100.0,
 	"Chalet Histórico": 100.0,
 	"Bosque de Lengas": 100.0,
-	"Costa y Pingüinera": 100.0,
-	"Cerro Chenque y Acantilados": 100.0,
 	"Humedal y Laguna de Aves": 100.0
 }
 
 # Tipos de daños visuales acumulados en cada parcela
 var parcels_damage_tags: Dictionary = {
+	"Cerro Chenque y Acantilados": [],
+	"Costa y Pingüinera": [],
 	"Chalet Histórico": [],
 	"Bosque de Lengas": [],
-	"Costa y Pingüinera": [],
-	"Cerro Chenque y Acantilados": [],
 	"Humedal y Laguna de Aves": []
 }
 
 # Marca si una parcela ya colapsó (llegó a 0%) para no re-penalizar la misma parcela dos veces
 var parcels_collapsed: Dictionary = {
+	"Cerro Chenque y Acantilados": false,
+	"Costa y Pingüinera": false,
 	"Chalet Histórico": false,
 	"Bosque de Lengas": false,
-	"Costa y Pingüinera": false,
-	"Cerro Chenque y Acantilados": false,
 	"Humedal y Laguna de Aves": false
 }
 
@@ -107,24 +107,24 @@ func reset_game() -> void:
 	day5_final_choice = ""
 	
 	parcels_health = {
+		"Cerro Chenque y Acantilados": 100.0,
+		"Costa y Pingüinera": 100.0,
 		"Chalet Histórico": 100.0,
 		"Bosque de Lengas": 100.0,
-		"Costa y Pingüinera": 100.0,
-		"Cerro Chenque y Acantilados": 100.0,
 		"Humedal y Laguna de Aves": 100.0
 	}
 	parcels_damage_tags = {
+		"Cerro Chenque y Acantilados": [],
+		"Costa y Pingüinera": [],
 		"Chalet Histórico": [],
 		"Bosque de Lengas": [],
-		"Costa y Pingüinera": [],
-		"Cerro Chenque y Acantilados": [],
 		"Humedal y Laguna de Aves": []
 	}
 	parcels_collapsed = {
+		"Cerro Chenque y Acantilados": false,
+		"Costa y Pingüinera": false,
 		"Chalet Histórico": false,
 		"Bosque de Lengas": false,
-		"Costa y Pingüinera": false,
-		"Cerro Chenque y Acantilados": false,
 		"Humedal y Laguna de Aves": false
 	}
 	total_infractors_stopped = 0

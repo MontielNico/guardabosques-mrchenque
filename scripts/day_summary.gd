@@ -68,10 +68,10 @@ func display_summary(summary: Dictionary) -> void:
 			
 		var parcels = summary.get("parcels_health", {})
 		var icons = {
+			"Cerro Chenque y Acantilados": "⛰️",
+			"Costa y Pingüinera": "🐧",
 			"Chalet Histórico": "🏛️",
 			"Bosque de Lengas": "🌲",
-			"Costa y Pingüinera": "🐧",
-			"Cerro Chenque y Acantilados": "⛰️",
 			"Humedal y Laguna de Aves": "🦆"
 		}
 		
