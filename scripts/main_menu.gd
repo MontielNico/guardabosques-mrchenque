@@ -3,28 +3,26 @@ class_name MainMenu
 
 # Menú Principal del Juego - Guarda-Bosques: Parque Chalet Huergo
 
-@onready var start_btn: Button = $Panel/Margin/VBox/Buttons/StartButton
-@onready var manual_btn: Button = $Panel/Margin/VBox/Buttons/ManualButton
-@onready var credits_btn: Button = $Panel/Margin/VBox/Buttons/CreditsButton
-@onready var manual_dialog: AcceptDialog = $ManualDialog
-@onready var credits_dialog: AcceptDialog = $CreditsDialog
+@onready var start_btn: Button = get_node_or_null("MenuButtons/StartButton")
+@onready var credits_btn: Button = get_node_or_null("MenuButtons/CreditsButton")
+@onready var credits_dialog: AcceptDialog = get_node_or_null("CreditsDialog")
 
 func _ready() -> void:
+	if not start_btn:
+		start_btn = find_child("StartButton", true, false) as Button
+	if not credits_btn:
+		credits_btn = find_child("CreditsButton", true, false) as Button
+	if not credits_dialog:
+		credits_dialog = find_child("CreditsDialog", true, false) as AcceptDialog
+
 	if start_btn:
 		start_btn.pressed.connect(_on_start_pressed)
-	if manual_btn:
-		manual_btn.pressed.connect(_on_manual_pressed)
 	if credits_btn:
 		credits_btn.pressed.connect(_on_credits_pressed)
 
 func _on_start_pressed() -> void:
 	SoundManager.play_sound("click")
 	GameManager.play_prologue()
-
-func _on_manual_pressed() -> void:
-	SoundManager.play_sound("paper")
-	if manual_dialog:
-		manual_dialog.popup_centered()
 
 func _on_credits_pressed() -> void:
 	SoundManager.play_sound("click")
