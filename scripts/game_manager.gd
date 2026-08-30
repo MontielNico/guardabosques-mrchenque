@@ -323,7 +323,7 @@ func get_average_parcel_health() -> float:
 func get_game_ending() -> Dictionary:
 	var avg_health = get_average_parcel_health()
 	var funds = family_savings
-	
+
 	if day5_final_choice == "embrace_mystery":
 		return {
 			"title": "FINAL OCULTO: EL SUCESOR DE LAS PROFUNDIDADES",
@@ -332,7 +332,13 @@ func get_game_ending() -> Dictionary:
 			"description": "Mr. Chenque autorizó el pase de 1980 y descendió por los túneles secretos del Chalet Huergo. Descubriste qué habitaba bajo el Cerro Chenque y tomaste el lugar que Silva dejó vacante. Tu familia recibió una misteriosa compensación anónima que los salvó para siempre del frío patagónico.",
 			"icon": "🌌🗝️🌊"
 		}
-	elif avg_health >= 80.0 and funds >= 30000.0:
+
+	# A partir de acá, avg_health es el eje narrativo principal (tu deber es el
+	# parque) y funds solo desempata DENTRO de cada franja de salud. Esto evita
+	# los huecos de la versión anterior (ej: un jugador que rechaza a todo el
+	# mundo por las dudas puede terminar con salud perfecta y plata destruida
+	# por las multas, y antes eso caía directo al peor final posible).
+	if avg_health >= 80.0 and funds >= 30000.0:
 		return {
 			"title": "FINAL PERFECTO: HÉROE DE LA PATAGONIA",
 			"rating": "SOBRESALIENTE (Rango S)",
@@ -340,7 +346,9 @@ func get_game_ending() -> Dictionary:
 			"description": "Mr. Chenque ha logrado el equilibrio legendario. El Parque Nacional Chalet Huergo, el Cerro Chenque, sus costas y humedales están intactos. Detectaste todas las anomalías y protegiste la superficie. Tu familia goza de estabilidad económica para pasar el crudo invierno patagónico con orgullo y bienestar.",
 			"icon": "🌲🎖️🏡"
 		}
-	elif avg_health >= 65.0 and funds >= 20000.0:
+	elif avg_health >= 65.0:
+		# Cubre TANTO el caso original (65-79 con buena plata) COMO el caso
+		# que antes se perdía (80+ pero con las finanzas ajustadas).
 		return {
 			"title": "FINAL HONORABLE: DEFENSOR DEL PARQUE",
 			"rating": "BUENO (Rango B)",
@@ -348,7 +356,9 @@ func get_game_ending() -> Dictionary:
 			"description": "Tu compromiso con la naturaleza patagónica fue ejemplar. Las 5 parcelas del parque sobrevivieron en gran estado y la garita se mantuvo firme ante los misterios de Silva. Aunque los gastos del hogar ajustaron el presupuesto familiar, eres un verdadero guardaparques.",
 			"icon": "🌲🛡️🥖"
 		}
-	elif avg_health < 50.0 and funds >= 25000.0:
+	elif funds >= 20000.0:
+		# Salud por debajo de 65 (hubo daño ecológico real) pero la plata
+		# aguantó: sacrificaste el parque para sostener a tu familia.
 		return {
 			"title": "FINAL AMARGO: DESASTRE ECOLÓGICO",
 			"rating": "NEGLIGENTE (Rango C)",
