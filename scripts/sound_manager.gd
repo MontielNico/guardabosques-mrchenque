@@ -108,7 +108,7 @@ func _generate_sound(type: String) -> AudioStreamWAV:
 			var total_samples = int(sample_rate * duration)
 			data.resize(total_samples * 2)
 			for i in range(total_samples):
-				var t = float(i) / sample_rate
+				var _t = float(i) / sample_rate
 				var env = sin((float(i) / float(total_samples)) * PI)
 				var noise = (randf() * 2.0 - 1.0) * 0.45
 				var val = clampf(noise * env, -1.0, 1.0)

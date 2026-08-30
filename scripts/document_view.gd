@@ -154,4 +154,3 @@ func apply_stamp(approved: bool) -> void:
 	tween.tween_property(stamp_visual, "scale", Vector2(1.1, 1.1), 0.15).from(Vector2(0.4, 0.4)).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(stamp_visual, "rotation", end_rotation, 0.16).from(end_rotation + 0.4).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(stamp_visual, "modulate:a", 0.95, 0.1)
-

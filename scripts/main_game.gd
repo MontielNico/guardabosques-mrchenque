@@ -7,7 +7,6 @@ class_name MainGame
 const PatagoniaView = preload("res://scripts/patagonia_view.gd")
 const DocumentView = preload("res://scripts/document_view.gd")
 const ParkMapView = preload("res://scripts/park_map_view.gd")
-const CarTrunkView = preload("res://scripts/car_trunk_view.gd")
 const RulebookModal = preload("res://scripts/rulebook_modal.gd")
 const DocumentModal = preload("res://scripts/document_modal.gd")
 const DataDB = preload("res://scripts/data_db.gd")
@@ -28,9 +27,9 @@ const DataDB = preload("res://scripts/data_db.gd")
 @onready var dialog_text: Label = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/DialogScroll/DialogText
 @onready var interrogate_btn: Button = $VBox/MainLayout/TopRow/Window2_Visitor/Margin/VBox/InterrogateBtn
 
-# 3° Ventana Superior Derecha: Mapa del Parque (Vista 1) o Baúl del Auto (Vista 2)
+# 3° Ventana Superior Derecha: Mapa del Parque (Vista 1)
+# El contenido de baúl/inspección del vehículo quedó desactivado en la primera pasada de limpieza.
 @onready var park_map_view: ParkMapView = $VBox/MainLayout/TopRow/Window3_MapAndTrunk/ParkMapView
-@onready var car_trunk_view: CarTrunkView = $VBox/MainLayout/TopRow/Window3_MapAndTrunk/CarTrunkView
 
 # 4° Ventana Inferior Izquierda: Escritorio de Mr. Chenque y Documento sobre la mesa
 @onready var document_view: DocumentView = $VBox/MainLayout/BottomRow/Window4_Desk/DocumentView
@@ -134,12 +133,10 @@ func _load_visitor(idx: int) -> void:
 		dialog_text.text = '"' + current_visitor.get("dialog_intro", "Buenas tardes oficial.") + '"'
 		dialog_text.modulate = Color(0.92, 0.94, 0.96)
 		
-	# 3. Ventana 3: Actualizar datos de baúl y mapa
+	# 3. Ventana 3: Actualizar mapa principal
 	if park_map_view:
 		park_map_view.update_map()
-	if car_trunk_view:
-		car_trunk_view.set_visitor(current_visitor)
-		
+	
 	# 4. Ventana 4: Cargar documentos en escritorio de madera
 	if document_view:
 		var doc_data = current_visitor.get("doc", {})
@@ -193,16 +190,11 @@ func _set_investigation_mode(enabled: bool) -> void:
 		if enabled:
 			interrogate_btn.modulate = Color(1.0, 0.9, 0.4)
 			
-	# Ventana 3: Alternar entre Mapa (Vista 1) y Baúl (Vista 2)
+	# Ventana 3: Mapas y flujo principal del puesto; la vista de baúl quedó desactivada.
 	if park_map_view:
-		park_map_view.visible = not enabled
-		if not enabled:
-			park_map_view.update_map()
-	if car_trunk_view:
-		car_trunk_view.visible = enabled
-		if enabled:
-			car_trunk_view.set_visitor(current_visitor)
-			
+		park_map_view.visible = true
+		park_map_view.update_map()
+	
 	# Ventana 5: Botones
 	if inspect_btn:
 		inspect_btn.visible = not enabled

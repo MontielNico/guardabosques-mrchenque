@@ -258,6 +258,20 @@ text = "🚗 VEHÍCULO 1 DE 4"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FundsBadge" type="Label" parent="VBox/TopHUD" unique_id=277085884]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.96, 0.74, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "💵 FONDO FAMILIAR: $12000"
+
+[node name="ViewModeBadge" type="Label" parent="VBox/TopHUD" unique_id=194825848]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.9, 1.0, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "📋 VISTA 1: CONTROL PRINCIPAL"
+
 [node name="MainLayout" type="VBoxContainer" parent="VBox" unique_id=1830276404]
 layout_mode = 2
 size_flags_vertical = 3

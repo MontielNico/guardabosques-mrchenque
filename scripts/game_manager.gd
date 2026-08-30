@@ -6,7 +6,6 @@ signal day_started(day_num: int)
 signal day_ended(day_summary: Dictionary)
 signal parcel_health_changed(parcel_name: String, new_health: float)
 signal family_funds_changed(new_amount: float)
-signal narrative_event_triggered(event_id: String, event_data: Dictionary)
 
 var current_day: int = 1
 const MAX_DAYS: int = 5
