@@ -53,6 +53,7 @@ var current_visitor_idx: int = 0
 var current_visitor: Dictionary = {}
 var is_processing_decision: bool = false
 var is_in_investigation_mode: bool = false
+var mandatory_inspection_required: bool = false
 
 func _ready() -> void:
 	# Conexión de botones y señales
@@ -111,12 +112,21 @@ func _load_visitor(idx: int) -> void:
 		
 	current_visitor = visitors_today[idx]
 	is_processing_decision = false
+	mandatory_inspection_required = current_visitor.get("event_id", "") == "rare_fisherman"
 	_set_investigation_mode(false)
 	
 	if visitor_counter_lbl:
 		visitor_counter_lbl.text = "🚗 VEHÍCULO %d DE %d" % [idx + 1, visitors_today.size()]
 	if feedback_lbl:
 		feedback_lbl.text = ""
+	
+	if mandatory_inspection_required:
+		_set_investigation_mode(true)
+		if feedback_lbl:
+			feedback_lbl.text = "🔎 INSPECCIÓN OBLIGATORIA: Revisa el pescado anómalo antes de decidir."
+			feedback_lbl.modulate = Color(1.0, 0.8, 0.32)
+			feedback_lbl.visible = true
+		_enable_decision_buttons(false)
 		
 	# 1. Ventana 1: Auto y exterior
 	if patagonia_view:
@@ -212,6 +222,13 @@ func _set_investigation_mode(enabled: bool) -> void:
 func _on_inspect_pressed() -> void:
 	SoundManager.play_sound("paper")
 	_set_investigation_mode(true)
+	if mandatory_inspection_required:
+		mandatory_inspection_required = false
+		if feedback_lbl:
+			feedback_lbl.text = "✅ Pescado anómalo inspeccionado: ahora puedes decidir si confiscarlo o no."
+			feedback_lbl.modulate = Color(0.7, 1.0, 0.7)
+			feedback_lbl.visible = true
+		_enable_decision_buttons(true)
 
 func _on_back_to_map_pressed() -> void:
 	SoundManager.play_sound("click")
@@ -248,6 +265,30 @@ func _make_decision(approved: bool) -> void:
 	
 	if funds_badge:
 		funds_badge.text = "💵 FONDO FAMILIAR: $%d" % int(GameManager.family_savings)
+	
+	if event_id == "rare_fisherman":
+		if dialog_text:
+			if approved:
+				dialog_text.text = '"No confiscaste el pescado anómalo. El pescador se marcha sin discutir y la marea vuelve a cerrar la costa."'
+				dialog_text.modulate = Color(0.8, 0.95, 0.8)
+			else:
+				dialog_text.text = '"Confiscaste el pescado anómalo. El pescador se va en silencio y el acantilado sigue respirando bajo la niebla."'
+				dialog_text.modulate = Color(1.0, 0.82, 0.52)
+		if feedback_lbl:
+			feedback_lbl.text = "⚖️ INSPECCIÓN NARRATIVA • SIN CONSECUENCIA"
+			feedback_lbl.modulate = Color(0.8, 0.85, 1.0)
+			feedback_lbl.visible = true
+			feedback_lbl.scale = Vector2(1.08, 1.08)
+			feedback_lbl.pivot_offset = feedback_lbl.size * 0.5
+			var feed_tween = create_tween()
+			feed_tween.set_parallel(true)
+			feed_tween.tween_property(feedback_lbl, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			feed_tween.tween_property(feedback_lbl, "modulate:a", 1.0, 0.12)
+			feed_tween.tween_property(feedback_lbl, "rotation", 0.0, 0.2).set_trans(Tween.TRANS_QUAD)
+		await get_tree().create_timer(2.2).timeout
+		current_visitor_idx += 1
+		_load_visitor(current_visitor_idx)
+		return
 		
 	if approved:
 		if patagonia_view:
@@ -302,10 +343,13 @@ func _make_decision(approved: bool) -> void:
 	_load_visitor(current_visitor_idx)
 
 func _enable_decision_buttons(enabled: bool) -> void:
+	var final_enabled = enabled
+	if current_visitor.get("event_id", "") == "rare_fisherman" and mandatory_inspection_required:
+		final_enabled = false
 	if approve_btn:
-		approve_btn.disabled = not enabled
+		approve_btn.disabled = not final_enabled
 	if reject_btn:
-		reject_btn.disabled = not enabled
+		reject_btn.disabled = not final_enabled
 	if inspect_btn:
 		inspect_btn.disabled = not enabled
 	if back_to_map_btn:

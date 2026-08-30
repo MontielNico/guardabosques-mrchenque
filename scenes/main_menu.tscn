@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dbirllrpa1nn5" path="res://scripts/main_menu.gd" id="1_menu"]
 [ext_resource type="Texture2D" uid="uid://c0dj567olkhhr" path="res://public/fondoMenuPrincipal.jpg" id="2_bg_tex"]
 [ext_resource type="FontFile" uid="uid://bxp77kdvusiey" path="res://fonts/PressStart2P-Regular.ttf" id="3_press_start"]
-[ext_resource type="FontFile" uid="uid://j2y771y6opce" path="res://fonts/VT323-Regular.ttf" id="4_vt323"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
 bg_color = Color(0.06, 0.09, 0.12, 0.94)
@@ -12,6 +11,10 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.24, 0.42, 0.58, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 shadow_color = Color(0, 0, 0, 0.75)
 shadow_size = 14
 
@@ -27,18 +30,6 @@ border_width_right = 2
 border_width_bottom = 4
 border_color = Color(0.28, 0.75, 0.42, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_start_hover"]
-content_margin_left = 18.0
-content_margin_top = 12.0
-content_margin_right = 18.0
-content_margin_bottom = 12.0
-bg_color = Color(0.18, 0.56, 0.3, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.52, 0.95, 0.65, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_start_pressed"]
 content_margin_left = 18.0
 content_margin_top = 14.0
@@ -51,6 +42,18 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.2, 0.55, 0.3, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_start_hover"]
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+bg_color = Color(0.18, 0.56, 0.3, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.52, 0.95, 0.65, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary"]
 content_margin_left = 16.0
 content_margin_top = 10.0
@@ -62,18 +65,10 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 4
 border_color = Color(0.3, 0.46, 0.62, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary_hover"]
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
-bg_color = Color(0.2, 0.3, 0.4, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.48, 0.7, 0.92, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary_pressed"]
 content_margin_left = 16.0
@@ -87,6 +82,18 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.22, 0.34, 0.46, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary_hover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.2, 0.3, 0.4, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.48, 0.7, 0.92, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_quit"]
 content_margin_left = 16.0
 content_margin_top = 10.0
@@ -99,18 +106,6 @@ border_width_right = 2
 border_width_bottom = 4
 border_color = Color(0.55, 0.26, 0.3, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_quit_hover"]
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
-bg_color = Color(0.4, 0.18, 0.21, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.85, 0.4, 0.45, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_quit_pressed"]
 content_margin_left = 16.0
 content_margin_top = 12.0
@@ -122,6 +117,18 @@ border_width_top = 3
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.4, 0.18, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_quit_hover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.4, 0.18, 0.21, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.85, 0.4, 0.45, 1)
 
 [node name="MainMenu" type="Control" unique_id=321234030]
 layout_mode = 3
@@ -143,17 +150,7 @@ texture = ExtResource("2_bg_tex")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="DarkOverlay" type="ColorRect" parent="." unique_id=2081703747]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.03, 0.05, 0.08, 0.42)
-
 [node name="Panel" type="PanelContainer" parent="." unique_id=1887158398]
-custom_minimum_size = Vector2(660, 420)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,31 +176,6 @@ theme_override_constants/margin_bottom = 28
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Header" type="VBoxContainer" parent="Panel/Margin/VBox" unique_id=744481122]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Title" type="Label" parent="Panel/Margin/VBox/Header" unique_id=935196879]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.96, 0.84, 0.42, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("3_press_start")
-theme_override_font_sizes/font_size = 17
-text = "🌲 GUARDA-BOSQUES: PATAGONIA"
-horizontal_alignment = 1
-
-[node name="Subtitle" type="Label" parent="Panel/Margin/VBox/Header" unique_id=1571078283]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.68, 0.86, 0.96, 1)
-theme_override_fonts/font = ExtResource("4_vt323")
-theme_override_font_sizes/font_size = 21
-text = "Puesto de Control — Parque Nacional Chalet Huergo & Cerro Chenque"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Panel/Margin/VBox" unique_id=2088838926]
-layout_mode = 2
-
 [node name="Buttons" type="VBoxContainer" parent="Panel/Margin/VBox" unique_id=1807469264]
 layout_mode = 2
 size_flags_vertical = 3
@@ -217,8 +189,8 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_press_start")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_start")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_start_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_start_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_start_hover")
 text = "▶ INICIAR SERVICIO (DÍA 1)"
 
 [node name="ManualButton" type="Button" parent="Panel/Margin/VBox/Buttons" unique_id=1958298720]
@@ -228,8 +200,8 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_press_start")
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_secondary_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_secondary_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_secondary_hover")
 text = "📖 MANUAL DE PROCEDIMIENTOS"
 
 [node name="CreditsButton" type="Button" parent="Panel/Margin/VBox/Buttons" unique_id=1039514400]
@@ -239,8 +211,8 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_press_start")
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_secondary_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_secondary_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_secondary_hover")
 text = "ℹ️ CRÉDITOS Y ACERCA DE"
 
 [node name="QuitButton" type="Button" parent="Panel/Margin/VBox/Buttons" unique_id=1602938112]
@@ -250,8 +222,8 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_press_start")
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_quit")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_quit_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_quit_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_quit_hover")
 text = "🚪 SALIR DEL JUEGO"
 
 [node name="ManualDialog" type="AcceptDialog" parent="." unique_id=2143161067]
