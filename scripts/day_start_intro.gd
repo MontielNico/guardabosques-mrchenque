@@ -110,13 +110,12 @@ func _process(delta: float) -> void:
 		if narrative_label:
 			narrative_label.visible_characters = char_int
 			
-		if char_int > last_sound_char_index and char_int <= total_character_count:
+		if char_int >= total_character_count:
+			_on_typing_completed()
+		elif char_int > last_sound_char_index:
 			if char_int % 2 == 0:
 				SoundManager.play_sound("typewriter_key")
 			last_sound_char_index = char_int
-			
-		if char_int >= total_character_count:
-			_on_typing_completed()
 
 func _on_typing_completed() -> void:
 	is_typing = false

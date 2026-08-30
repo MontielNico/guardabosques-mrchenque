@@ -183,15 +183,13 @@ func _process(delta: float) -> void:
 		if text_label:
 			text_label.visible_characters = char_int
 			
-		# Reproducir sonido de tecleo de máquina de escribir mecánicamente
-		if char_int > last_sound_char_index and char_int <= total_character_count:
+		if char_int >= total_character_count:
+			_on_typing_finished()
+		elif char_int > last_sound_char_index:
 			# Reproducir sonido cada 2 caracteres para no saturar el buffer
 			if char_int % 2 == 0:
 				SoundManager.play_sound("typewriter_key")
 			last_sound_char_index = char_int
-			
-		if char_int >= total_character_count:
-			_on_typing_finished()
 
 func _on_typing_finished() -> void:
 	is_typing = false
